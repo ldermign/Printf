@@ -6,26 +6,11 @@
 /*   By: ldermign <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/01/15 13:44:14 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/01/21 13:48:24 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-void	ft_putstr(const char *str);
-
-size_t	ft_strlen(const char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-
-
-#include <libc.h>
 
 /*void	ft_afficher(const char *str)
 {
@@ -47,51 +32,6 @@ size_t	ft_strlen(const char *str)
 			printf("Il y a un flag : %c", str[i]);
 		i++;
 	}
-}*/
-
-void	ft_init_struct(t_flags *newVar)
-{
-	newVar->minus = 0;
-	newVar->padded_zero = 0;
-	newVar->sign_number = 0;
-	newVar->space = 0;
-	newVar->prefix = 0;
-}
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putstr(const char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
-}
-
-/*void	ft_putnbr(int nb)
-{
-	long nbr;
-
-	nbr = nb;
-	if (nbr < 0)
-	{
-		ft_putchar('-');
-		nbr = -nbr;
-	}
-	if (nbr > 9)
-	{
-		ft_putnbr(nbr / 10);
-		ft_putnbr(nbr % 10);
-	}
-	else
-		ft_putchar(nbr + '0');
 }
 
 int		ft_size_str(char *str)
@@ -104,126 +44,118 @@ int		ft_size_str(char *str)
 	while (str[i])
 		i++;
 	return (i);
-}*/
+}
 
-/*
- *	fonction pour preciser la conversion ?
- *	ou renvoit ce qui a ete convertit (non ! trop de diff)
- */
-
-/*void	ft_conversion(char c)
+void	ft_conversion(char c)
 {
 	if (c == 'c')
-		ft_print_char();
+		ft_conversion_char();
 	else if (c == 's')
-		ft_print_string();
+		ft_conversion_string();
 	else if (c == 'p')
-		ft_();
+		ft_conversion_adress();
 	else if (c == 'd')
-		ft_();
+		ft_conversion_int_deci();
 	else if (c == 'i')
-		ft_();
+		ft_conversion_int();
 	else if (c == 'u')
-		ft_();
+		ft_conversion_unsigned_int();
 	else if (c == 'x' || c == 'X')
-		ft_();
-	else if (c == '%')
-		ft_print_percentage();
+		ft_conversion_unsigned_int_hexa();
+}
+
+
+char	ft_conversion_char()
+{}
+
+char	*ft_conversion_string()
+{}
+
+void	ft_flag()
+{}
+
+char	ft_flag_space(char *str)
+{
+
 }*/
 
-/*
- *	fonction pour les flags
- *	si doublon, tej ? 
- *
- *
- */
+void	ft_init_struct(t_flags *flag)
+{
+	flag->minus = 0;
+	flag->padded_zero = 0;
+	flag->sign_number = 0;
+	flag->space = 0;
+	flag->prefix = 0;
+}
 
-void	ft_flags(const char *str, t_flags *newVar)
+void	ft_which_flag(const char *str, t_flags *flag)
 {
 	int i;
 
 	i = 0;
+	ft_init_struct(flag);
 	if (str)
 	{
-		while (str[i])
+		i++;
+		while (str[i] == '-' || str[i] == '+' || str[i] == ' ' || str[i] == '0'
+				|| str[i] == '#')
 		{
 			if (str[i] == '-')
-				newVar->minus = 1;
+				flag->minus = 1;
 			if (str[i] == '+')
-				newVar->sign_number = 1;
+				flag->sign_number = 1;
 			if (str[i] == ' ')
-				newVar->space = 1;
+				flag->space = 1;
 			if (str[i] == '0')
-				newVar->padded_zero = 1;
+				flag->padded_zero = 1;
 			if (str[i] == '#')
-				newVar->prefix = 1;
-			if (str[i] != '-' && str[i] != '+' && str[i] != ' ' && str[i] != '0'
-					&& str[i] != '#')
-				break ;
+				flag->prefix = 1;
 			i++;
 		}
 	}
 }
 
-/*
- *	fonction pour afficher pourcentage
- *	flags pas pris en compte !!!!
- */
-
-/*int		ft_percentage()
-{}
-
-char	ft_print_char()
-{}
-
-char	*ft_print_string()
-{}
-
-void	ft_flag()
-{}*/
-
-/*
- *	... == nombre variable d'arguments, oblige d'utiliser va_arg,start,end,list 
- *	pour y acceder
- *
- */
-
-int	ft_printf(const char *str, ...)
+void	afficher_flags_struct(t_flags flags)
+	//simplement afficher la structure en fonction du flag
 {
-	int			i;
-	int			j;
+	printf("\nStructure = \n");
+	printf("   minus = %d\n", flags.minus);
+	printf("   sign_number = %d\n", flags.sign_number);
+	printf("   space = %d\n", flags.space);
+	printf("   padded_zero = %d\n", flags.padded_zero);
+	printf("   prefix = %d\n", flags.prefix);
+}
+
+int		ft_printf(const char *str, ...)
+{
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
 	va_list ap;
 	va_start (ap, str);
-	t_flags newVar;
-	ft_init_struct(&newVar);
+	t_flags flags;
 	while (str[i])
 	{
-		if (str[i] == '%')
+		if (str[i] == '%' && str[i + 1] != '\0')
 		{
-			ft_flags(&str[i], &newVar);
-			break ;
+			ft_which_flag(&str[i], &flags);
+			afficher_flags_struct(flags);
 		}
-		else if (str[i] == '\0')
-			ft_putstr(str);
+		if (str[i] != '%')
+			ft_putchar(str[i]);	
 		i++;
 	}
-	printf("minus = %d\n", newVar.minus);
-	printf("sign_number = %d\n", newVar.sign_number);
-	printf("space = %d\n", newVar.space);
-	printf("padded_zero = %d\n", newVar.padded_zero);
-	printf("prefix = %d\n", newVar.prefix);
 	va_end(ap);
-	return (ft_strlen(str));
+	return (ft_strlen((char*)str));
 }
 
-int main ()
+int		main()
 {
-	int i;
+	int test_d;
 
-	i = 0;
-	ft_printf("On va tester cette merde");
+	test_d = 42;
+	ft_printf("On va tester cette merde = %d", test_d);
 	return (0);
 }
