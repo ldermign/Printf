@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldermign <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/01/21 13:48:24 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/01/24 14:53:44 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,21 @@ char	ft_flag_space(char *str)
 
 }*/
 
-void	ft_init_struct(t_flags *flag)
+void	ft_bzero(void *str, size_t n)
 {
-	flag->minus = 0;
-	flag->padded_zero = 0;
-	flag->sign_number = 0;
-	flag->space = 0;
-	flag->prefix = 0;
+	size_t	i;
+	char	*s;
+	size_t	n_bytes;
+
+	i = 0;
+	s = str;
+	n_bytes = n;
+	while (n_bytes > 0)
+	{
+		s[i] = '\0';
+		i++;
+		n_bytes--;
+	}
 }
 
 void	ft_which_flag(const char *str, t_flags *flag)
@@ -93,41 +101,46 @@ void	ft_which_flag(const char *str, t_flags *flag)
 	int i;
 
 	i = 0;
-	ft_init_struct(flag);
+	ft_bzero(flag, sizeof(t_flags));
+	flag->padded_zero = -1;
 	if (str)
 	{
 		i++;
-		while (str[i] == '-' || str[i] == '+' || str[i] == ' ' || str[i] == '0'
-				|| str[i] == '#')
+		while (str[i] == '-' || str[i] == '0')
 		{
-			if (str[i] == '-')
+			if (str[i] == '-') // forcement colle au nombre ?
 				flag->minus = 1;
-			if (str[i] == '+')
-				flag->sign_number = 1;
-			if (str[i] == ' ')
-				flag->space = 1;
-			if (str[i] == '0')
+			if (str[i] == '0') // forcement colle au nombre ?
 				flag->padded_zero = 1;
-			if (str[i] == '#')
-				flag->prefix = 1;
+			if ((str[i] >= '0' && str[i] <= '9') || str[i] == '*')
+			{
+				flag->widht = 1;
+				while (str[i] >= '0' && str[i] <= '9')
+					i++;
+				if (str[i] == '.')
+					flag->precision = 1;
+			}
+			// gerer *.* et *
+			// *.nombre (pas neg)
 			i++;
 		}
 	}
 }
 
+char	ft_widht();
+
 void	afficher_flags_struct(t_flags flags)
 	//simplement afficher la structure en fonction du flag
 {
 	printf("\nStructure = \n");
-	printf("   minus = %d\n", flags.minus);
-	printf("   sign_number = %d\n", flags.sign_number);
-	printf("   space = %d\n", flags.space);
-	printf("   padded_zero = %d\n", flags.padded_zero);
-	printf("   prefix = %d\n", flags.prefix);
+	printf("	minus = %d\n", flags.minus);
+	printf("	padded_zero = %d\n", flags.padded_zero);
+	printf("	widht = %d\n", flags.widht);
+	printf("	precision = %d\n", flags.precision);
 }
 
 int		ft_printf(const char *str, ...)
-{
+{ 
 	int	i;
 	int	j;
 
@@ -156,6 +169,7 @@ int		main()
 	int test_d;
 
 	test_d = 42;
-	ft_printf("On va tester cette merde = %d", test_d);
+	ft_printf("On va tester %12cette merde");
+//	printf("%# -10.1d", -8, 10);
 	return (0);
 }
