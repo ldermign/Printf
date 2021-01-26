@@ -6,128 +6,12 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/01/24 14:53:44 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/01/26 11:34:26 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/*void	ft_afficher(const char *str)
-{
-	int size;
-	int i;
-
-	size = 0;
-	i = 0;
-//	printf("Voici la chaine :");
-//	ft_putstr(str);
-	printf("\n");
-	while (str[size])
-		size++;
-	printf("Taille de la chaine envoyee = %d.\n", size);
-	while (str[i])
-	{
-		if (str[i] == '-' || str[i] == '+' || str[i] == ' ' || str[i] == '0'
-				|| str[i] == '#')
-			printf("Il y a un flag : %c", str[i]);
-		i++;
-	}
-}
-
-int		ft_size_str(char *str)
-{
-	int i;
-
-	i = 0;
-	if (str == NULL)
-		return (0);
-	while (str[i])
-		i++;
-	return (i);
-}
-
-void	ft_conversion(char c)
-{
-	if (c == 'c')
-		ft_conversion_char();
-	else if (c == 's')
-		ft_conversion_string();
-	else if (c == 'p')
-		ft_conversion_adress();
-	else if (c == 'd')
-		ft_conversion_int_deci();
-	else if (c == 'i')
-		ft_conversion_int();
-	else if (c == 'u')
-		ft_conversion_unsigned_int();
-	else if (c == 'x' || c == 'X')
-		ft_conversion_unsigned_int_hexa();
-}
-
-
-char	ft_conversion_char()
-{}
-
-char	*ft_conversion_string()
-{}
-
-void	ft_flag()
-{}
-
-char	ft_flag_space(char *str)
-{
-
-}*/
-
-void	ft_bzero(void *str, size_t n)
-{
-	size_t	i;
-	char	*s;
-	size_t	n_bytes;
-
-	i = 0;
-	s = str;
-	n_bytes = n;
-	while (n_bytes > 0)
-	{
-		s[i] = '\0';
-		i++;
-		n_bytes--;
-	}
-}
-
-void	ft_which_flag(const char *str, t_flags *flag)
-{
-	int i;
-
-	i = 0;
-	ft_bzero(flag, sizeof(t_flags));
-	flag->padded_zero = -1;
-	if (str)
-	{
-		i++;
-		while (str[i] == '-' || str[i] == '0')
-		{
-			if (str[i] == '-') // forcement colle au nombre ?
-				flag->minus = 1;
-			if (str[i] == '0') // forcement colle au nombre ?
-				flag->padded_zero = 1;
-			if ((str[i] >= '0' && str[i] <= '9') || str[i] == '*')
-			{
-				flag->widht = 1;
-				while (str[i] >= '0' && str[i] <= '9')
-					i++;
-				if (str[i] == '.')
-					flag->precision = 1;
-			}
-			// gerer *.* et *
-			// *.nombre (pas neg)
-			i++;
-		}
-	}
-}
-
-char	ft_widht();
 
 void	afficher_flags_struct(t_flags flags)
 	//simplement afficher la structure en fonction du flag
@@ -139,22 +23,91 @@ void	afficher_flags_struct(t_flags flags)
 	printf("	precision = %d\n", flags.precision);
 }
 
+void	ft_init_conversion(t_conversion *conv)
+{
+	conv->cara = 0;
+	conv->string = 0;
+	conv->point_ad = 0;
+	conv->int_deci = 0;
+	conv->int_deci_hexa = 0;
+	conv->unsigned_int = 0;
+	conv->unsigned_hexa_x = 0;
+	conv->unsigned_hexa_X = 0;
+}
+
+void	ft_init_struct_flag(t_flags *flag)
+{
+	flag->minus = 0;
+	flag->padded_zero = -1;
+	flag->widht = 0;
+	flag->precision = 0;
+}
+
+void	ft_which_print(char c)
+{
+	t_conversion conv;
+
+	ft_init_struct_conversion(conv);
+	if (c == 'c')
+		conv->cara = 1;
+	else if (c == 's')
+		conv->string = 1;
+	else if (c == 'p')
+		conv->point_ad = 1;
+	else if (c == 'd')
+		conv->int_deci = 1;
+	else if (c == 'i')
+		conv->int_deci_hexa = 1;
+	else if (c == 'u')
+		ft_conversion_unsigned_int();
+	else if (c == 'x' || c == 'X')
+		ft_conversion_unsigned_int_hexa();
+}
+
+
+void	ft_which_flag(const char *str, t_flags *flag)
+{
+	ft_init_struct_flag(flag);
+	if (str)
+	{
+		str++;
+		while (*str == '-' || *str == '0' || *str == '*'
+		|| (*str >= '0' && *str <= '9'))
+		{
+			if (*str == '-')
+				flag->minus = 1;
+			if (*str == '0')
+				flag->padded_zero = 1;
+			if ((*str >= '0' && *str <= '9') || *str == '*' || *str == '.')
+			{
+				flag->widht = 1;
+				while ((*str >= '0' && *str <= '9') || *str == '*')
+					str++;
+				if (*str == '.' && ((*(str + 1) >= '0' && *(str + 1) <= '9')
+				|| *(str + 1) == '*'))
+					flag->precision = 1;
+			}
+			str++;
+		}
+	}
+}
+
 int		ft_printf(const char *str, ...)
 { 
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
 	va_list ap;
 	va_start (ap, str);
 	t_flags flags;
 	while (str[i])
 	{
-		if (str[i] == '%' && str[i + 1] != '\0')
+		if (str[i] == '%' && str[i] != '\0')
 		{
 			ft_which_flag(&str[i], &flags);
-			afficher_flags_struct(flags);
+			afficher_flags_struct(flags); /////////////////////////////////////
+			ft_which_print(&str[i]);
+	//		va_arg(ap, str);
 		}
 		if (str[i] != '%')
 			ft_putchar(str[i]);	
@@ -169,7 +122,9 @@ int		main()
 	int test_d;
 
 	test_d = 42;
-	ft_printf("On va tester %12cette merde");
+	ft_printf("On va tester cette merde = %d", 8);
+	printf("On va tester cette merde = %d", 8);
 //	printf("%# -10.1d", -8, 10);
 	return (0);
 }
+

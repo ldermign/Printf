@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/01/24 14:44:08 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/01/25 11:06:20 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
-
-
-
 
 
 #include <libc.h> //////////////////////
@@ -36,5 +33,16 @@ typedef struct		ft_flags
 	int widht;
 	int precision;
 }					t_flags;
+/*typedef struct	ft_conversion
+{
+	int cara;
+	int string;
+	int point_adress;
+	int int_deci;
+	int int_deci_hexa;
+	int unsigned_int;
+	int unsigned_hexa_x;
+	int unsigned_hexa_X;
+}					t_conversion;*/
 
 #endif
