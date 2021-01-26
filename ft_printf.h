@@ -33,16 +33,16 @@ typedef struct		ft_flags
 	int widht;
 	int precision;
 }					t_flags;
-/*typedef struct	ft_conversion
+typedef struct	ft_conversion
 {
-	int cara;
-	int string;
-	int point_adress;
-	int int_deci;
-	int int_deci_hexa;
-	int unsigned_int;
-	int unsigned_hexa_x;
-	int unsigned_hexa_X;
-}					t_conversion;*/
+	int cara_c;
+	int string_s;
+	int point_ad_p;
+	int int_deci_d;
+	int int_deci_hexa_i;
+	int unsd_int_u;
+	int unsd_hexa_x;
+	int unsd_hexa_X;
+}					t_conversion;
 
 #endif

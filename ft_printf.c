@@ -23,16 +23,16 @@ void	afficher_flags_struct(t_flags flags)
 	printf("	precision = %d\n", flags.precision);
 }
 
-void	ft_init_conversion(t_conversion *conv)
+void	ft_init_struct_conversion(t_conversion *conv)
 {
-	conv->cara = 0;
-	conv->string = 0;
-	conv->point_ad = 0;
-	conv->int_deci = 0;
-	conv->int_deci_hexa = 0;
-	conv->unsigned_int = 0;
-	conv->unsigned_hexa_x = 0;
-	conv->unsigned_hexa_X = 0;
+	conv->cara_c = 0;
+	conv->string_s = 0;
+	conv->point_ad_p = 0;
+	conv->int_deci_d = 0;
+	conv->int_deci_hexa_i = 0;
+	conv->unsd_int_u = 0;
+	conv->unsd_hexa_x = 0;
+	conv->unsd_hexa_X = 0;
 }
 
 void	ft_init_struct_flag(t_flags *flag)
@@ -43,29 +43,31 @@ void	ft_init_struct_flag(t_flags *flag)
 	flag->precision = 0;
 }
 
-void	ft_which_print(char c)
+void	ft_which_conv(char c)
 {
-	t_conversion conv;
+	t_conversion *conv;
 
+	conv = NULL;
 	ft_init_struct_conversion(conv);
 	if (c == 'c')
-		conv->cara = 1;
+		conv->cara_c = 1;
 	else if (c == 's')
-		conv->string = 1;
+		conv->string_s = 1;
 	else if (c == 'p')
-		conv->point_ad = 1;
+		conv->point_ad_p = 1;
 	else if (c == 'd')
-		conv->int_deci = 1;
+		conv->int_deci_d = 1;
 	else if (c == 'i')
-		conv->int_deci_hexa = 1;
+		conv->int_deci_hexa_i = 1;
 	else if (c == 'u')
-		ft_conversion_unsigned_int();
-	else if (c == 'x' || c == 'X')
-		ft_conversion_unsigned_int_hexa();
+		conv->unsd_int_u = 1;
+	else if (c == 'x')
+		conv->unsd_hexa_x = 1;
+	else if (c == 'X')
+		conv->unsd_hexa_X = 1;
 }
 
-
-void	ft_which_flag(const char *str, t_flags *flag)
+char	*ft_which_flag(const char *str, t_flags *flag)
 {
 	ft_init_struct_flag(flag);
 	if (str)
@@ -90,7 +92,9 @@ void	ft_which_flag(const char *str, t_flags *flag)
 			str++;
 		}
 	}
+	return (&str);
 }
+
 
 int		ft_printf(const char *str, ...)
 { 
@@ -106,7 +110,10 @@ int		ft_printf(const char *str, ...)
 		{
 			ft_which_flag(&str[i], &flags);
 			afficher_flags_struct(flags); /////////////////////////////////////
-			ft_which_print(&str[i]);
+			if (str[i] == 'c' || str[i] == 's' || str[i] == 'p'
+			|| str[i] == 'd' || str[i] == 'i' || str[i] == 'u' || str[i] == 'x'
+			|| str[i] == 'X')
+				ft_which_conv(&str[i]);
 	//		va_arg(ap, str);
 		}
 		if (str[i] != '%')
