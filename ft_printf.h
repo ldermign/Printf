@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/01/31 12:15:05 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/01/31 14:28:25 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,12 @@ size_t				ft_strlen(const char *str);
 /*
 **	Structures
 */
+
+typedef struct		s_ptrf
+{
+	char	c;
+	void	(*f)();
+}					t_ptrf;
 
 typedef struct		ft_flags
 {

@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/01/31 12:29:50 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/01/31 14:20:30 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,21 @@
 
 int		chaipas(const char *str, va_list ap)
 {
-	int i;
-	int len;
+	int			i;
+	int			len;
+	const char *temp;
 
 	i = 0;
 	len = 0;
+	temp = str;
 	t_flags flags;
 	t_conversion conv;
-	if (!ft_check_all(str, flag, conv))
-		return (-1);
+/*	while (temp)
+	{
+		if (!ft_check_all(str, flags, conv))
+			return (-1);
+		temp++;
+	}*/
 	while (str[i])
 	{
 		if (str[i] == '%' && str[i] != '\0')
@@ -40,10 +46,8 @@ int		chaipas(const char *str, va_list ap)
 int		ft_printf(const char *str, ...)
 { 
 	int			final_lenght;
-	const char	*temp;
 
 	final_lenght = 0;
-	temp = str;
 	va_list ap;
 	va_start (ap, str);
 	final_lenght = chaipas(str, ap);
@@ -69,8 +73,8 @@ int		main()
 	int test_d;
 
 	test_d = 42;
-	ft_printf("On va tester cette merde = %08%");
-	printf("On va tester cette merde = %%%d", 8);
+//	ft_printf("On va tester cette merde = %08%");
+	printf("On va tester cette merde = %tttt", 8);
 //	printf("%# -10.1d", -8, 10);
 	return (0);
 }
