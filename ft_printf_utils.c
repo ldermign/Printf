@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/01/28 11:25:24 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/01/31 11:52:49 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ void	ft_putstr(char *str)
 	}
 }
 
-void	ft_putchar(char c)
+int		ft_putchar(char c)
 {
 	write(1, &c, 1);
+	return (1);
 }
 
 void	ft_putnbr(int nb)
