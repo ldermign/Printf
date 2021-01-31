@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/01/31 14:20:30 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/01/31 21:16:35 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		chaipas(const char *str, va_list ap)
 	}*/
 	while (str[i])
 	{
-		if (str[i] == '%' && str[i] != '\0')
+		if (str[i] == '%' && str[i + 1] != '\0')
 		{
 			i += ft_which_flag(&str[i], &flags) + ft_which_print(&str[i], &conv);
 	//		va_arg(ap, str);

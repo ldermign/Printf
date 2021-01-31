@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/01/31 14:28:25 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/01/31 21:24:11 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int 				ft_is_width(char c);
 **	Utils
 */
 
-void				ft_putnbr(int nb);
+int					ft_atoi(const char *str);
 int					ft_putchar(char c);
 void				ft_putstr(char *str);
 void				ft_bzer(void *str, size_t n);
