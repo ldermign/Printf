@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/01/31 21:24:11 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/01 22:03:49 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,27 @@
 int					ft_printf(const char *, ...);
 
 /*
-**	Conversion
+**	Structures
 */
 
+typedef struct		s_ptrf
+{
+	char	c;
+	void	(*f)();
+}					t_ptrf;
+
+typedef struct		ft_struct
+{
+	int final_len;
+	int minus;
+	int padded_zero;
+	int widht;
+	int precision;
+}					t_struct;
+
+void				ft_init_struct_flag(t_struct *ntm);
+int 				which_flag(const char *str, t_struct *ntm);
+int					which_conv(const char *str, va_list ap);
 
 
 /*
@@ -47,50 +65,22 @@ int 				ft_is_width(char c);
 */
 
 int					ft_atoi(const char *str);
-int					ft_putchar(char c);
+void		ft_putchar(char c, t_struct *ntm);
 void				ft_putstr(char *str);
 void				ft_bzer(void *str, size_t n);
 size_t				ft_strlen(const char *str);
 
 /*
-**	Structures
+**	Conversion
 */
 
-typedef struct		s_ptrf
-{
-	char	c;
-	void	(*f)();
-}					t_ptrf;
-
-typedef struct		ft_flags
-{
-	int minus;
-	int padded_zero;
-	int widht;
-	int precision;
-}					t_flags;
-typedef struct		ft_conversion
-{
-	int cara_c;
-	int string_s;
-	int point_ad_hex_p;
-	int int_dec_d;
-	int int_dec_i;
-	int unsd_int_u;
-	int unsd_hex_x;
-	int unsd_hex_X;
-	int percent;
-}					t_conversion;
-void				ft_init_struct_flag(t_flags *flag);
-void				ft_init_struct_conversion(t_conversion *conv);
-int 				ft_which_flag(const char *str, t_flags *flag);
-int					ft_which_print(const char *str, t_conversion *conv);
+char	*ft_itoa(int n);
 
 /*
 **	A SUPPRIMER
 */
 
-void	afficher_struct_conv(t_conversion conv);
-void	afficher_struct_flags(t_flags flags);
+//void	afficher_struct_conv(t_conversion conv);
+void	afficher_struct_flags(t_struct ntm);
 
 #endif

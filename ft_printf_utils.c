@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/01/31 21:24:48 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/01 22:18:10 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,33 +22,60 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-int		ft_putchar(char c)
+void	ft_putchar(char c, t_struct *ntm)
 {
 	write(1, &c, 1);
-	return (1);
+	ntm->final_len++;
 }
 
-int			ft_atoi(const char *str)
+void	ft_putstr(char *str, t_struct *ntm)
 {
-	int			i;
-	int			neg;
-	long int	nbr;
+	int i;
 
 	i = 0;
-	neg = 1;
-	nbr = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || (str[i] == 32))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
+	while (str[i])
 	{
-		if (str[i++] == '-')
-			neg = -1;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		nbr = (nbr * 10) + (str[i] - '0');
+		ft_putchar(&str[i], &ntm);
 		i++;
 	}
-	nbr *= neg;
-	return (nbr);
+}
+
+int		ft_len_int(long n)
+{
+	int len_int;
+
+	len_int = 0;
+	n = n < 0 ? -n : n;
+	while (n >= 10)
+	{
+		n /= 10;
+		len_int++;
+	}
+	return (len_int + 1);
+}
+
+char	*ft_itoa(int n, t_struct *ntm)
+{
+	char	*dst;
+	long	nb;
+	int		len;
+
+	nb = n;
+	len = ft_len_int(nb) + (n < 0);
+	if (!(dst = (char*)malloc(sizeof(char) * len + 1 + (n < 0))))
+		return (NULL);
+	if (nb < 0)
+		dst[0] = '-';
+	nb = nb < 0 ? -nb : nb;
+	dst[len] = '\0';
+	len--;
+	while (nb >= 10)
+	{
+		dst[len] = (nb % 10) + '0';
+		nb /= 10;
+		len--;
+	}
+	dst[len] = (nb % 10) + '0';
+	ft_putstr(dst, &ntm);
+	return (dst);
 }
