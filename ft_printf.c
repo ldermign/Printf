@@ -6,15 +6,34 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/01 22:18:56 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/01 22:35:36 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		which_conv(char c, va_list ap, t_struct ntm)
+void		which_conv(const char *str, va_list ap, t_struct ntm)
 {
-	
+	char cara;
+
+	cara = (int)&str[i];
+	str++;
+	if (cara == 'c')
+		//fonction c
+	else if (cara == 's')
+		//fonction s
+	else if (cara == 'p')
+		//fonction p
+	else if (cara == 'd')
+		//fonction d
+	else if (cara == 'i')
+		//fonciton i
+	else if (cara == 'u')
+		//fonction u
+	else if (cara == 'x' || cara == 'X')
+		//fonction x || X
+	else if (cara == '%')
+		//fonction %
 }
 
 int		chaipas(const char *str, va_list ap)
@@ -31,7 +50,7 @@ int		chaipas(const char *str, va_list ap)
 		{
 			i += which_flag(&str[i], &ntm);
 			if (ft_is_conv(&str[i]))
-				// which_conv(str, ap, ntm); conv de merde ekowfnerjialshgkjrtw;d shzglrikzs`l'char	*ft_itoa(int n)'jakqgof
+				// which_conv(&str[i], ap, ntm); conv de merde ekowfnerjialshgkjrtw;d shzglrikzs`l'char	*ft_itoa(int n)'jakqgof
 			else if (str[i])
 				ft_putchar(str[i], &ntm);
 		}

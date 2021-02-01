@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/01 22:03:49 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/01 22:32:29 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 int					ft_printf(const char *, ...);
 
 /*
-**	Structures
+**	Structures cspdiuxX%
 */
 
 typedef struct		s_ptrf
