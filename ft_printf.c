@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/01 22:35:36 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/02 13:58:22 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,30 @@ void		which_conv(const char *str, va_list ap, t_struct ntm)
 {
 	char cara;
 
-	cara = (int)&str[i];
-	str++;
-	if (cara == 'c')
+	cara = (int)*str;
+	/*if (cara == 'c')
 		//fonction c
 	else if (cara == 's')
 		//fonction s
 	else if (cara == 'p')
-		//fonction p
-	else if (cara == 'd')
-		//fonction d
-	else if (cara == 'i')
+		//fonction p*/
+	if (cara == 'd')
+		conv_int(ap, ntm);
+	/*else if (cara == 'i')
 		//fonciton i
 	else if (cara == 'u')
 		//fonction u
 	else if (cara == 'x' || cara == 'X')
 		//fonction x || X
 	else if (cara == '%')
-		//fonction %
+		//fonction %*/
 }
 
 int		chaipas(const char *str, va_list ap)
 {
 	int	i;
 
-(void)ap;
+	(void)ap;
 	i = 0;
 	t_struct ntm;
 	ntm.final_len = 0;
@@ -48,14 +47,17 @@ int		chaipas(const char *str, va_list ap)
 	{
 		if (str[i] == '%' && str[i + 1] != '\0')
 		{
+			if (!ft_check_flag(&str[i], &ntm))
+				return (ntm.final_len);
 			i += which_flag(&str[i], &ntm);
-			if (ft_is_conv(&str[i]))
-				// which_conv(&str[i], ap, ntm); conv de merde ekowfnerjialshgkjrtw;d shzglrikzs`l'char	*ft_itoa(int n)'jakqgof
-			else if (str[i])
+			if (ft_is_conv((char)&str[i]))
+				//return (0);
+				which_conv(&str[i], ap, ntm);
+			if (str[i])
 				ft_putchar(str[i], &ntm);
 		}
 		if (str[i] != '%')
-			ft_putchar(str[i], &ntm);	
+			ft_putchar(str[i], &ntm);
 		i++;
 	}
 	return (ntm.final_len);
@@ -78,7 +80,7 @@ void	afficher_struct_flags(t_struct ntm)
 	printf("\nStructure flag :\n");
 	printf("	minus = %d\n", ntm.minus);
 	printf("	padded_zero = %d\n", ntm.padded_zero);
-	printf("	widht = %d\n", ntm.widht);
+	printf("	width = %d\n", ntm.width);
 	printf("	precision = %d\n", ntm.precision);
 }
 
@@ -87,8 +89,8 @@ int		main()
 	int test_d;
 
 	test_d = 42;
-	ft_printf("On va tester cette merde = %d", 8);
-//	printf("On va tester cette merde = %d", 8);
+	ft_printf("On va tester cette merde = %*d", 8, 12);
+//	printf("On va tester cette merde = %-8d", 45);
 //	printf("%# -10.1d", -8, 10);
 	return (0);
 }
