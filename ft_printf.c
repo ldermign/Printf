@@ -6,33 +6,31 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/02 13:58:22 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/03 13:05:30 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		which_conv(const char *str, va_list ap, t_struct ntm)
+int		which_conv(const char *str, va_list ap, t_struct ntm)
 {
-	char cara;
-
-	cara = (int)*str;
-	/*if (cara == 'c')
-		//fonction c
-	else if (cara == 's')
-		//fonction s
-	else if (cara == 'p')
-		//fonction p*/
-	if (cara == 'd')
-		conv_int(ap, ntm);
-	/*else if (cara == 'i')
-		//fonciton i
-	else if (cara == 'u')
-		//fonction u
-	else if (cara == 'x' || cara == 'X')
-		//fonction x || X
-	else if (cara == '%')
-		//fonction %*/
+/*	if (*str == 'c')
+		conv_c(va_arg(ap, char), ntm);
+	else if (*str == 's')
+		conv_s(va_arg(ap, char*), ntm);
+	//else if (*str == 'p')
+	//	conv_p(va_arg(ap, *p), ntm)*/
+	if (*str == 'd')
+		conv_d_u(va_arg(ap, int), ntm);
+/*	else if (*str == 'i')
+		conv_i(va_arg(ap, int), ntm);
+	else if (*str == 'u')
+		conv_d_u(va_arg(ap, int), ntm);
+	else if (*str == 'x' || *str == 'X')
+		conv_x_X(va_arg(ap, int), ntm);
+//	else if (*str == '%')
+//		conv_%(va_arg(ap, char), ntm);*/
+	return (1);
 }
 
 int		chaipas(const char *str, va_list ap)
@@ -49,12 +47,11 @@ int		chaipas(const char *str, va_list ap)
 		{
 			if (!ft_check_flag(&str[i], &ntm))
 				return (ntm.final_len);
-			i += which_flag(&str[i], &ntm);
-			if (ft_is_conv((char)&str[i]))
-				//return (0);
-				which_conv(&str[i], ap, ntm);
-			if (str[i])
-				ft_putchar(str[i], &ntm);
+			i += which_flag(&str[i], &ntm) + 1;
+			if (ft_is_conv(str[i]))
+				i += which_conv(&str[i], ap, ntm);
+			//if (str[i])
+			//	ft_putchar(str[i], &ntm);
 		}
 		if (str[i] != '%')
 			ft_putchar(str[i], &ntm);
@@ -75,21 +72,12 @@ int		ft_printf(const char *str, ...)
 	return (final_lenght);
 }
 
-void	afficher_struct_flags(t_struct ntm)
-{
-	printf("\nStructure flag :\n");
-	printf("	minus = %d\n", ntm.minus);
-	printf("	padded_zero = %d\n", ntm.padded_zero);
-	printf("	width = %d\n", ntm.width);
-	printf("	precision = %d\n", ntm.precision);
-}
-
 int		main()
 {
 	int test_d;
 
 	test_d = 42;
-	ft_printf("On va tester cette merde = %*d", 8, 12);
+	ft_printf("On va tester cette merde = %*d", 20, 12);
 //	printf("On va tester cette merde = %-8d", 45);
 //	printf("%# -10.1d", -8, 10);
 	return (0);

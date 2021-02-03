@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/02 13:20:53 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/03 13:07:12 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,13 @@ void			flag_precision(va_list ap);
 **	Conversion
 */
 
-void			which_conv(const char *str, va_list ap, t_struct ntm);
-void			conv_int(va_list ap, t_struct flag);
+int				which_conv(const char *str, va_list ap, t_struct ntm);
+void			conv_d_u(va_list ap, t_struct flag);
 
 
-/*
-**	A SUPPRIMER
-*/
 
-//void	afficher_struct_conv(t_conversion conv);
-void			afficher_struct_flags(t_struct ntm);
+
+
 
 
 

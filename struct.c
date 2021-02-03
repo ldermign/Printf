@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:46:59 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/02 13:57:36 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/03 13:04:07 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ void flag_padded_zero(va_list ap)
 	va_arg(ap, int);
 }
 
-void flag_width(va_list ap)
+void flag_width(int width, t_struct *ntm)
 {
-	int width;
-
-	width = va_arg(ap, int);
-	printf("\nArg width = %d", width);
+	(void)width;
+	ft_putchar('T', ntm);
 }
 
 void flag_precision(va_list ap)
@@ -42,13 +40,12 @@ void	to_flag(t_struct flag, va_list ap)
 	if (flag.padded_zero == 1)
 		flag_padded_zero(ap);
 	if (flag.width == 1)
-		flag_width(ap);	
+		flag_width(va_arg(ap, int), &flag);	
 	if (flag.precision == 1)
 		flag_precision(ap);
 }
 
 void	ft_init_struct_flag(t_struct *ntm)
-// initialiser structure de ntm
 {
 	ntm->minus = 0;
 	ntm->padded_zero = 0;
@@ -83,7 +80,6 @@ int which_flag(const char *str, t_struct *ntm)
 			str++;
 		}
 	}
-	afficher_struct_flags(*ntm);
 	return (avancement - ft_strlen(str) - 1);
 }
 

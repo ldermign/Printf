@@ -6,23 +6,11 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 22:43:34 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/02 13:43:47 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/03 13:06:39 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void    conv_int(va_list ap, t_struct flag)
-{
-    int i;
-    int arg_int;
-
-    i = 0;
-    arg_int = 0;
-	(void)flag;
-	(void)ap;
-	to_flag(flag, ap);
-}
 
 int		ft_len_int(long n)
 {
@@ -63,5 +51,18 @@ char	*ft_itoa(int n, t_struct *ntm)
 	}
 	dst[len] = (nb % 10) + '0';
 	ft_putstr(dst, ntm);
-	return (dst);
+	//return (dst);
+	free(dst);
+	return (0);
+}
+
+void    conv_d_u(va_list ap, t_struct flag)
+{
+    int i;
+
+    i = 0;
+//	(void)flag;
+//	(void)ap;
+	to_flag(flag, ap);
+	ft_itoa(ap, &flag);
 }
