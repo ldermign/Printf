@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/04 09:26:53 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/04 12:46:23 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,18 @@
 # include <string.h>
 
 
+/*
+**	TEJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
+*/
+
+#define KRED  "\x1B[1;31m"
+#define KGRN  "\x1B[1;32m"
+#define KYEL  "\x1B[1;33m"
+#define KBLU  "\x1B[1;34m"
+#define KMAG  "\x1B[1;35m"
+#define KCYN  "\x1B[1;36m"
+#define KWHT  "\x1B[1;37m"
+//	printf("%sred\n", KRED);
 
 
 # include <libc.h> /////////////////////////////////////////////////////////////
@@ -60,6 +72,7 @@ void			ft_putchar(char c, t_struct *ntm);
 void			ft_putstr(char *str, t_struct *ntm);
 void			ft_bzer(void *str, size_t n);
 size_t			ft_strlen(const char *str);
+char			*ft_itoa(int n);
 
 /*
 **	Flags
@@ -80,7 +93,7 @@ int				which_conv(const char *str, va_list ap, t_struct ntm);
 void			conv_d_u(va_list ap, t_struct flag);
 void			conv_s(va_list ap, t_struct flag);
 void			conv_c(va_list ap, t_struct flag);
-
+void			conv_per(va_list ap, t_struct flag);
 
 
 

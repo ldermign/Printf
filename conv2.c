@@ -1,57 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conv_int_d_u.c                                     :+:      :+:    :+:   */
+/*   conv_char.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/01 22:43:34 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/04 10:40:17 by ldermign         ###   ########.fr       */
+/*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
+/*   Updated: 2021/02/04 12:15:02 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_len_int(long n)
+void    conv_s(va_list ap, t_struct flag)
 {
-	int len_int;
+    char *arg_char;
 
-	len_int = 0;
-    if (n < 0)
-        n = -n;
-	while (n >= 10)
-	{
-		n /= 10;
-		len_int++;
-	}
-	return (len_int + 1);
+    arg_char = va_arg(ap, char *);
+    ft_putstr(arg_char, &flag);
 }
 
-char	*ft_itoa(int n)
+void    conv_c(va_list ap, t_struct flag)
 {
-	char	*dst;
-	long	nb;
-	int		len;
+    char cara;
 
-	nb = n;
-	len = ft_len_int(nb) + (n < 0);
-	if (!(dst = (char*)malloc(sizeof(char) * len + 1 + (n < 0))))
-		return (NULL);
-	if (nb < 0)
-    {
-		dst[0] = '-';
-    	nb = -nb;
-    }
-	dst[len--] = '\0';
-	while (nb >= 10)
-	{
-		dst[len] = (nb % 10) + '0';
-		nb /= 10;
-		len--;
-	}
-	dst[len] = (nb % 10) + '0';
-	return (dst);
+    cara = va_arg(ap, int);
+    ft_putchar(cara, &flag);
 }
+
+void    conv_per(va_list ap, t_struct flag)
+{
+    char cara_percent;
+
+    cara_percent = va_arg(ap, int);
+    ft_putchar(cara_percent, &flag);
+}
+
 
 void    conv_d_u(va_list ap, t_struct flag)
 {

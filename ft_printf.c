@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/04 12:03:15 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/04 12:40:46 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 int		which_conv(const char *str, va_list ap, t_struct ntm)
 {
-	//to_flag(ap, ntm);
+//	to_flag(ap, ntm);
 	if (*str == 'c')
 		conv_c(ap, ntm); // char
 	else if (*str == 's')
 		conv_s(ap, ntm); // char *
-	//else if (*str == 'p')
-	//	conv_p(va_arg(ap, *ptr), ntm)*/ // *pointeur
+//	else if (*str == 'p')
+//		conv_p(va_arg(ap, *ptr), ntm); // unsdint
 	else if (*str == 'd')
-		conv_d_u(ap, ntm);
-/*	else if (*str == 'i')
-		conv_i(va_list ap, ntm); // int 
-	else if (*str == 'u')
-		conv_d_u(va_arg(ap, int), ntm); // int
-	else if (*str == 'x' || *str == 'X')
-		conv_x_X(va_arg(ap, int), ntm); // int
+		conv_d_u(ap, ntm); // int
+//	else if (*str == 'i')
+//		conv_i(va_list ap, ntm); // int 
+//	else if (*str == 'u')
+//		conv_d_u(va_arg(ap, int), ntm); // unsdint
+//	else if (*str == 'x' || *str == 'X')
+//		conv_x_X(va_arg(ap, int), ntm); // unsdint
 //	else if (*str == '%')
-//		conv_%(va_arg(ap, char), ntm);*/ // char
+//		conv_per(ap, ntm); // char
 	return (1);
 }
 
@@ -72,7 +72,7 @@ int		ft_printf(const char *str, ...)
 	va_start (ap, str);
 	final_lenght = chaipas(str, ap);
 	va_end(ap);
-	printf("Taille finale retournee : %d", final_lenght);
+	printf("\nTaille finale retournee : %d.", final_lenght);
 	return (final_lenght);
 }
 
@@ -81,9 +81,13 @@ int		main()
 	int test_d;
 
 	test_d = 42;
-	ft_printf("On va tester cette merde = %c, %s, %d\n", 126, "yt", 8);
-	// write(1, "\n", 1);
-//	printf("%d", ft_printf("On va tester cette merde = %c, %s, %d", 't', "test", 8));
+//	ft_printf("On va tester cette merde = %d", 6);
+//	write(1, "\n", 1);
+	printf(KGRN"\n//!\\\\TAILLE PRINTF = %d.//!\\\\", ft_printf(KCYN"Mon printf : testons cette merde = %d", 6));
 //	printf("%# -10.1d", -8, 10);
 	return (0);
 }
+
+/*
+**	printf("On va tester cette merde = %u", -8); => underflow, unsdint
+*/
