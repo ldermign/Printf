@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/03 13:07:12 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/04 09:26:53 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int				ft_is_width(char c);
 **	Utils
 */
 
-int				ft_atoi(const char *str);
 void			ft_putchar(char c, t_struct *ntm);
 void			ft_putstr(char *str, t_struct *ntm);
 void			ft_bzer(void *str, size_t n);
@@ -70,7 +69,7 @@ void			to_flag(t_struct flag, va_list ap);
 int				which_flag(const char *str, t_struct *ntm);
 void			flag_minus(va_list ap);
 void			flag_padded_zero(va_list ap);
-//void			flag_width(va_list ap);
+void			flag_width(va_list ap, t_struct *ntm);
 void			flag_precision(va_list ap);
 
 /*
@@ -79,6 +78,8 @@ void			flag_precision(va_list ap);
 
 int				which_conv(const char *str, va_list ap, t_struct ntm);
 void			conv_d_u(va_list ap, t_struct flag);
+void			conv_s(va_list ap, t_struct flag);
+void			conv_c(va_list ap, t_struct flag);
 
 
 

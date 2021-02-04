@@ -1,44 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   flags.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/04 09:58:02 by ldermign         ###   ########.fr       */
+/*   Created: 2021/02/04 08:57:13 by ldermign          #+#    #+#             */
+/*   Updated: 2021/02/04 09:06:39 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	ft_strlen(const char *str)
+void flag_minus(va_list ap)
 {
-	int i;
-
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	va_arg(ap, int);
 }
 
-void	ft_putchar(char c, t_struct *ntm)
+void flag_padded_zero(va_list ap)
 {
-//	printf("\\\\avant:%d//", ntm->final_len);
-	write(1, &c, 1);
-	ntm->final_len++;
-//	printf("\\\\apres:%d//", ntm->final_len);
+	va_arg(ap, int);
 }
 
-void	ft_putstr(char *str, t_struct *ntm)
+void flag_width(va_list ap, t_struct *ntm)
 {
-	size_t len;
+	int width;
 
-	if (!str)
-		return ;
-	len = ft_strlen(str);
-	write(1, str, len);
-	ntm->final_len += (int)len;
+    width = va_arg(ap, int);
+    (void)ntm;
+  /*  while (width != 0)
+    {
+    	ft_putchar('T', ntm);
+        width--;
+    }*/
+    printf("WIDTH%dWIDTH", width)
+;}
+
+void flag_precision(va_list ap)
+{
+	va_arg(ap, int);
 }

@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/03 13:05:30 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/04 12:03:15 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,23 @@
 
 int		which_conv(const char *str, va_list ap, t_struct ntm)
 {
-/*	if (*str == 'c')
-		conv_c(va_arg(ap, char), ntm);
+	//to_flag(ap, ntm);
+	if (*str == 'c')
+		conv_c(ap, ntm); // char
 	else if (*str == 's')
-		conv_s(va_arg(ap, char*), ntm);
+		conv_s(ap, ntm); // char *
 	//else if (*str == 'p')
-	//	conv_p(va_arg(ap, *p), ntm)*/
-	if (*str == 'd')
-		conv_d_u(va_arg(ap, int), ntm);
+	//	conv_p(va_arg(ap, *ptr), ntm)*/ // *pointeur
+	else if (*str == 'd')
+		conv_d_u(ap, ntm);
 /*	else if (*str == 'i')
-		conv_i(va_arg(ap, int), ntm);
+		conv_i(va_list ap, ntm); // int 
 	else if (*str == 'u')
-		conv_d_u(va_arg(ap, int), ntm);
+		conv_d_u(va_arg(ap, int), ntm); // int
 	else if (*str == 'x' || *str == 'X')
-		conv_x_X(va_arg(ap, int), ntm);
+		conv_x_X(va_arg(ap, int), ntm); // int
 //	else if (*str == '%')
-//		conv_%(va_arg(ap, char), ntm);*/
+//		conv_%(va_arg(ap, char), ntm);*/ // char
 	return (1);
 }
 
@@ -50,12 +51,15 @@ int		chaipas(const char *str, va_list ap)
 			i += which_flag(&str[i], &ntm) + 1;
 			if (ft_is_conv(str[i]))
 				i += which_conv(&str[i], ap, ntm);
-			//if (str[i])
-			//	ft_putchar(str[i], &ntm);
 		}
-		if (str[i] != '%')
+		else if (str[i] != '%')
+		{
+		//	printf("\\\\avant:%d//", ntm.final_len);
 			ft_putchar(str[i], &ntm);
-		i++;
+			i++;
+		//	printf("\\\\apres:%d//", ntm.final_len);
+		}
+		//i++;
 	}
 	return (ntm.final_len);
 }
@@ -68,7 +72,7 @@ int		ft_printf(const char *str, ...)
 	va_start (ap, str);
 	final_lenght = chaipas(str, ap);
 	va_end(ap);
-	printf("\nTaille finale retournee : %d", final_lenght);
+	printf("Taille finale retournee : %d", final_lenght);
 	return (final_lenght);
 }
 
@@ -77,8 +81,9 @@ int		main()
 	int test_d;
 
 	test_d = 42;
-	ft_printf("On va tester cette merde = %*d", 20, 12);
-//	printf("On va tester cette merde = %-8d", 45);
+	ft_printf("On va tester cette merde = %c, %s, %d\n", 126, "yt", 8);
+	// write(1, "\n", 1);
+//	printf("%d", ft_printf("On va tester cette merde = %c, %s, %d", 't', "test", 8));
 //	printf("%# -10.1d", -8, 10);
 	return (0);
 }

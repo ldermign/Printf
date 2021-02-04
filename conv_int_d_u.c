@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 22:43:34 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/03 13:06:39 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/04 10:40:17 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		ft_len_int(long n)
 	return (len_int + 1);
 }
 
-char	*ft_itoa(int n, t_struct *ntm)
+char	*ft_itoa(int n)
 {
 	char	*dst;
 	long	nb;
@@ -50,19 +50,16 @@ char	*ft_itoa(int n, t_struct *ntm)
 		len--;
 	}
 	dst[len] = (nb % 10) + '0';
-	ft_putstr(dst, ntm);
-	//return (dst);
-	free(dst);
-	return (0);
+	return (dst);
 }
 
 void    conv_d_u(va_list ap, t_struct flag)
 {
-    int i;
+    int arg_int;
+	char *temp;
 
-    i = 0;
-//	(void)flag;
-//	(void)ap;
-	to_flag(flag, ap);
-	ft_itoa(ap, &flag);
+    arg_int = va_arg(ap, int);
+	temp = ft_itoa(arg_int);
+	ft_putstr(temp, &flag);
+	free(temp);
 }

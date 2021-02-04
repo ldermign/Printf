@@ -1,44 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   conv_char.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/04 09:58:02 by ldermign         ###   ########.fr       */
+/*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
+/*   Updated: 2021/02/04 09:30:19 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	ft_strlen(const char *str)
+void    conv_s(va_list ap, t_struct flag)
 {
-	int i;
+    char *arg_char;
 
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+    arg_char = va_arg(ap, char *);
+    ft_putstr(arg_char, &flag);
 }
 
-void	ft_putchar(char c, t_struct *ntm)
+void    conv_c(va_list ap, t_struct flag)
 {
-//	printf("\\\\avant:%d//", ntm->final_len);
-	write(1, &c, 1);
-	ntm->final_len++;
-//	printf("\\\\apres:%d//", ntm->final_len);
+    char cara;
+
+    cara = va_arg(ap, int);
+    ft_putchar(cara, &flag);
 }
 
-void	ft_putstr(char *str, t_struct *ntm)
-{
-	size_t len;
-
-	if (!str)
-		return ;
-	len = ft_strlen(str);
-	write(1, str, len);
-	ntm->final_len += (int)len;
-}
