@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conv_char.c                                        :+:      :+:    :+:   */
+/*   conv2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/04 12:15:02 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/05 11:56:13 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void    conv_s(va_list ap, t_struct flag)
+void    conv_s(va_list ap, t_flag_len flag)
 {
     char *arg_char;
 
@@ -20,7 +20,7 @@ void    conv_s(va_list ap, t_struct flag)
     ft_putstr(arg_char, &flag);
 }
 
-void    conv_c(va_list ap, t_struct flag)
+void    conv_c(va_list ap, t_flag_len flag)
 {
     char cara;
 
@@ -28,16 +28,13 @@ void    conv_c(va_list ap, t_struct flag)
     ft_putchar(cara, &flag);
 }
 
-void    conv_per(va_list ap, t_struct flag)
+void    conv_per(t_flag_len flag)
 {
-    char cara_percent;
-
-    cara_percent = va_arg(ap, int);
-    ft_putchar(cara_percent, &flag);
+    ft_putstr("\%", &flag);
 }
 
 
-void    conv_d_u(va_list ap, t_struct flag)
+void    conv_d_i(va_list ap, t_flag_len flag)
 {
     int arg_int;
 	char *temp;

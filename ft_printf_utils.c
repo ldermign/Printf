@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/04 09:58:02 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/05 11:54:34 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,19 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-void	ft_putchar(char c, t_struct *ntm)
+void	ft_putchar(char c, t_flag_len *len)
 {
-//	printf("\\\\avant:%d//", ntm->final_len);
 	write(1, &c, 1);
-	ntm->final_len++;
-//	printf("\\\\apres:%d//", ntm->final_len);
+	len->final_len++;
 }
 
-void	ft_putstr(char *str, t_struct *ntm)
+void	ft_putstr(char *str, t_flag_len *len)
 {
-	size_t len;
+	size_t size;
 
 	if (!str)
 		return ;
-	len = ft_strlen(str);
-	write(1, str, len);
-	ntm->final_len += (int)len;
+	size = ft_strlen(str);
+	write(1, str, size);
+	len->final_len += (int)size;
 }
