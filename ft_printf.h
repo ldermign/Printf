@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/05 11:56:14 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/07 14:19:57 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,13 @@
 #define KMAG  "\x1B[0;35m"
 #define KCYN  "\x1B[0;36m"
 #define KWHT  "\x1B[0;37m"
-//	printf("%sred\n", KRED);
+//printf("%sred\n", KRED);
 
 
 # include <libc.h> /////////////////////////////////////////////////////////////
 
+
+#define ERR(FILE, FUNC, LINE) printf(KYEL"%s:%s:%d\033[0m", FILE, FUNC, LINE)
 
 
 int				ft_printf(const char *str, ...);
@@ -70,7 +72,6 @@ int				ft_is_width(char c);
 
 void			ft_putchar(char c, t_flag_len *len);
 void			ft_putstr(char *str, t_flag_len *len);
-void			ft_bzer(void *str, size_t n);
 size_t			ft_strlen(const char *str);
 char			*ft_itoa(int n);
 
@@ -89,8 +90,8 @@ void			flag_precision(va_list ap);
 **	Conversion
 */
 
-int				which_conv(const char *str, va_list ap, t_flag_len ntm);
-void			conv_d_i(va_list ap, t_flag_len flag);
+int				which_conv(const char *str, va_list ap, t_flag_len *ntm);
+void			conv_d_i(va_list ap, t_flag_len *flag);
 void			conv_s(va_list ap, t_flag_len flag);
 void			conv_c(va_list ap, t_flag_len flag);
 void			conv_per(t_flag_len flag);

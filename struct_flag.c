@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:46:59 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/05 12:01:31 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/07 14:25:35 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int which_flag(const char *str, t_flag_len *flag)
 	ft_init_struct_flag(flag);
 	if (str)
 	{
-		str++;
+		//str++;
 		while (ft_is_flag(*str))
 		{
 			if (*str == '-')
@@ -59,7 +59,9 @@ int which_flag(const char *str, t_flag_len *flag)
 			str++;
 		}
 	}
-	return (avancement - ft_strlen(str) - 1);
+	avancement -= ft_strlen((str) - 1);
+	//printf("\nntaille flags = %d ", avancement);
+	return (avancement);
 }
 
 int		ft_check_flag(const char *str, t_flag_len *flag)
