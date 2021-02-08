@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/05 12:04:34 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/08 12:04:33 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,186 @@ void	ft_putstr(char *str, t_flag_len *len)
 	write(1, str, size);
 	len->final_len += (int)size;
 }
+
+int		ft_len_int(long n)
+{
+	int len_int;
+
+	len_int = 0;
+    if (n < 0)
+        n = -n;
+	while (n >= 10)
+	{
+		n /= 10;
+		len_int++;
+	}
+	return (len_int + 1);
+}
+
+char	*ft_itoa(int n)
+{
+	char	*dst;
+	long	nb;
+	int		len;
+
+	nb = n;
+	len = ft_len_int(nb) + (n < 0);
+	if (!(dst = (char*)malloc(sizeof(char) * len + 1 + (n < 0))))
+		return (NULL);
+	if (nb < 0)
+    {
+		dst[0] = '-';
+    	nb = -nb;
+    }
+	dst[len--] = '\0';
+	while (nb >= 10)
+	{
+		dst[len] = (nb % 10) + '0';
+		nb /= 10;
+		len--;
+	}
+	dst[len] = (nb % 10) + '0';
+	return (dst);
+}
+
+int		ft_len_int(long n)
+{
+	int len_int;
+
+	len_int = 0;
+	if (n < 0)
+		n = -n;
+	while (n >= 10)
+	{
+		n /= 10;
+		len_int++;
+	}
+	return (len_int + 1);
+}
+
+char	*ft_itoa(int n)
+{
+	char	*dst;
+	long	nb;
+	int		len;
+
+	nb = n;
+	len = ft_len_int(nb) + (nb < 0);
+	if ((dst = (char*)malloc(sizeof(char) * len + 1 + (n < 0))) == NULL)
+		return (NULL);
+	if (nb < 0 && (nb = -nb))
+		*dst = '-';
+	dst[len--] = '\0';
+	while (len >= (n < 0))
+	{
+		dst[len--] = (nb % 10) + '0';
+		nb /= 10;
+	}
+	return (dst);
+}
+
+char	*ft_itoa_base(unsigned int n, char *base)
+{
+	
+}
+
+/*
+int		ft_position(char c, char *str)
+{
+	int i;
+
+	i = -1;
+	while (str[++i])
+		if (str[i] == c)
+			return (i);
+	return (-1);
+}
+
+int		ft_base_valid(char *str)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 1;
+	while (str[i])
+	{
+		if (str[i] == '-' || str[i] == '+' || str[i] < 32 || str[i] > 126)
+			return (0);
+		while (str[j])
+		{
+			if (str[i] == str[j])
+				return (0);
+			j++;
+		}
+		i++;
+		j = i + 1;
+	}
+	if (ft_strlen(str) < 2)
+		return (0);
+	return (1);
+}
+
+int		ft_atoi_base(char *str, char *base)
+{
+	int neg;
+	int nbr;
+
+	neg = 0;
+	nbr = 0;
+	if (!(ft_base_valid(base)))
+		return (0);
+	while ((*str >= 9 && *str <= 13) || (*str == 32))
+		str++;
+	while (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			neg++;
+		str++;
+	}
+	while (*str && ft_position(*str, base) != -1)
+	{
+		nbr *= ft_strlen(base) + ft_position(*str, base);
+		str++;
+	}
+	if (neg % 2 != 0)
+		nbr *= -1;
+	return (nbr);
+}
+
+char	*ft_strcat(char *dst,char *src)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (dst[i])
+		i++;
+	while (src[j])
+	{
+		dst[i + j] = src[j];
+		j++;
+	}
+	dst[i + j] = '\0';
+	return (dst);
+}
+
+char	*ft_strncat(char *dst, char *src, size_t nb)
+{
+	size_t i;
+	size_t j;
+
+	i = 0;
+	j = 0;
+	while (dst[i])
+		i++;
+	while (src[j] && j < nb)
+	{
+		dst[i] = src[j];
+		i++;
+		j++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}*/

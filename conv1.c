@@ -1,54 +1,70 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conv_int_d_u.c                                     :+:      :+:    :+:   */
+/*   conv1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/01 22:43:34 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/04 12:12:49 by ldermign         ###   ########.fr       */
+/*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
+/*   Updated: 2021/02/08 12:29:39 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_len_int(long n)
+void    conv_s(va_list ap, t_flag_len *flag)
 {
-	int len_int;
+    char *arg_char;
 
-	len_int = 0;
-    if (n < 0)
-        n = -n;
-	while (n >= 10)
-	{
-		n /= 10;
-		len_int++;
-	}
-	return (len_int + 1);
+    arg_char = va_arg(ap, char *);
+    ft_putstr(arg_char, flag);
 }
 
-char	*ft_itoa(int n)
+void    conv_c(va_list ap, t_flag_len *flag)
 {
-	char	*dst;
-	long	nb;
-	int		len;
+    char cara;
 
-	nb = n;
-	len = ft_len_int(nb) + (n < 0);
-	if (!(dst = (char*)malloc(sizeof(char) * len + 1 + (n < 0))))
-		return (NULL);
-	if (nb < 0)
-    {
-		dst[0] = '-';
-    	nb = -nb;
-    }
-	dst[len--] = '\0';
-	while (nb >= 10)
-	{
-		dst[len] = (nb % 10) + '0';
-		nb /= 10;
-		len--;
-	}
-	dst[len] = (nb % 10) + '0';
-	return (dst);
+    cara = va_arg(ap, int);
+    ft_putchar(cara, flag);
+}
+
+void    conv_per(t_flag_len *flag)
+{
+    ft_putstr("\%", flag);
+}
+
+
+void    conv_d_i(va_list ap, t_flag_len *flag)
+{
+    int arg_int;
+	char *temp;
+
+    arg_int = va_arg(ap, int);
+	temp = ft_itoa(arg_int);
+	ft_putstr(temp, flag);
+	free(temp);
+}
+
+void    conv_u(va_list ap, t_flag_len *flag)
+{
+    unsigned int arg_unsdint;
+
+    arg_unsdint = va_arg(ap, unsigned int);
+    (void)flag;
+//    ft_itoa_base()
+}
+
+void	conv_x_X(char c, va_list ap, t_flag_len *flag)
+{
+	unsigned int	arg_unsdint;
+	char			*base;
+	char			*dst;
+
+	arg_unsdint = va_arg(ap, unsigned int);
+	if (c == 'x')
+		base = "abcdef";
+	if (c == 'X')
+		base = "ABCDEF";
+	dst = ft_itoa_base(arg_unsdint, base);
+	ft_putstr(dst, flag);
 }

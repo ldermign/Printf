@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/07 14:19:57 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/08 11:24:35 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,10 @@ void			flag_precision(va_list ap);
 
 int				which_conv(const char *str, va_list ap, t_flag_len *ntm);
 void			conv_d_i(va_list ap, t_flag_len *flag);
-void			conv_s(va_list ap, t_flag_len flag);
-void			conv_c(va_list ap, t_flag_len flag);
-void			conv_per(t_flag_len flag);
+void			conv_s(va_list ap, t_flag_len *flag);
+void			conv_c(va_list ap, t_flag_len *flag);
+void			conv_u(va_list ap, t_flag_len *flag);
+void			conv_per(t_flag_len *flag);
 
 
 
