@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/08 11:24:35 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/09 13:56:26 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,22 @@ int				ft_is_width(char c);
 void			ft_putchar(char c, t_flag_len *len);
 void			ft_putstr(char *str, t_flag_len *len);
 size_t			ft_strlen(const char *str);
-char			*ft_itoa(int n);
+char			*ft_itoa(int nb);
+char			*ft_itoa_base(size_t nb, char *base);
+char			*ft_putnbr_base_printf(long nbr, char *base);
+char			*ft_strcat(char *dst, char *src);
+char			*ft_strncat(char *dst, char *src, size_t nb);
 
 /*
 **	Flags
 */
 
-void			to_flag(t_flag_len flag, va_list ap);
+void			to_flag(t_flag_len *flag, va_list ap);
 int				which_flag(const char *str, t_flag_len *ntm);
-void			flag_minus(va_list ap);
-void			flag_padded_zero(va_list ap);
+void			flag_minus(va_list ap, t_flag_len *ntm);
+void			flag_padded_zero(va_list ap, t_flag_len *ntm);
 void			flag_width(va_list ap, t_flag_len *ntm);
-void			flag_precision(va_list ap);
+void			flag_precision(va_list ap, t_flag_len *ntm);
 
 /*
 **	Conversion
@@ -96,6 +100,7 @@ void			conv_s(va_list ap, t_flag_len *flag);
 void			conv_c(va_list ap, t_flag_len *flag);
 void			conv_u(va_list ap, t_flag_len *flag);
 void			conv_per(t_flag_len *flag);
+void			conv_x_X(char c, va_list ap, t_flag_len *flag);
 
 
 

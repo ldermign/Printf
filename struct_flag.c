@@ -6,22 +6,22 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:46:59 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/07 14:25:35 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/09 12:23:16 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	to_flag(t_flag_len flag, va_list ap)
+void	to_flag(t_flag_len *flag, va_list ap)
 {
-	if (flag.minus == 1)
-		flag_minus(ap);
-	if (flag.padded_zero == 1)
-		flag_padded_zero(ap);
-	if (flag.width == 1)
-		flag_width(ap, &flag);	
-	if (flag.precision == 1)
-		flag_precision(ap);
+	if (flag->minus == 1)
+		flag_minus(ap, flag);
+	if (flag->padded_zero == 1)
+		flag_padded_zero(ap, flag);
+	if (flag->width == 1)
+		flag_width(ap, flag);	
+	if (flag->precision == 1)
+		flag_precision(ap, flag);
 }
 
 void	ft_init_struct_flag(t_flag_len *flag)
@@ -40,7 +40,6 @@ int which_flag(const char *str, t_flag_len *flag)
 	ft_init_struct_flag(flag);
 	if (str)
 	{
-		//str++;
 		while (ft_is_flag(*str))
 		{
 			if (*str == '-')
@@ -60,7 +59,6 @@ int which_flag(const char *str, t_flag_len *flag)
 		}
 	}
 	avancement -= ft_strlen((str) - 1);
-	//printf("\nntaille flags = %d ", avancement);
 	return (avancement);
 }
 
