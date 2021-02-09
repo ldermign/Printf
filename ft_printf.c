@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/09 13:46:23 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/09 15:21:25 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int		main()
 
 	test_d_i = 420;
 	test_u = 428510;
-	test_x_X = 0xFADEF;
+	test_x_X = 0xFFFFFFFF;
 	test_char = "pouet";
 	printf(KCYN"\t//!\\\\MON PRINTF//!\\\\\n");
 	printf("Taille retournee = %d.\n", ft_printf("Testons cette merde = %x, %d.\n", test_x_X, 123456789));

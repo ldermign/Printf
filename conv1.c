@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/09 13:58:09 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/09 15:31:28 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,15 @@ void    conv_u(va_list ap, t_flag_len *flag)
 	//ft_putstr(dst, flag);
 }
 
-void	conv_x_X(char c, va_list ap, t_flag_len *flag)
+void	conv_x_X(char c, va_list ap, t_flag_len *len)
 {
 	unsigned int	arg_unsdint;
 	char			*base;
-	char			*str_conv;
 
 	arg_unsdint = va_arg(ap, unsigned int);
 	if (c == 'x')
 		base = "0123456789abcdef";
 	if (c == 'X')
 		base = "0123456789ABCDEF";
-	str_conv = ft_putnbr_base_printf(arg_unsdint, base);
-	ft_putstr(str_conv, flag);
-	free(str_conv);
+	ft_putnbr_base_printf(arg_unsdint, base, len);
 }

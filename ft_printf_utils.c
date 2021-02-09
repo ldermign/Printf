@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/09 13:58:35 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/09 15:33:28 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,26 +77,23 @@ char	*ft_itoa(int nb)
 	return (dst);
 }
 
-char	*ft_putnbr_base_printf(long nbr, char *base)
+void	ft_putnbr_base_printf(long nbr, char *base, t_flag_len *len)
 {
 	long size_base;
-	char *dst;
 
 	size_base = ft_strlen(base);
-	dst = NULL;
 	if (nbr < 0)
 	{
-		ft_strcat(dst, "-");
+		ft_putchar('-', len);
 		nbr *= -1;
 	}
 	if (nbr < size_base)
-		ft_strncat(dst, &base[nbr], 1);
+		ft_putchar(base[nbr], len);
 	if (nbr >= size_base)
 	{
-		ft_putnbr_base_printf((nbr / size_base), base);
-		ft_putnbr_base_printf((nbr % size_base), base);
+		ft_putnbr_base_printf((nbr / size_base), base, len);
+		ft_putnbr_base_printf((nbr % size_base), base, len);
 	}
-	return (dst);
 }
 
 char	*ft_strcat(char *dst, char *src)
