@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/09 15:33:28 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/10 21:35:25 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,22 @@ void	ft_putnbr_base_printf(long nbr, char *base, t_flag_len *len)
 		ft_putnbr_base_printf((nbr / size_base), base, len);
 		ft_putnbr_base_printf((nbr % size_base), base, len);
 	}
+}
+
+void	ft_putnbr(unsigned int nbr, t_flag_len *len)
+{
+	if (nbr < 0)
+	{
+		ft_putchar('-', len);
+		nbr *= -1;
+	}
+	if (nbr > 9)
+	{
+		ft_putnbr((nbr / 10), len);
+		ft_putnbr((nbr % 10), len);
+	}
+	else
+		ft_putchar((nbr + '0'), len);
 }
 
 char	*ft_strcat(char *dst, char *src)
