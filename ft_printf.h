@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/10 21:39:58 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/11 13:40:29 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 #define KMAG  "\x1B[0;35m"
 #define KCYN  "\x1B[0;36m"
 #define KWHT  "\x1B[0;37m"
+#define KGRE  "\x1b[1;30m"
 //printf("%sred\n", KRED);
 
 
@@ -64,7 +65,8 @@ int				ft_check_flag(const char *str, t_flag_len *flag);
 int				ft_is_flag(char c);
 int				ft_is_digit(char c);
 int				ft_is_conv(char c);
-int				ft_is_width(char c);
+int				ft_is_width(char c); //largeur
+int				ft_is_all(char c);
 
 /*
 **	Utils
@@ -79,12 +81,15 @@ void			ft_putnbr_base_printf(long nbr, char *base, t_flag_len *len);
 char			*ft_strcat(char *dst, char *src);
 char			*ft_strncat(char *dst, char *src, size_t nb);
 void			ft_putnbr(unsigned int nbr, t_flag_len *len);
+void			ft_putnbr_adr(unsigned long nbr, t_flag_len *len);
+char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_rev_string(char *str, int size);
 
 /*
 **	Flags
 */
 
-void			to_flag(t_flag_len *flag, va_list ap);
+char			*to_flag(char *str, va_list ap, t_flag_len *flag);
 int				which_flag(const char *str, t_flag_len *ntm);
 void			flag_minus(va_list ap, t_flag_len *ntm);
 void			flag_padded_zero(va_list ap, t_flag_len *ntm);

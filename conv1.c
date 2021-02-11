@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/10 21:47:31 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/11 11:49:23 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void    conv_s(va_list ap, t_flag_len *flag)
 {
-    char *arg_char;
+    char	*arg_char;
 
     arg_char = va_arg(ap, char *);
     ft_putstr(arg_char, flag);
@@ -57,23 +57,35 @@ void	conv_x_X(char c, va_list ap, t_flag_len *len)
 	unsigned int	arg_unsdint;
 	char			*base;
 
+	int size_arg;
+	char *temp;
+
 	arg_unsdint = va_arg(ap, unsigned int);
+
+	temp = ft_itoa(arg_unsdint);
+	
 	if (c == 'x')
 		base = "0123456789abcdef";
 	if (c == 'X')
 		base = "0123456789ABCDEF";
+	size_arg = ft_strlen(temp);
 	ft_putnbr_base_printf(arg_unsdint, base, len);
 }
 
 void    conv_p(va_list ap, t_flag_len *flag)
 {
-	// va_arg = type void ?
-	// utiliser unsdint ?
-	// c la meme que u mais avec 0x au debut ptdr ????
-	// base de 16 ??????????????????????????/
-	unsigned int 	arg_unsdint;
+	unsigned long 	arg_unsdint;
+	void			*adrss_ptr;
 
-    arg_unsdint = va_arg(ap, unsigned int);
+    adrss_ptr = va_arg(ap, void*);
+	arg_unsdint = (unsigned long)(adrss_ptr);
 	ft_putstr("0x", flag);
 	ft_putnbr(arg_unsdint, flag);
 }
+	/* va_arg = type void ?
+	utiliser unsdint ?
+	c la meme que u mais avec 0x au debut ptdr ????
+	base de 16 ??????????????????????????/
+	
+	why explicit cast to void* is needed for all types but char*.
+	*/

@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/10 21:35:25 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/11 13:45:01 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,25 @@ void	ft_putstr(char *str, t_flag_len *len)
 	size = ft_strlen(str);
 	write(1, str, size);
 	len->final_len += (int)size;
+}
+
+char	*ft_rev_string(char *str, int size)
+{
+	int i;
+//	int j;
+	char swap;
+
+	i = 0;
+//	size_str = ft_strlen(str);
+	while (i < size)
+	{
+		swap = str[i];
+		str[i] = str[size];
+		str[size] = swap;
+		i++;
+		size --;
+	}
+	return (str);
 }
 
 int		ft_len_nb(long n)
@@ -98,6 +117,17 @@ void	ft_putnbr_base_printf(long nbr, char *base, t_flag_len *len)
 
 void	ft_putnbr(unsigned int nbr, t_flag_len *len)
 {
+	if (nbr > 9)
+	{
+		ft_putnbr((nbr / 10), len);
+		ft_putnbr((nbr % 10), len);
+	}
+	else
+		ft_putchar((nbr + '0'), len);
+}
+
+void	ft_putnbr_adr(unsigned long nbr, t_flag_len *len)
+{
 	if (nbr < 0)
 	{
 		ft_putchar('-', len);
@@ -105,8 +135,8 @@ void	ft_putnbr(unsigned int nbr, t_flag_len *len)
 	}
 	if (nbr > 9)
 	{
-		ft_putnbr((nbr / 10), len);
-		ft_putnbr((nbr % 10), len);
+		ft_putnbr_adr((nbr / 16), len);
+		ft_putnbr_adr((nbr % 16), len);
 	}
 	else
 		ft_putchar((nbr + '0'), len);
@@ -144,6 +174,31 @@ char	*ft_strncat(char *dst, char *src, size_t nb)
 		dst[i] = src[j];
 		i++;
 		j++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*dst;
+	int		i;
+	int		j;
+	int		size_tot;
+
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
+	i = -1;
+	j = -1;
+	size_tot = ft_strlen((char*)s1) + ft_strlen((char*)s2) + 1;
+	if ((dst = (char*)malloc(sizeof(char) * size_tot)) == NULL)
+		return (NULL);
+	while (s1[++i])
+		dst[i] = s1[i];
+	while (s2[++j])
+	{
+		dst[i] = s2[j];
+		i++;
 	}
 	dst[i] = '\0';
 	return (dst);

@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/10 21:46:54 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/11 12:14:56 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		which_conv(const char *str, va_list ap, t_flag_len *ntm)
 {
-//	to_flag(ap, ntm);
+	to_flag((char*)str, ap, ntm);
 	if (*str == 'c')
 		conv_c(ap, ntm);
 	else if (*str == 's')
@@ -81,16 +81,26 @@ int		main()
 	char			test_c;
 	char			*test_p;
 
-	test_d_i = 420;
-	test_u = -428510;
-	test_x_X = 0xFFFFFFFF;
+	test_d_i = -2147483648;
+	test_u = 48;
+	test_x_X = 420;
 	test_s = "pouet c'est relou";
 	test_c = 'c';
 	test_p = "nique ta race, adresse a la con, j'y arrive pas putain";
-	printf(KCYN"\t//!\\\\MON PRINTF//!\\\\\n");
-	printf("Taille retournee = %d.\n", ft_printf("Testons cette merde = %p, %d.\n", test_p, 123456789));
-	printf(KGRN"\n\t//!\\\\VRAI PRINTF//!\\\\\n");
-	printf("Taille retournee = %d.\n", printf("Testons cette merde = %p, %d.\n", test_p, 123456789));
+	printf(KCYN"\t\t//!\\\\MON PRINTF//!\\\\\n");
+	printf(KGRE"Taille pour test d/i = %d.\n", ft_printf(KCYN"Quelque chose pouet 1 = [d : %8.3d] & [i : %i].\n", test_d_i, test_d_i));
+	printf(KGRE"Taille pour test u = %d.\n", ft_printf(KCYN"Quelque chose pouet 2 = %u.\n", test_u));
+	printf(KGRE"Taille pour test x et X = %d.\n", ft_printf(KCYN"Quelque chose pouet 3 = [x : %x] & [X : %X].\n", test_x_X, test_x_X));
+	printf(KGRE"Taille pour test s = %d.\n", ft_printf(KCYN"Quelque chose pouet 4 = %s.\n", test_s));
+	printf(KGRE"Taille pour test c = %d.\n", ft_printf(KCYN"Quelque chose pouet 5 = %c.\n", test_c));
+	printf(KGRE"Taille pour test p = %d.\n", ft_printf(KCYN"Quelque chose pouet 6 = %p.\n", test_p));
+	printf(KGRN"\n\t\t//!\\\\VRAI PRINTF//!\\\\\n");
+	printf(KGRE"Taille pour test d/i = %d.\n", printf(KGRN"Quelque chose pouet 1 = [d : %d] & [i : %i].\n", test_d_i, test_d_i));
+	printf(KGRE"Taille pour test u = %d.\n", printf(KGRN"Quelque chose pouet 2 = %u.\n", test_u));
+	printf(KGRE"Taille pour test x et X = %d.\n", printf(KGRN"Quelque chose pouet 3 = [x : %x] & [X : %X].\n", test_x_X, test_x_X));
+	printf(KGRE"Taille pour test s = %d.\n", printf(KGRN"Quelque chose pouet 4 = %s.\n", test_s));
+	printf(KGRE"Taille pour test c = %d.\n", printf(KGRN"Quelque chose pouet 5 = %c.\n", test_c));
+	printf(KGRE"Taille pour test p = %d.\n", printf(KGRN"Quelque chose pouet 6 = %p.\n", test_p));
 	return (0);
 }
 
@@ -98,5 +108,5 @@ int		main()
 **	printf("On va tester cette merde = %u", -8); => underflow, unsdint
 **	%[flag][min width][precision][length modifier][conversion specifier]
 **	a regler :
-**	conversion u
+**	conversion p
 */
