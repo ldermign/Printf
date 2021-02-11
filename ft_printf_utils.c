@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/11 13:45:01 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/11 15:10:29 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,20 +126,20 @@ void	ft_putnbr(unsigned int nbr, t_flag_len *len)
 		ft_putchar((nbr + '0'), len);
 }
 
-void	ft_putnbr_adr(unsigned long nbr, t_flag_len *len)
+void	ft_putnbr_adr(unsigned int nbr, t_flag_len *len)
 {
-	if (nbr < 0)
+/*	if (nbr < 0)
 	{
 		ft_putchar('-', len);
 		nbr *= -1;
-	}
-	if (nbr > 9)
+	}*/
+	if (nbr / 16 > 0)
 	{
 		ft_putnbr_adr((nbr / 16), len);
-		ft_putnbr_adr((nbr % 16), len);
+		// ft_putnbr_adr((nbr % 16), len);
 	}
-	else
-		ft_putchar((nbr + '0'), len);
+	ft_putchar((nbr + '0'), len);
+	ft_putchar((nbr % 16 + '0'), len);
 }
 
 char	*ft_strcat(char *dst, char *src)

@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:46:59 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/11 13:50:21 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/11 14:53:58 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ char	*to_flag(char *str, va_list ap, t_flag_len *flag)
 	(void)ap;
 	(void)flag;
 	int len_flag;
-	char *str_flag;
+//	char *str_flag;
 	int i;
 
 	i = 0;
 	len_flag = 0;
 	str--;
-	while (ft_is_all(*str) && str--)
+/*	while (ft_is_all(*str) && str--)
 		len_flag++;
-/*	while ((i < len_flag) && i++)
-		str++;*/
+	while ((i < len_flag) && i++)
+		str++;
 	printf("len_flag = %d\n", len_flag);
 	str_flag = ft_rev_string(str, len_flag);
-	printf(KRED"flags = [%s]\n", str);
+	printf(KRED"flags = [%s]\n", str);*/
 	return (str);
 }
 

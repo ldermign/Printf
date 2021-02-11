@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/11 11:49:23 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/11 15:06:48 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,13 @@ void	conv_x_X(char c, va_list ap, t_flag_len *len)
 
 void    conv_p(va_list ap, t_flag_len *flag)
 {
-	unsigned long 	arg_unsdint;
-	void			*adrss_ptr;
+	unsigned int 	arg_unsdint;
+	void			*adresse_ptr;
 
-    adrss_ptr = va_arg(ap, void*);
-	arg_unsdint = (unsigned long)(adrss_ptr);
+    adresse_ptr = va_arg(ap, void*);
+	arg_unsdint = (unsigned int)(adresse_ptr);
 	ft_putstr("0x", flag);
-	ft_putnbr(arg_unsdint, flag);
+	ft_putnbr_adr(arg_unsdint, flag);
 }
 	/* va_arg = type void ?
 	utiliser unsdint ?
