@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/12 18:50:20 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/12 22:43:50 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,25 +107,24 @@ int		main()
 	int test2 = -765;
 	
 	printf(KCYN"\t\t//!\\\\MON PRINTF//!\\\\\n");
-	printf(KGRE"Taille = %d.\n", ft_printf(KCYN"positif, zero, width sup ----------> [d : %010d].\n", test1));
+	printf(KGRE"Taille = %d.\n", ft_printf(KCYN"positif, zero, width sup ----------> [d : %030.20d].\n", test1));
 	printf(KGRE"Taille = %d.\n", ft_printf(KCYN"negatif, zero, width sup ----------> [d : %010d].\n", test2));
 	printf(KGRE"Taille = %d.\n", ft_printf(KCYN"positif, zero, width inf ----------> [d : %01d].\n", test1));
 	printf(KGRE"Taille = %d.\n", ft_printf(KCYN"negatif, zero, width inf ----------> [d : %01d].\n", test2));
-	printf(KGRE"Taille = %d.\n", ft_printf(KCYN"positif, moins, width sup ----------> [d : %-10d].\n", test1));
-	printf(KGRE"Taille = %d.\n", ft_printf(KCYN"negatif, moins, width sup ----------> [d : %-10d].\n", test2));
-	printf(KGRE"Taille = %d.\n", ft_printf(KCYN"positif, moins, width inf ---------> [d : %-1d].\n", test1));
-	printf(KGRE"Taille = %d.\n", ft_printf(KCYN"negatif, moins, width inf ---------> [d : %-1d].\n", test2));
+	// printf(KGRE"Taille = %d.\n", ft_printf(KCYN"positif, moins, width sup ----------> [d : %-10d].\n", test1));
+	// printf(KGRE"Taille = %d.\n", ft_printf(KCYN"negatif, moins, width sup ----------> [d : %-10d].\n", test2));
+	// printf(KGRE"Taille = %d.\n", ft_printf(KCYN"positif, moins, width inf ---------> [d : %-1d].\n", test1));
+	// printf(KGRE"Taille = %d.\n", ft_printf(KCYN"negatif, moins, width inf ---------> [d : %-1d].\n", test2));
 
 	printf(KGRN"\n\t\t//!\\\\VRAI PRINTF//!\\\\\n");
-	printf(KGRE"Taille = %d.\n", printf(KGRN"positif, zero, width sup ----------> [d : %010d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"positif, zero, width sup ----------> [d : %030.20d].\n", test1));
 	printf(KGRE"Taille = %d.\n", printf(KGRN"negatif, zero, width sup ----------> [d : %010d].\n", test2));
 	printf(KGRE"Taille = %d.\n", printf(KGRN"positif, zero, width inf ----------> [d : %01d].\n", test1));
 	printf(KGRE"Taille = %d.\n", printf(KGRN"negatif, zero, width inf ----------> [d : %01d].\n", test2));
 	printf(KGRE"Taille = %d.\n", printf(KGRN"positif, moins, width sup ----------> [d : %-10d].\n", test1));
 	printf(KGRE"Taille = %d.\n", printf(KGRN"negatif, moins, width sup ----------> [d : %-10d].\n", test2));
 	printf(KGRE"Taille = %d.\n", printf(KGRN"positif, moins, width inf ---------> [d : %-1d].\n", test1));
-	printf(KGRE"Taille = %d.\n", printf(KGRN"negatif, moins, width inf ---------> [d : %-1d].\n", test2));
-	return (0);
+	printf(KGRE"Taille = %d.\n", printf(KGRN"negatif, moins, width inf ---------> [d : %-1d].\n", test2));	return (0);
 }
 
 

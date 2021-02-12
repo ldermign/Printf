@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/12 18:50:47 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/12 22:37:02 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,39 +44,41 @@ void    conv_p(char *str_flag, va_list ap, t_flag_len *flag)
 
 void    conv_d_i(char *str_flag, va_list ap, t_flag_len *flag)
 {
-    int 	arg_int;
-	int		size_str_flag;
-	int		size_str_ap;
 	char	*temp;
-	char	*strconv_flags;
+    int 	arg_int;
 
+	(void)str_flag;
     arg_int = va_arg(ap, int);
 	temp = ft_itoa(arg_int);
-	size_str_flag = ft_strlen(str_flag);
-	size_str_ap = ft_strlen(temp);
-	if (size_str_flag < size_str_ap)
-		strconv_flags = ft_itoa(arg_int);
-	if (size_str_flag > size_str_ap)
-	{
-		strconv_flags = str_flag;
-		if (arg_int < 0 && flag->padded_zero == 1)
-			strconv_flags[0] = '-';
-		while (size_str_ap >= 0)
-		{
-			strconv_flags[size_str_flag] = temp[size_str_ap];
-			size_str_flag--;
-			size_str_ap--;
-			if (!ft_is_digit(temp[size_str_ap]) && flag->padded_zero == 1)
-			 	break ;
-		}
-
-	}
-	ft_putstr(strconv_flags, flag);
-	if (temp)
-		free(temp);
-	if (strconv_flags)
-		free(strconv_flags);
+	ft_putstr(temp, flag);
 }
+	// char	*strconv_flags;
+	// int		size_str_flag;
+	// int		size_str_ap;
+	// size_str_flag = ft_strlen(str_flag);
+	// size_str_ap = ft_strlen(temp);
+	// if (size_str_flag < size_str_ap)
+	// 	strconv_flags = ft_itoa(arg_int);
+	// if (size_str_flag > size_str_ap)
+	// {
+	// 	strconv_flags = str_flag;
+	// 	if (arg_int < 0 && flag->padded_zero == 1)
+	// 		strconv_flags[0] = '-';
+	// 	while (size_str_ap >= 0)
+	// 	{
+	// 		strconv_flags[size_str_flag] = temp[size_str_ap];
+	// 		size_str_flag--;
+	// 		size_str_ap--;
+	// 		if (!ft_is_digit(temp[size_str_ap]) && flag->padded_zero == 1)
+	// 		 	break ;
+	// 	}
+
+	// }
+	// ft_putstr(strconv_flags, flag);
+	// if (temp)
+	// 	free(temp);
+	// if (strconv_flags)
+	// 	free(strconv_flags);
 
 void    conv_u(char *str_flag, va_list ap, t_flag_len *flag)
 {

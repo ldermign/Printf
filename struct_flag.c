@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:46:59 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/12 17:46:56 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/12 22:48:51 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,15 @@ char	*string_of_flags(char *str)
 	str++;
 	str_of_flag = ft_strcat(str_of_flag, str);
 	return (str);
+}
+
+char	*strflag_to_use(char *str, t_flag_len *flag)
+{
+	while (str)
+	{
+		
+	}
+	
 }
 
 char	*flag_width(char *str, size_t len_str, va_list ap, t_flag_len *flag)
@@ -59,11 +68,13 @@ char	*flag_width(char *str, size_t len_str, va_list ap, t_flag_len *flag)
 	return (str_width);
 }
 
+
 char	*to_flag(char *str, va_list ap, t_flag_len *flag)
 {
 	char	*str_of_flag;
 	char	*str_flag_conv;
 	size_t	size_str_flag;
+	char	*final_str_flag;
 
 	
 	str_flag_conv = NULL;
@@ -71,13 +82,14 @@ char	*to_flag(char *str, va_list ap, t_flag_len *flag)
 		flag->padded_zero = 0;
 	str_of_flag = string_of_flags(str);
 	size_str_flag = ft_strlen(str_of_flag);
+	final_str_flag = strflag_to_use(str_of_flag, flag);
 	if (flag->width == 1 || flag->padded_zero == 1)
 		str_flag_conv = flag_width(str_of_flag, size_str_flag, ap, flag);
+	// if (flag->minus == 1)
+	// 	return (str_flag_conv);
 
 	// if (flag->minus == 1)
 	// 	flag_minus(str, len_str);
-	// if (flag->padded_zero == 1)
-	// 	flag_padded_zero(str, len_str);
 	// if (flag->precision == 1)
 	// 	flag_precision(str, len_str);
 	return (str_flag_conv);
@@ -138,6 +150,35 @@ int		ft_check_flag(const char *str)
 	}
 	return (1);
 }
+
+// char	*flag_width(char *str, size_t len_str, va_list ap, t_flag_len *flag)
+// {
+// 	(void)ap;
+// 	char	*space_or_zero;
+// 	char	*str_width;
+// 	size_t	i;
+// 	size_t	int_width;
+
+// 	space_or_zero = " ";
+// 	i = 0;
+// 	if (flag->padded_zero == 1)
+// 		space_or_zero = "0";
+// 	while (i < len_str)
+// 	{
+// 		if (ft_is_digit(*str))
+// 			int_width = ft_atoi_printf(str);
+// 		i++;
+// 	}
+// 	if ((str_width = (char*)malloc(sizeof(char) * (int_width + 1))) == NULL)
+// 		return (NULL);
+// 	i = 0;
+// 	while (i < int_width)
+// 	{
+// 		str_width = ft_strcat(str_width, space_or_zero);
+// 		i++;
+// 	}
+// 	return (str_width);
+// }
 
 	// while ((i < len_flag) && i++)
 	// 	str++;
