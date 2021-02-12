@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/11 15:10:29 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/12 10:37:09 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,26 @@ char	*ft_itoa(int nb)
 	return (dst);
 }
 
+int	ft_atoi_printf(char *str)
+{
+	int i;
+	int neg;
+	int nbr;
+
+	i = 0;
+	neg = 0;
+	nbr = 0;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		nbr *= 10;
+		nbr += str[i] - '0';
+		i++;
+	}
+	if (neg % 2 != 0)
+		nbr *= -1;
+	return (nbr);
+}
+
 void	ft_putnbr_base_printf(long nbr, char *base, t_flag_len *len)
 {
 	long size_base;
@@ -126,20 +146,18 @@ void	ft_putnbr(unsigned int nbr, t_flag_len *len)
 		ft_putchar((nbr + '0'), len);
 }
 
-void	ft_putnbr_adr(unsigned int nbr, t_flag_len *len)
+void	ft_putnbr_adr(unsigned long nbr, t_flag_len *len)
 {
-/*	if (nbr < 0)
-	{
-		ft_putchar('-', len);
-		nbr *= -1;
-	}*/
-	if (nbr / 16 > 0)
+	char *base;
+
+	base = "abcdef0123456789";
+	if (nbr >= 16)
 	{
 		ft_putnbr_adr((nbr / 16), len);
-		// ft_putnbr_adr((nbr % 16), len);
+		ft_putnbr_adr((nbr % 16), len);
 	}
-	ft_putchar((nbr + '0'), len);
-	ft_putchar((nbr % 16 + '0'), len);
+	else
+		ft_putchar(base[nbr], len);
 }
 
 char	*ft_strcat(char *dst, char *src)

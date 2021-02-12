@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/11 15:07:01 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/12 11:13:04 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void			ft_init_flag_len_flag(t_flag_len *flag);
 **	Checks
 */
 
-int				ft_check_flag(const char *str, t_flag_len *flag);
+int				ft_check_flag(const char *str);
 int				ft_is_flag(char c);
 int				ft_is_digit(char c);
 int				ft_is_conv(char c);
@@ -81,9 +81,10 @@ void			ft_putnbr_base_printf(long nbr, char *base, t_flag_len *len);
 char			*ft_strcat(char *dst, char *src);
 char			*ft_strncat(char *dst, char *src, size_t nb);
 void			ft_putnbr(unsigned int nbr, t_flag_len *len);
-void			ft_putnbr_adr(unsigned int nbr, t_flag_len *len);
+void			ft_putnbr_adr(unsigned long nbr, t_flag_len *len);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_rev_string(char *str, int size);
+int				ft_atoi_printf(char *str);
 
 /*
 **	Flags
@@ -91,10 +92,10 @@ char			*ft_rev_string(char *str, int size);
 
 char			*to_flag(char *str, va_list ap, t_flag_len *flag);
 int				which_flag(const char *str, t_flag_len *ntm);
-void			flag_minus(va_list ap, t_flag_len *ntm);
-void			flag_padded_zero(va_list ap, t_flag_len *ntm);
-void			flag_width(va_list ap, t_flag_len *ntm);
-void			flag_precision(va_list ap, t_flag_len *ntm);
+// void			flag_minus(va_list ap, t_flag_len *ntm);
+// void			flag_padded_zero(va_list ap, t_flag_len *ntm);
+// void			flag_width(va_list ap, t_flag_len *ntm);
+// void			flag_precision(va_list ap, t_flag_len *ntm);
 
 /*
 **	Conversion
@@ -114,7 +115,7 @@ void			conv_p(va_list ap, t_flag_len *flag);
 
 
 
-
+void    ft_printf_monuq(t_flag_len ntm);
 
 
 

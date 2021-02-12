@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/11 15:06:48 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/12 09:42:30 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,35 +57,28 @@ void	conv_x_X(char c, va_list ap, t_flag_len *len)
 	unsigned int	arg_unsdint;
 	char			*base;
 
-	int size_arg;
-	char *temp;
+//	int size_arg;
+//	char *temp;
 
 	arg_unsdint = va_arg(ap, unsigned int);
 
-	temp = ft_itoa(arg_unsdint);
+//	temp = ft_itoa(arg_unsdint);
 	
 	if (c == 'x')
 		base = "0123456789abcdef";
 	if (c == 'X')
 		base = "0123456789ABCDEF";
-	size_arg = ft_strlen(temp);
+//	size_arg = ft_strlen(temp);
 	ft_putnbr_base_printf(arg_unsdint, base, len);
 }
 
 void    conv_p(va_list ap, t_flag_len *flag)
 {
-	unsigned int 	arg_unsdint;
+	unsigned long 	arg_unsdint;
 	void			*adresse_ptr;
 
     adresse_ptr = va_arg(ap, void*);
-	arg_unsdint = (unsigned int)(adresse_ptr);
+	arg_unsdint = (unsigned long)(adresse_ptr);
 	ft_putstr("0x", flag);
 	ft_putnbr_adr(arg_unsdint, flag);
 }
-	/* va_arg = type void ?
-	utiliser unsdint ?
-	c la meme que u mais avec 0x au debut ptdr ????
-	base de 16 ??????????????????????????/
-	
-	why explicit cast to void* is needed for all types but char*.
-	*/
