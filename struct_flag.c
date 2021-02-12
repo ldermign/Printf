@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:46:59 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/12 11:58:56 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/12 17:46:56 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,12 @@ char	*to_flag(char *str, va_list ap, t_flag_len *flag)
 	if (flag->width == 1 || flag->padded_zero == 1)
 		str_flag_conv = flag_width(str_of_flag, size_str_flag, ap, flag);
 
-		
-
-
-
 	// if (flag->minus == 1)
 	// 	flag_minus(str, len_str);
 	// if (flag->padded_zero == 1)
 	// 	flag_padded_zero(str, len_str);
 	// if (flag->precision == 1)
 	// 	flag_precision(str, len_str);
-	printf("*****%s*****\n", str_flag_conv);
 	return (str_flag_conv);
 }
 
@@ -172,8 +167,3 @@ int		ft_check_flag(const char *str)
 	// 	flag_width(str, len_str);	
 	// if (flag->precision == 1)
 	// 	flag_precision(str, len_str);
-
-	1 rtyuiopbvdnzkm
-	2 vbesunfml;
-	3 vndsuifmw;al
-	4 vndj

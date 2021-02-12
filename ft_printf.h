@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/12 11:13:04 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/12 17:58:45 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void			ft_putnbr_adr(unsigned long nbr, t_flag_len *len);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_rev_string(char *str, int size);
 int				ft_atoi_printf(char *str);
+void			*ft_memmove(char *dst, char *src, size_t n);
+void			*fill_from_end(char *dst, char *src, size_t n);
 
 /*
 **	Flags
@@ -102,13 +104,13 @@ int				which_flag(const char *str, t_flag_len *ntm);
 */
 
 int				which_conv(const char *str, va_list ap, t_flag_len *ntm);
-void			conv_d_i(va_list ap, t_flag_len *flag);
-void			conv_s(va_list ap, t_flag_len *flag);
-void			conv_c(va_list ap, t_flag_len *flag);
-void			conv_u(va_list ap, t_flag_len *flag);
-void			conv_per(t_flag_len *flag);
-void			conv_x_X(char c, va_list ap, t_flag_len *len);
-void			conv_p(va_list ap, t_flag_len *flag);
+void			conv_d_i(char *str_flag, va_list ap, t_flag_len *flag);
+void			conv_s(char *str_flag, va_list ap, t_flag_len *flag);
+void			conv_c(char *str_flag, va_list ap, t_flag_len *flag);
+void			conv_u(char *str_flag, va_list ap, t_flag_len *flag);
+void			conv_per(char *str_flag, t_flag_len *flag);
+void			conv_x_X(char *str_flag, char c, va_list ap, t_flag_len *len);
+void			conv_p(char *str_flag, va_list ap, t_flag_len *flag);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/12 10:37:09 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/12 17:58:37 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,45 @@ void	ft_putstr(char *str, t_flag_len *len)
 	len->final_len += (int)size;
 }
 
-char	*ft_rev_string(char *str, int size)
+void	*ft_memmove(char *dst, char *src, size_t n)
 {
-	int i;
-//	int j;
-	char swap;
+	size_t i;
 
 	i = 0;
-//	size_str = ft_strlen(str);
-	while (i < size)
+	if (!dst && !src)
+		return (NULL);
+	if (dst > src)
 	{
-		swap = str[i];
-		str[i] = str[size];
-		str[size] = swap;
-		i++;
-		size --;
+		while (n > 0)
+		{
+			((char*)dst)[n - 1] = ((char*)src)[n - 1];
+			n--;
+		}
 	}
-	return (str);
+	else
+	{
+		while (i < n)
+		{
+			((char*)dst)[i] = ((char*)src)[i];
+			i++;
+		}
+	}
+	return (dst);
+}
+
+void	*fill_from_end(char *dst, char *src, size_t n)
+{
+	size_t from_last;
+
+	from_last = n;
+	if (!dst && !src)
+		return (NULL);
+	while (from_last > 0)
+	{
+		dst[from_last] = src[from_last];
+		from_last--;
+	}
+	return (dst);
 }
 
 int		ft_len_nb(long n)
@@ -311,3 +333,23 @@ char	*ft_itoa_base(size_t nb, char *base)
 	}
 	return (dst);
 }*/
+
+
+// char	*ft_rev_string(char *str, int size)
+// {
+// 	int i;
+// //	int j;
+// 	char swap;
+
+// 	i = 0;
+// //	size_str = ft_strlen(str);
+// 	while (i < size)
+// 	{
+// 		swap = str[i];
+// 		str[i] = str[size];
+// 		str[size] = swap;
+// 		i++;
+// 		size --;
+// 	}
+// 	return (str);
+// }
