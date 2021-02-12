@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/12 18:27:54 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/12 18:50:20 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		ft_printf(const char *str, ...)
 
 int		main()
 {
-	int				test_d_i = -8372;
+	// int				test_d_i = -8372;
 /*	unsigned int	test_u = 42;
 	unsigned int	test_x_X = 420;
 	char 			*test_s = "pouet c'est relou";
@@ -84,24 +84,50 @@ int		main()
 	int				test_adresse_p = 9999999;
 	int				*test_p = &test_adresse_p;*/
 
-	printf(KCYN"\t\t//!\\\\MON PRINTF//!\\\\\n");
-	printf(KGRE"Taille pour test d/i = %d.\n", ft_printf(KCYN"Quelque chose d ----------> [d : %03d].\n", test_d_i));
+	// printf(KCYN"\t\t//!\\\\MON PRINTF//!\\\\\n");
+	// printf(KGRE"Taille pour test d/i = %d.\n", ft_printf(KCYN"Quelque chose d ----------> [d : %15d].\n", test_d_i));
 	// printf(KGRE"Taille pour test c = %d.\n", ft_printf(KCYN"Quelque chose c --------------> [%c].\n", test_c));
 	// printf(KGRE"Taille pour test s = %d.\n", ft_printf(KCYN"Quelque chose s --------------> [%s].\n", test_s));
 	// printf(KGRE"Taille pour test p = %d.\n", ft_printf(KCYN"Quelque chose p --------------> [%p].\n", test_p));
 	// printf(KGRE"Taille pour test d/i = %d.\n", ft_printf(KCYN"Quelque chose d & i ----------> [d : %8.3d] & [i : %i].\n", test_d_i, test_d_i));
 	// printf(KGRE"Taille pour test u = %d.\n", ft_printf(KCYN"Quelque chose u --------------> [%u].\n", test_u));
 	// printf(KGRE"Taille pour test x et X = %d.\n", ft_printf(KCYN"Quelque chose x & X ----------> [x : %x] & [X : %X].\n", test_x_X, test_x_X));
-	printf(KGRN"\n\t\t//!\\\\VRAI PRINTF//!\\\\\n");
-	printf(KGRE"Taille pour test d/i = %d.\n", printf(KGRN"Quelque chose d ----------> [d : %03d].\n", test_d_i));
+	// printf(KGRN"\n\t\t//!\\\\VRAI PRINTF//!\\\\\n");
+	// printf(KGRE"Taille pour test d/i = %d.\n", printf(KGRN"Quelque chose d ----------> [d : %15d].\n", test_d_i));
 	// printf(KGRE"Taille pour test c = %d.\n", printf(KGRN"Quelque chose c --------------> [%c].\n", test_c));
 	// printf(KGRE"Taille pour test s = %d.\n", printf(KGRN"Quelque chose s --------------> [%s].\n", test_s));
 	// printf(KGRE"Taille pour test p = %d.\n", printf(KGRN"Quelque chose p --------------> [%p].\n", test_p));
 	// printf(KGRE"Taille pour test d/i = %d.\n", printf(KGRN"Quelque chose d & i ----------> [d : %8.3d] & [i : %i].\n", test_d_i, test_d_i));
 	// printf(KGRE"Taille pour test u = %d.\n", printf(KGRN"Quelque chose u --------------> [%u].\n", test_u));
 	// printf(KGRE"Taille pour test x et X = %d.\n", printf(KGRN"Quelque chose x & X ----------> [x : %x] & [X : %X].\n", test_x_X, test_x_X));
+
+	//test flags
+
+	int test1 = 765;
+	int test2 = -765;
+	
+	printf(KCYN"\t\t//!\\\\MON PRINTF//!\\\\\n");
+	printf(KGRE"Taille = %d.\n", ft_printf(KCYN"positif, zero, width sup ----------> [d : %010d].\n", test1));
+	printf(KGRE"Taille = %d.\n", ft_printf(KCYN"negatif, zero, width sup ----------> [d : %010d].\n", test2));
+	printf(KGRE"Taille = %d.\n", ft_printf(KCYN"positif, zero, width inf ----------> [d : %01d].\n", test1));
+	printf(KGRE"Taille = %d.\n", ft_printf(KCYN"negatif, zero, width inf ----------> [d : %01d].\n", test2));
+	printf(KGRE"Taille = %d.\n", ft_printf(KCYN"positif, moins, width sup ----------> [d : %-10d].\n", test1));
+	printf(KGRE"Taille = %d.\n", ft_printf(KCYN"negatif, moins, width sup ----------> [d : %-10d].\n", test2));
+	printf(KGRE"Taille = %d.\n", ft_printf(KCYN"positif, moins, width inf ---------> [d : %-1d].\n", test1));
+	printf(KGRE"Taille = %d.\n", ft_printf(KCYN"negatif, moins, width inf ---------> [d : %-1d].\n", test2));
+
+	printf(KGRN"\n\t\t//!\\\\VRAI PRINTF//!\\\\\n");
+	printf(KGRE"Taille = %d.\n", printf(KGRN"positif, zero, width sup ----------> [d : %010d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"negatif, zero, width sup ----------> [d : %010d].\n", test2));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"positif, zero, width inf ----------> [d : %01d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"negatif, zero, width inf ----------> [d : %01d].\n", test2));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"positif, moins, width sup ----------> [d : %-10d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"negatif, moins, width sup ----------> [d : %-10d].\n", test2));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"positif, moins, width inf ---------> [d : %-1d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"negatif, moins, width inf ---------> [d : %-1d].\n", test2));
 	return (0);
 }
+
 
 /*
 **	printf("On va tester cette merde = %u", -8); => underflow, unsdint

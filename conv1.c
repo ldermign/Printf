@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/12 18:27:25 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/12 18:50:47 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ void    conv_d_i(char *str_flag, va_list ap, t_flag_len *flag)
 	if (size_str_flag > size_str_ap)
 	{
 		strconv_flags = str_flag;
-		if (arg_int < 0)
+		if (arg_int < 0 && flag->padded_zero == 1)
 			strconv_flags[0] = '-';
 		while (size_str_ap >= 0)
 		{
 			strconv_flags[size_str_flag] = temp[size_str_ap];
 			size_str_flag--;
 			size_str_ap--;
-			if (!ft_is_digit(temp[size_str_ap]))
+			if (!ft_is_digit(temp[size_str_ap]) && flag->padded_zero == 1)
 			 	break ;
 		}
 
