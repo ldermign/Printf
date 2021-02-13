@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:46:59 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/13 16:32:12 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/13 19:00:29 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_init_struct_flag(t_flag_len *flag)
 	flag->str_of_flag = NULL;
 }
 
-char	*string_of_flags(char *str)
+char	*create_string_of_flags(char *str)
 {
 	int		i;
 	int		len_flag;
@@ -44,49 +44,74 @@ char	*string_of_flags(char *str)
 		str_of_flag[i] = str[i];
 		i++;
 	}
+	str_of_flag[i] = '\0';
 	return (str_of_flag);
 }
 
-int	strflag_to_use(char *str_of_flags, va_list ap, t_flag_len *flag)
+void	string_of_flag_to_int(va_list ap, t_flag_len *flag)
 {
-	(void)flag;
-	(void)ap;
-	(void)str_of_flags;
-	int arg;
-	int nbr;
-	int width;
-	int precision;
-	//char *temp;
+	int		i;
+	int		start;
+	int		len_int;
+	char	*temp;
 
-	nbr = 0;
-	arg = 0;
-	width = 0;
-	precision = 0;
-	// while (!ft_is_conv(str_of_flags))
-	// {
-	// 	if (str_of_flags == '*')
-	// 		arg = va_arg(ap, int);
-	// 	while (ft_is_digit(str_of_flags))
-	
-	// 		temp
-			
-	// 	str_of_flags++;
-	// }
-	return (nbr);
+	i = 0;
+	start = 0;
+	len_int = 0;
+	if (flag->str_of_flag[i] == '0' || flag->str_of_flag[i] == '-')
+	{
+		i++;
+		start++;
+	}
+	while (ft_is_digit(flag->str_of_flag[i]))
+	{
+		len_int++;
+		i++;
+	}
+	if (len_int > 0)
+	{
+		if ((temp = malloc(sizeof(char*) * (len_int + 1))) == NULL)
+			return ;
+		ft_strcat(temp, &flag->str_of_flag[start]);
+		flag->nbr_width = ft_atoi_printf(temp);
+		free(temp);
+	}
+	if (flag->str_of_flag[i] == '*')
+		flag->nbr_width = va_arg(ap, int);
+	i++;
+	if (flag->str_of_flag[i] == '.')
+	{
+		i++;
+		start = i;
+		while (ft_is_digit(flag->str_of_flag[i]))
+		{
+			len_int++;
+			i++;
+		}
+		if (len_int > 0)
+		{
+			if ((temp = malloc(sizeof(char*) * (len_int + 1))) == NULL)
+				return ;
+			ft_strcat(temp, &flag->str_of_flag[start]);
+			flag->nbr_precision = ft_atoi_printf(temp);
+			free(temp);
+		}
+		if (flag->str_of_flag[i] == '*')
+			flag->nbr_precision = va_arg(ap, int);
+	}
 }
-
-
 
 char	*to_flag(char *str, va_list ap, t_flag_len *flag)
 {
 	(void)str;
 	(void)ap;
-	char	*str_flag_conv;
+//	char *conv_flag_to_int;
 
-	
-	str_flag_conv = NULL;
 	if (flag->minus == 1 && flag->padded_zero == 1)
 		flag->padded_zero = 0;
+	string_of_flag_to_int(ap, flag);
+	
+		
 	//strflag_to_use(str_of_flag, ap, flag);
 
 	
@@ -103,7 +128,8 @@ char	*to_flag(char *str, va_list ap, t_flag_len *flag)
 	// if (flag->precision == 1)
 	// 	flag_precision(str, len_str);
 	free(flag->str_of_flag);
-	return (str_flag_conv);
+	// return (str_flag_conv);
+	return (str);
 }
 
 int which_flag(const char *str, t_flag_len *flag)
@@ -112,7 +138,7 @@ int which_flag(const char *str, t_flag_len *flag)
 
 	avancement = 0;
 	ft_init_struct_flag(flag);
-	flag->str_of_flag = string_of_flags((char*)str);
+	flag->str_of_flag = create_string_of_flags((char*)str);
 	while (ft_is_flag(*str) && str++)
 	{
 		if (*str == '-')

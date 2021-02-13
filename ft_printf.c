@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/13 16:19:44 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/13 18:58:27 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ int		main()
 	int size_printf;
 	
 	write (1, "\n", 1);
-	size_ft_printf = ft_printf(KCYN"positif [030.20] -------> [d : %-30.20d].\n", test1);
-	size_printf = printf(KGRN"positif [030.20] -------> [d : %030.20d].\n", test1);
+	size_ft_printf = ft_printf(KCYN"positif [030.20] -------> [d : %-*.*d].\n", 30, 20, test1);
+	size_printf = printf(KGRN"positif [030.20] -------> [d : %0*.*d].\n", 30, 20, test1);
 	check_printf(size_ft_printf, size_printf);
 	write (1, "\n", 1);
 	size_ft_printf = ft_printf(KCYN"negatif [010] ----------> [d : %010d].\n", test2);
