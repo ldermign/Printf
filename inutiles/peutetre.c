@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 16:04:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/01 16:07:11 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/13 11:59:11 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	ft_which_print(const char *str, t_conversion *conv)
 int		ft_check_flag(const char *str)
 {
 	str++;
-	if (!ft_is_flag(*str) || !ft_is_conv(*str))
+	if (!ft_is_flag(*str) || !ft_is_all(*str))
 		return (-1);
 	if (flag->minus == 1 && flag->padded_zero == 1)
 		flag->padded_zero = -1;

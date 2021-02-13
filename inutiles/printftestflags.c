@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 22:01:20 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/12 22:31:16 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/13 11:43:44 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,42 +26,54 @@ int main()
 	int test2 = -765;
 	
 	printf(KRED"\n\t\t//!\\\\VRAI PRINTF//!\\\\\n");
-    printf(KGRN"\t\t//!\\\\NEUTRE//!\\\\\n");
-	printf(KGRE"Taille = %d.\n", printf(KGRN"positif, pas de flag -----------------> [d : %d].\n", test1));
-	printf(KGRE"Taille = %d.\n", printf(KGRN"positif, pas de flag -----------------> [d : %d].\n", test2));
-    printf(KGRE"Taille = %d.\n", printf(KGRN"positif, width sup -------------------> [d : %10d].\n", test1));
-	printf(KGRE"Taille = %d.\n", printf(KGRN"negatif, width sup -------------------> [d : %1d].\n", test2));
-    printf(KGRN"\t\t//!\\\\ZERO//!\\\\\n");
-	printf(KGRE"Taille = %d.\n", printf(KGRN"positif, zero, width sup -------------> [d : %010d].\n", test1));
-	printf(KGRE"Taille = %d.\n", printf(KGRN"negatif, zero, width sup -------------> [d : %010d].\n", test2));
-    printf(KGRN"\t\t//!\\\\MOINS//!\\\\\n");
-	printf(KGRE"Taille = %d.\n", printf(KGRN"positif, moins, width sup ------------> [d : %-10d].\n", test1));
-	printf(KGRE"Taille = %d.\n", printf(KGRN"negatif, moins, width sup ------------> [d : %-10d].\n", test2));
-	printf(KGRN"\t\t//!\\\\PRECISION//!\\\\\n");
-	printf(KGRE"Taille = %d.\n", printf(KGRN"positif, zero, width sup, preci sup str & sup width --> [d : %010.15d].\n", test1));
-	printf(KGRE"Taille = %d.\n", printf(KGRN"positif, zero, width sup, preci sup str & inf a width --> [d : %10.30d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"[\\] ----------> [d : %d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[\\] ----------> [d : %d].\n", test2));
+    printf(KGRE"Taille = %d.\n", printf(KGRN"[10] ---------> [d : %10d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[10] ---------> [d : %10d].\n", test2));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"[10.30] ------> [d : %10.30d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[10.30] ------> [d : %10.30d].\n", test2));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"[30.10] ------> [d : %30.10d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[30.10] ------> [d : %30.10d].\n", test2));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"[10.5] -------> [d : %10.5d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[10.5] -------> [d : %10.5d].\n", test2));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"[010.1] ------> [d : %10.1d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[10.1] -------> [d : %10.1d].\n", test2));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"[1.10] -------> [d : %1.10d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[1.10] -------> [d : %1.10d].\n", test2));
+    printf(KGRE"Taille = %d.\n", printf(KGRN"[10.10] ------> [d : %10.10d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[10.10] ------> [d : %10.10d].\n", test2));
 
-    printf(KGRE"Taille = %d.\n", printf(KGRN"negatif, zero, width sup, preci sup str & sup width --> [d : %010.15d].\n", test2));
-    printf(KGRE"Taille = %d.\n", printf(KGRN"positif, zero, width sup, precis sup str & inf width -------------> [d : %010.5d].\n", test1));
-	printf(KGRE"Taille = %d.\n", printf(KGRN"negatif, zero, width sup, precis sup str & inf width -------------> [d : %010.5d].\n", test2));
-	printf(KGRE"Taille = %d.\n", printf(KGRN"positif, zero, width sup, precis inf str & inf width -------------> [d : %010.1d].\n", test1));
-	printf(KGRE"Taille = %d.\n", printf(KGRN"negatif, zero, width sup, precis inf str & inf width -------------> [d : %010.1d].\n", test2));
-    
-	printf(KGRE"Taille = %d.\n", printf(KGRN"positif, zero, width inf, preci sup str & sup width -------------> [d : %01.10d].\n", test1));
-    printf(KGRE"Taille = %d.\n", printf(KGRN"positif, moins, width sup, precis sup str & inf width ------------> [d : %-10.5d].\n", test1));
-	printf(KGRE"Taille = %d.\n", printf(KGRN"positif, moins, width sup, precis inf str & inf width ------------> [d : %-10.1d].\n", test1));
-    printf(KGRE"Taille = %d.\n", printf(KGRN"negatif, zero, width inf, preci sup str & sup width -------------> [d : %01.10d].\n", test2));
-    printf(KGRE"Taille = %d.\n", printf(KGRN"negatif, moins, width sup, precis sup str & inf width ------------> [d : %-10.5d].\n", test2));
-	printf(KGRE"Taille = %d.\n", printf(KGRN"negatif, moins, width sup, precis inf str & inf width ------------> [d : %-10.1d].\n", test2));
-    
-    printf(KGRE"Taille = %d.\n", printf(KGRN"positif, moins, width sup, preci sup str & sup width ------------> [d : %-10.15d].\n", test1));
-	printf(KGRE"Taille = %d.\n", printf(KGRN"positif, moins, width et precis egales, sup ------------> [d : %-10.10d].\n", test1));
-	printf(KGRE"Taille = %d.\n", printf(KGRN"negatif, moins, width sup, preci sup str & sup width ------------> [d : %-10.15d].\n", test2));
-	printf(KGRE"Taille = %d.\n", printf(KGRN"negatif, moins, width et precis egales, sup ------------> [d : %-10.10d].\n", test2));
-    
-	printf(KGRE"Taille = %d.\n", printf(KGRN"positif, width sup, preci sup str & sup width -------------------> [d : %10.15d].\n", test1));
-	printf(KGRE"Taille = %d.\n", printf(KGRN"negatif, width sup, precis sup str & inf width -------------------> [d : %10.5d].\n", test2));
-    printf(KGRE"Taille = %d.\n", printf(KGRN"positif, width et precis egales, sup a str -------------------> [d : %10.10d].\n", test1));
-	printf(KGRE"Taille = %d.\n", printf(KGRN"negatif, width et precis egales, sup a str -------------------> [d : %10.10d].\n", test2));
+	printf(KRED"\n\n\t\t//!\\\\ZERO//!\\\\\n");
+	printf(KGRE"Taille = %d.\n", printf(KGRN"[010] --------> [d : %010d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[010] --------> [d : %010d].\n", test2));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"[010.30] -----> [d : %010.30d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[010.30] -----> [d : %010.30d].\n", test2));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"[030.10] -----> [d : %030.10d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[030.10] -----> [d : %030.10d].\n", test2));
+    printf(KGRE"Taille = %d.\n", printf(KGRN"[010.5] ------> [d : %010.5d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[010.5] ------> [d : %010.5d].\n", test2));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"[010.1] ------> [d : %010.1d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[010.1] ------> [d : %010.1d].\n", test2));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"[01.10] ------> [d : %01.10d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[01.10] ------> [d : %01.10d].\n", test2));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"[010.10] -----> [d : %010.10d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[010.10] -----> [d : %010.10d].\n", test2));
+
+	printf(KRED"\n\n\t\t//!\\\\MOINS//!\\\\\n");
+	printf(KGRE"Taille = %d.\n", printf(KGRN"[-10] --------> [d : %-10d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[-10] --------> [d : %-10d].\n", test2));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"[-10.30] -----> [d : %-10.30d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[-10.30] -----> [d : %-10.30d].\n", test2));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"[-30.10] -----> [d : %-30.10d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[-30.10] -----> [d : %-30.10d].\n", test2));
+    printf(KGRE"Taille = %d.\n", printf(KGRN"[-10.5] ------> [d : %-10.5d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[-10.5] ------> [d : %-10.5d].\n", test2));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"[-10.1] ------> [d : %-10.1d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[-10.1] ------> [d : %-10.1d].\n", test2));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"[-1.10] ------> [d : %-1.10d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[-1.10] ------> [d : %-1.10d].\n", test2));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"[-10.10] -----> [d : %-10.10d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[-10.10] ------> [d : %-10.10d].\n", test2));
+
     return (0);
 }

@@ -6,11 +6,21 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:46:59 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/12 22:48:51 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/13 14:42:54 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void	ft_init_struct_flag(t_flag_len *flag)
+{
+	flag->minus = 0;
+	flag->padded_zero = 0;
+	flag->width = 0;
+	flag->precision = 0;
+	flag->nbr_width = 0;
+	flag->nbr_precision = 0;
+}
 
 char	*string_of_flags(char *str)
 {
@@ -20,8 +30,7 @@ char	*string_of_flags(char *str)
 
 	i = 0;
 	len_flag = 0;
-	str--;
-	while (ft_is_conv(*str) && str--)
+	while (ft_is_all(*str) && str--)
 		len_flag++;
 	if ((str_of_flag = (char*)malloc(sizeof(char) * (len_flag + 1))) == NULL)
 		return (NULL);
@@ -30,61 +39,55 @@ char	*string_of_flags(char *str)
 	return (str);
 }
 
-char	*strflag_to_use(char *str, t_flag_len *flag)
+int	strflag_to_use(char *str_of_flags, va_list ap, t_flag_len *flag)
 {
-	while (str)
-	{
-		
-	}
-	
-}
-
-char	*flag_width(char *str, size_t len_str, va_list ap, t_flag_len *flag)
-{
+	(void)flag;
 	(void)ap;
-	char	*space_or_zero;
-	char	*str_width;
-	size_t	i;
-	size_t	int_width;
+	(void)str_of_flags;
+	int arg;
+	int nbr;
+	int width;
+	int precision;
+	//char *temp;
 
-	space_or_zero = " ";
-	i = 0;
-	if (flag->padded_zero == 1)
-		space_or_zero = "0";
-	while (i < len_str)
-	{
-		if (ft_is_digit(*str))
-			int_width = ft_atoi_printf(str);
-		i++;
-	}
-	if ((str_width = (char*)malloc(sizeof(char) * (int_width + 1))) == NULL)
-		return (NULL);
-	i = 0;
-	while (i < int_width)
-	{
-		str_width = ft_strcat(str_width, space_or_zero);
-		i++;
-	}
-	return (str_width);
+	nbr = 0;
+	arg = 0;
+	width = 0;
+	precision = 0;
+	// while (!ft_is_conv(str_of_flags))
+	// {
+	// 	if (str_of_flags == '*')
+	// 		arg = va_arg(ap, int);
+	// 	while (ft_is_digit(str_of_flags))
+	
+	// 		temp
+			
+	// 	str_of_flags++;
+	// }
+	return (nbr);
 }
+
 
 
 char	*to_flag(char *str, va_list ap, t_flag_len *flag)
 {
+	(void)ap;
 	char	*str_of_flag;
 	char	*str_flag_conv;
-	size_t	size_str_flag;
-	char	*final_str_flag;
 
 	
 	str_flag_conv = NULL;
 	if (flag->minus == 1 && flag->padded_zero == 1)
 		flag->padded_zero = 0;
 	str_of_flag = string_of_flags(str);
-	size_str_flag = ft_strlen(str_of_flag);
-	final_str_flag = strflag_to_use(str_of_flag, flag);
-	if (flag->width == 1 || flag->padded_zero == 1)
-		str_flag_conv = flag_width(str_of_flag, size_str_flag, ap, flag);
+	strflag_to_use(str_of_flag, ap, flag);
+
+	
+	//	size_t	size_str_flag;
+	//	char	*final_str_flag;
+		//size_str_flag = ft_strlen(str_of_flag);
+	// if (flag->width == 1 || flag->padded_zero == 1)
+	// 	str_flag_conv = flag_width(str_of_flag, size_str_flag, ap, flag);
 	// if (flag->minus == 1)
 	// 	return (str_flag_conv);
 
@@ -92,27 +95,16 @@ char	*to_flag(char *str, va_list ap, t_flag_len *flag)
 	// 	flag_minus(str, len_str);
 	// if (flag->precision == 1)
 	// 	flag_precision(str, len_str);
-	return (str_flag_conv);
-}
-
-	// retourne la chaine avec flag,
-	// utilisee ensuite dans les conversionpour changer le print
-
-void	ft_init_struct_flag(t_flag_len *flag)
-{
-	flag->minus = 0;
-	flag->padded_zero = 0;
-	flag->width = 0;
-	flag->precision = 0;
+	return (str_flag_conv + 1);
 }
 
 int which_flag(const char *str, t_flag_len *flag)
 {
 	int avancement;
 
-	avancement = ft_strlen(str);
+	avancement = 0;
 	ft_init_struct_flag(flag);
-	while (ft_is_flag(*str))
+	while (ft_is_flag(*str) && str++)
 	{
 		if (*str == '-')
 			flag->minus = 1;
@@ -121,24 +113,23 @@ int which_flag(const char *str, t_flag_len *flag)
 		if (*str == '*' || ft_is_digit(*str))
 		{
 			flag->width = 1;
-			while (*str == '*' || ft_is_digit(*str))
-				str++;
+			while ((*str == '*' || ft_is_digit(*str)) && str++)
+				avancement++;
 			if (*str == '.' && (ft_is_digit(*(str + 1))
 			|| *(str + 1) == '*'))
 				flag->precision = 1;
 		}
-		str++;
+		avancement++;
 	}
-	avancement -= ft_strlen((str) - 1);
 	return (avancement);
 }
 
 int		ft_check_flag(const char *str)
 {
 	str++;
-	if (!ft_is_flag(*str) || !ft_is_conv(*str))
+	if (!ft_is_flag(*str) || !ft_is_all(*str))
 		return (-1);
-	while (ft_is_flag(*str) || ft_is_conv(*str))
+	while (ft_is_flag(*str) || ft_is_all(*str))
 	{
 		if (*(str - 1) == '%' && *str == '0' && ft_is_digit(*(str + 1)))
 			return (-1);
@@ -208,3 +199,5 @@ int		ft_check_flag(const char *str)
 	// 	flag_width(str, len_str);	
 	// if (flag->precision == 1)
 	// 	flag_precision(str, len_str);
+
+	

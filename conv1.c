@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/12 22:37:02 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/13 13:57:25 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void    conv_c(char *str_flag, va_list ap, t_flag_len *flag)
 {
-	(void)str_flag;
+	str_flag = NULL;
     char cara;
 
     cara = va_arg(ap, int);
@@ -23,7 +23,7 @@ void    conv_c(char *str_flag, va_list ap, t_flag_len *flag)
 
 void    conv_s(char *str_flag, va_list ap, t_flag_len *flag)
 {
-	(void)str_flag;
+	str_flag = NULL;
     char	*arg_char;
 
     arg_char = va_arg(ap, char *);
@@ -32,7 +32,7 @@ void    conv_s(char *str_flag, va_list ap, t_flag_len *flag)
 
 void    conv_p(char *str_flag, va_list ap, t_flag_len *flag)
 {
-	(void)str_flag;
+	str_flag = NULL;
 	unsigned long 	arg_unsdint;
 	void			*adresse_ptr;
 
@@ -47,7 +47,7 @@ void    conv_d_i(char *str_flag, va_list ap, t_flag_len *flag)
 	char	*temp;
     int 	arg_int;
 
-	(void)str_flag;
+	str_flag = NULL;
     arg_int = va_arg(ap, int);
 	temp = ft_itoa(arg_int);
 	ft_putstr(temp, flag);
@@ -82,7 +82,7 @@ void    conv_d_i(char *str_flag, va_list ap, t_flag_len *flag)
 
 void    conv_u(char *str_flag, va_list ap, t_flag_len *flag)
 {
-	(void)str_flag;
+	str_flag = NULL;
     unsigned int 	arg_unsdint;
 
     arg_unsdint = va_arg(ap, unsigned int);
@@ -91,7 +91,7 @@ void    conv_u(char *str_flag, va_list ap, t_flag_len *flag)
 
 void	conv_x_X(char *str_flag, char c, va_list ap, t_flag_len *len)
 {
-	(void)str_flag;
+	str_flag = NULL;
 	unsigned int	arg_unsdint;
 	char			*base;
 
@@ -112,6 +112,6 @@ void	conv_x_X(char *str_flag, char c, va_list ap, t_flag_len *len)
 
 void    conv_per(char *str_flag, t_flag_len *flag)
 {
-	(void)str_flag;
+	str_flag = NULL;
     ft_putstr("\%", flag);
 }

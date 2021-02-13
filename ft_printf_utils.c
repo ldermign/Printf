@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/12 17:58:37 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/13 14:02:54 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ void	ft_putnbr_adr(unsigned long nbr, t_flag_len *len)
 {
 	char *base;
 
-	base = "abcdef0123456789";
+	base = "0123456789abcdef";
 	if (nbr >= 16)
 	{
 		ft_putnbr_adr((nbr / 16), len);
@@ -242,6 +242,34 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	dst[i] = '\0';
 	return (dst);
+}
+
+int	ft_atoi(char *str)
+{
+	int i;
+	int neg;
+	int nbr;
+
+	i = 0;
+	neg = 0;
+	nbr = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || (str[i] == 32))
+		i++;
+	while (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			neg++;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		nbr *= 10;
+		nbr += str[i] - '0';
+		i++;
+	}
+	if (neg % 2 != 0)
+		nbr *= -1;
+	return (nbr);
 }
 
 /*
