@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:46:59 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/13 14:42:54 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/13 16:32:12 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,31 @@ void	ft_init_struct_flag(t_flag_len *flag)
 	flag->precision = 0;
 	flag->nbr_width = 0;
 	flag->nbr_precision = 0;
+	flag->str_of_flag = NULL;
 }
 
 char	*string_of_flags(char *str)
 {
-	int len_flag;
-	char *str_of_flag;
-	int i;
+	int		i;
+	int		len_flag;
+	char	*str_of_flag;
 
 	i = 0;
 	len_flag = 0;
-	while (ft_is_all(*str) && str--)
+	while (ft_is_flag(str[i]))
+	{
 		len_flag++;
+		i++;
+	}
 	if ((str_of_flag = (char*)malloc(sizeof(char) * (len_flag + 1))) == NULL)
 		return (NULL);
-	str++;
-	str_of_flag = ft_strcat(str_of_flag, str);
-	return (str);
+	i = 0;
+	while (i < len_flag)
+	{
+		str_of_flag[i] = str[i];
+		i++;
+	}
+	return (str_of_flag);
 }
 
 int	strflag_to_use(char *str_of_flags, va_list ap, t_flag_len *flag)
@@ -71,16 +79,15 @@ int	strflag_to_use(char *str_of_flags, va_list ap, t_flag_len *flag)
 
 char	*to_flag(char *str, va_list ap, t_flag_len *flag)
 {
+	(void)str;
 	(void)ap;
-	char	*str_of_flag;
 	char	*str_flag_conv;
 
 	
 	str_flag_conv = NULL;
 	if (flag->minus == 1 && flag->padded_zero == 1)
 		flag->padded_zero = 0;
-	str_of_flag = string_of_flags(str);
-	strflag_to_use(str_of_flag, ap, flag);
+	//strflag_to_use(str_of_flag, ap, flag);
 
 	
 	//	size_t	size_str_flag;
@@ -95,7 +102,8 @@ char	*to_flag(char *str, va_list ap, t_flag_len *flag)
 	// 	flag_minus(str, len_str);
 	// if (flag->precision == 1)
 	// 	flag_precision(str, len_str);
-	return (str_flag_conv + 1);
+	free(flag->str_of_flag);
+	return (str_flag_conv);
 }
 
 int which_flag(const char *str, t_flag_len *flag)
@@ -104,6 +112,7 @@ int which_flag(const char *str, t_flag_len *flag)
 
 	avancement = 0;
 	ft_init_struct_flag(flag);
+	flag->str_of_flag = string_of_flags((char*)str);
 	while (ft_is_flag(*str) && str++)
 	{
 		if (*str == '-')

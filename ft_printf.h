@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/13 11:52:08 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/13 16:05:51 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,14 @@
 **	TEJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 */
 
-#define KRED  "\x1B[0;31m"
-#define KGRN  "\x1B[0;32m"
-#define KYEL  "\x1B[0;33m"
-#define KBLU  "\x1B[0;34m"
-#define KMAG  "\x1B[0;35m"
-#define KCYN  "\x1B[0;36m"
-#define KWHT  "\x1B[0;37m"
-#define KGRE  "\x1b[1;30m"
-//printf("%sred\n", KRED);
+#define KRED  "\x1B[0;31m" // ROUGE
+#define KGRN  "\x1B[0;32m" // VERT
+#define KYEL  "\x1B[0;33m" // JAUNE
+#define KBLU  "\x1B[0;34m" // BLEU
+#define KMAG  "\x1B[0;35m" // MAGENTA
+#define KCYN  "\x1B[0;36m" // CYAN
+#define KWHT  "\x1B[0;37m" // BLANC
+#define KGRE  "\x1b[1;30m" // VERT
 
 
 # include <libc.h> /////////////////////////////////////////////////////////////
@@ -55,6 +54,7 @@ typedef	struct	s_struct
 	int precision;
 	int	nbr_width;
 	int nbr_precision;
+	char *str_of_flag;
 }				t_flag_len;
 void			ft_init_flag_len_flag(t_flag_len *flag);
 
