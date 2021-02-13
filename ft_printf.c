@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/13 18:58:27 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/14 00:20:12 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,23 @@
 
 int		which_conv(const char *str, va_list ap, t_flag_len *ntm)
 {
-	char *str_conv_to_flags;
-
-	str_conv_to_flags = to_flag((char*)str, ap, ntm);
+	string_of_flags(ap, ntm);
 	if (*str == 'c')
-		conv_c(str_conv_to_flags, ap, ntm);
+		conv_c(ap, ntm);
 	else if (*str == 's')
-		conv_s(str_conv_to_flags, ap, ntm);
+		conv_s(ap, ntm);
 	else if (*str == 'p')
-		conv_p(str_conv_to_flags, ap, ntm);
+		conv_p(ap, ntm);
 	else if (*str == 'd')
-		conv_d_i(str_conv_to_flags, ap, ntm);
+		conv_d_i(ap, ntm);
 	else if (*str == 'i')
-		conv_d_i(str_conv_to_flags, ap, ntm);
+		conv_d_i(ap, ntm);
 	else if (*str == 'u')
-		conv_u(str_conv_to_flags, ap, ntm);
+		conv_u(ap, ntm);
 	else if (*str == 'x' || *str == 'X')
-		conv_x_X(str_conv_to_flags, *str, ap, ntm);
+		conv_x_X(*str, ap, ntm);
 	else if (*str == '%')
-		conv_per(str_conv_to_flags, ntm);
+		conv_per(ntm);
 	return (1);
 }
 
@@ -119,13 +117,84 @@ int		main()
 	int size_printf;
 	
 	write (1, "\n", 1);
-	size_ft_printf = ft_printf(KCYN"positif [030.20] -------> [d : %-*.*d].\n", 30, 20, test1);
-	size_printf = printf(KGRN"positif [030.20] -------> [d : %0*.*d].\n", 30, 20, test1);
+	size_ft_printf = ft_printf(KCYN"positif [20.10] -------> [d : %*.*d].\n", 20, 10, test1);
+	size_printf = printf(KGRN"positif [20.10] -------> [d : %*.*d].\n", 20, 10, test1);
 	check_printf(size_ft_printf, size_printf);
 	write (1, "\n", 1);
-	size_ft_printf = ft_printf(KCYN"negatif [010] ----------> [d : %010d].\n", test2);
-	size_printf = printf(KGRN"negatif [010] ----------> [d : %010d].\n", test2);
+	size_ft_printf = ft_printf(KCYN"positif [10.20] -------> [d : %*.*d].\n", 10, 20, test1);
+	size_printf = printf(KGRN"positif [10.20] -------> [d : %*.*d].\n", 10, 20, test1);
 	check_printf(size_ft_printf, size_printf);
+	write (1, "\n", 1);
+	size_ft_printf = ft_printf(KCYN"positif [10.10] -------> [d : %*.*d].\n", 10, 10, test1);
+	size_printf = printf(KGRN"positif [10.10] -------> [d : %*.*d].\n", 10, 10, test1);
+	check_printf(size_ft_printf, size_printf);
+	write (1, "\n", 1);
+	size_ft_printf = ft_printf(KCYN"negatif [20.10] -------> [d : %*.*d].\n", 20, 10, test2);
+	size_printf = printf(KGRN"negatif [20.10] -------> [d : %*.*d].\n", 20, 10, test2);
+	check_printf(size_ft_printf, size_printf);
+	write (1, "\n", 1);
+	size_ft_printf = ft_printf(KCYN"negatif [10.20] -------> [d : %*.*d].\n", 10, 20, test2);
+	size_printf = printf(KGRN"negatif [10.20] -------> [d : %*.*d].\n", 10, 20, test2);
+	check_printf(size_ft_printf, size_printf);
+	write (1, "\n", 1);
+	size_ft_printf = ft_printf(KCYN"negatif [10.10] -------> [d : %*.*d].\n", 10, 10, test2);
+	size_printf = printf(KGRN"negatif [10.10] -------> [d : %*.*d].\n", 10, 10, test2);
+	check_printf(size_ft_printf, size_printf);
+	write (1, "\n", 1);
+	write (1, "\n", 1);
+	size_ft_printf = ft_printf(KCYN"positif [020.10] -------> [d : %0*.*d].\n", 20, 10, test1);
+	size_printf = printf(KGRN"positif [020.10] -------> [d : %0*.*d].\n", 20, 10, test1);
+	check_printf(size_ft_printf, size_printf);
+	write (1, "\n", 1);
+	size_ft_printf = ft_printf(KCYN"positif [010.20] -------> [d : %0*.*d].\n", 10, 20, test1);
+	size_printf = printf(KGRN"positif [010.20] -------> [d : %0*.*d].\n", 10, 20, test1);
+	check_printf(size_ft_printf, size_printf);
+	write (1, "\n", 1);
+	size_ft_printf = ft_printf(KCYN"positif [010.10] -------> [d : %0*.*d].\n", 10, 10, test1);
+	size_printf = printf(KGRN"positif [010.10] -------> [d : %0*.*d].\n", 10, 10, test1);
+	check_printf(size_ft_printf, size_printf);
+	write (1, "\n", 1);
+	size_ft_printf = ft_printf(KCYN"negatif [020.10] -------> [d : %0*.*d].\n", 20, 10, test2);
+	size_printf = printf(KGRN"negatif [020.10] -------> [d : %0*.*d].\n", 20, 10, test2);
+	check_printf(size_ft_printf, size_printf);
+	write (1, "\n", 1);
+	size_ft_printf = ft_printf(KCYN"negatif [010.20] -------> [d : %0*.*d].\n", 10, 20, test2);
+	size_printf = printf(KGRN"negatif [010.20] -------> [d : %0*.*d].\n", 10, 20, test2);
+	check_printf(size_ft_printf, size_printf);
+	write (1, "\n", 1);
+	size_ft_printf = ft_printf(KCYN"negatif [010.10] -------> [d : %0*.*d].\n", 10, 10, test2);
+	size_printf = printf(KGRN"negatif [010.10] -------> [d : %0*.*d].\n", 10, 10, test2);
+	check_printf(size_ft_printf, size_printf);
+	write (1, "\n", 1);
+	write (1, "\n", 1);
+	size_ft_printf = ft_printf(KCYN"positif [-20.10] -------> [d : %-*.*d].\n", 20, 10, test1);
+	size_printf = printf(KGRN"positif [-20.10] -------> [d : %-*.*d].\n", 20, 10, test1);
+	check_printf(size_ft_printf, size_printf);
+	write (1, "\n", 1);
+	size_ft_printf = ft_printf(KCYN"positif [-10.20] -------> [d : %-*.*d].\n", 10, 20, test1);
+	size_printf = printf(KGRN"positif [-10.20] -------> [d : %-*.*d].\n", 10, 20, test1);
+	check_printf(size_ft_printf, size_printf);
+	write (1, "\n", 1);
+	size_ft_printf = ft_printf(KCYN"positif [-10.10] -------> [d : %-*.*d].\n", 10, 10, test1);
+	size_printf = printf(KGRN"positif [-10.10] -------> [d : %-*.*d].\n", 10, 10, test1);
+	check_printf(size_ft_printf, size_printf);
+	write (1, "\n", 1);
+	size_ft_printf = ft_printf(KCYN"negatif [-20.10] -------> [d : %-*.*d].\n", 20, 10, test2);
+	size_printf = printf(KGRN"negatif [-20.10] -------> [d : %-*.*d].\n", 20, 10, test2);
+	check_printf(size_ft_printf, size_printf);
+	write (1, "\n", 1);
+	size_ft_printf = ft_printf(KCYN"negatif [-10.20] -------> [d : %-*.*d].\n", 10, 20, test2);
+	size_printf = printf(KGRN"negatif [-10.20] -------> [d : %-*.*d].\n", 10, 20, test2);
+	check_printf(size_ft_printf, size_printf);
+	write (1, "\n", 1);
+	size_ft_printf = ft_printf(KCYN"negatif [-10.10] -------> [d : %-*.*d].\n", 10, 10, test2);
+	size_printf = printf(KGRN"negatif [-10.10] -------> [d : %-*.*d].\n", 10, 10, test2);
+	check_printf(size_ft_printf, size_printf);
+	write (1, "\n", 1);
+	// 	size_ft_printf = ft_printf(KCYN"negatif [10] ----------> [d : %10d].\n", test2);
+	// size_printf = printf(KGRN"negatif [10] ----------> [d : %10d].\n", test2);
+	// check_printf(size_ft_printf, size_printf);
+	// write (1, "\n", 1);
 	// write (1, "\n", 1);
 	// size_ft_printf = ft_printf(KCYN"positif [01] -----------> [d : %01d].\n", test1);
 	// size_printf = printf(KGRN"positif [01] -----------> [d : %01d].\n", test1);

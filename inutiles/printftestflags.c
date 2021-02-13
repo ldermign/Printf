@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 22:01:20 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/13 11:43:44 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/13 22:14:00 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int main()
 	printf(KGRE"Taille = %d.\n", printf(KRED"[\\] ----------> [d : %d].\n", test2));
     printf(KGRE"Taille = %d.\n", printf(KGRN"[10] ---------> [d : %10d].\n", test1));
 	printf(KGRE"Taille = %d.\n", printf(KRED"[10] ---------> [d : %10d].\n", test2));
+    printf(KGRE"Taille = %d.\n", printf(KGRN"[10.0] -------> [d : %10.0d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[10.0] -------> [d : %10.0d].\n", test2));
 	printf(KGRE"Taille = %d.\n", printf(KGRN"[10.30] ------> [d : %10.30d].\n", test1));
 	printf(KGRE"Taille = %d.\n", printf(KRED"[10.30] ------> [d : %10.30d].\n", test2));
 	printf(KGRE"Taille = %d.\n", printf(KGRN"[30.10] ------> [d : %30.10d].\n", test1));
@@ -46,6 +48,8 @@ int main()
 	printf(KRED"\n\n\t\t//!\\\\ZERO//!\\\\\n");
 	printf(KGRE"Taille = %d.\n", printf(KGRN"[010] --------> [d : %010d].\n", test1));
 	printf(KGRE"Taille = %d.\n", printf(KRED"[010] --------> [d : %010d].\n", test2));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"[010.0] ------> [d : %010.0d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[010.0] ------> [d : %010.0d].\n", test2));
 	printf(KGRE"Taille = %d.\n", printf(KGRN"[010.30] -----> [d : %010.30d].\n", test1));
 	printf(KGRE"Taille = %d.\n", printf(KRED"[010.30] -----> [d : %010.30d].\n", test2));
 	printf(KGRE"Taille = %d.\n", printf(KGRN"[030.10] -----> [d : %030.10d].\n", test1));
@@ -62,6 +66,10 @@ int main()
 	printf(KRED"\n\n\t\t//!\\\\MOINS//!\\\\\n");
 	printf(KGRE"Taille = %d.\n", printf(KGRN"[-10] --------> [d : %-10d].\n", test1));
 	printf(KGRE"Taille = %d.\n", printf(KRED"[-10] --------> [d : %-10d].\n", test2));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"[-.10] -------> [d : %-.10d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[-.10] -------> [d : %-.10d].\n", test2));
+	printf(KGRE"Taille = %d.\n", printf(KGRN"[-10.0] ------> [d : %-10.0d].\n", test1));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[-10.0] ------> [d : %-10.0d].\n", test2));
 	printf(KGRE"Taille = %d.\n", printf(KGRN"[-10.30] -----> [d : %-10.30d].\n", test1));
 	printf(KGRE"Taille = %d.\n", printf(KRED"[-10.30] -----> [d : %-10.30d].\n", test2));
 	printf(KGRE"Taille = %d.\n", printf(KGRN"[-30.10] -----> [d : %-30.10d].\n", test1));
@@ -74,6 +82,8 @@ int main()
 	printf(KGRE"Taille = %d.\n", printf(KRED"[-1.10] ------> [d : %-1.10d].\n", test2));
 	printf(KGRE"Taille = %d.\n", printf(KGRN"[-10.10] -----> [d : %-10.10d].\n", test1));
 	printf(KGRE"Taille = %d.\n", printf(KRED"[-10.10] ------> [d : %-10.10d].\n", test2));
+
+	printf(KGRE"Taille = %d.\n", printf(KRED"[-10.10] ------> [d : %050.10d].\n", test2));
 
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/13 14:02:54 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/14 00:18:16 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,18 @@ void	ft_putstr(char *str, t_flag_len *len)
 	size = ft_strlen(str);
 	write(1, str, size);
 	len->final_len += (int)size;
+}
+void	ft_fill_with_c(char *str, char c, int size)
+{
+	int i;
+
+	i = 0;
+	while (i < size)
+	{
+		str[i] = c;
+		i++;
+	}
+	str[i] = '\0';
 }
 
 void	*ft_memmove(char *dst, char *src, size_t n)
@@ -272,6 +284,113 @@ int	ft_atoi(char *str)
 	return (nbr);
 }
 
+void	width_sup(t_flag_len *flag)
+{
+	int i;
+	int j;
+	int max;
+	int min;
+
+	i = 0;
+	j = 0;
+	max = flag->nbr_width;
+	min = flag->nbr_precision;
+	while (i < (max - min))
+	{
+		flag->final_flag[i] = flag->str_width[i];
+		i++;
+	}
+	while (i < max)
+	{
+		flag->final_flag[i] = flag->str_precision[j];
+		i++;
+		j++;
+	}
+	flag->final_flag[i] = '\0';
+}
+
+void	precision_sup(t_flag_len *flag)
+{
+	int i;
+	int j;
+	int max;
+	int min;
+
+	i = 0;
+	j = 0;
+	max = flag->nbr_precision;
+	min = flag->nbr_width;
+	while (i <= (max - min))
+	{
+		flag->final_flag[i] = flag->str_precision[i];
+		i++;
+	}
+	while (i < max)
+	{
+		flag->final_flag[i] = flag->str_width[j];
+		i++;
+		j++;
+	}
+	flag->final_flag[i] = '\0';
+}
+
+void	precision_and_width_equal(t_flag_len *flag)
+{
+	int i;
+	int size;
+
+	i = 0;
+	size = flag->nbr_precision;
+	while (i < size)
+	{
+		flag->final_flag[i] = flag->str_precision[i];
+		i++;
+	}
+	flag->final_flag[i] = '\0';
+}
+
+void	join_str_width_and_precision(t_flag_len *flag)
+{
+	int size;
+	
+	if (flag->nbr_precision >= flag->nbr_width)
+		size = flag->nbr_precision;
+	else
+		size = flag->nbr_width;
+	if ((flag->final_flag = malloc(sizeof(char) * (size + 1))) == NULL)
+		return ;
+	if (flag->nbr_precision >= flag->nbr_width)
+		precision_and_width_equal(flag);
+	else
+		width_sup(flag);
+}
+
+void	flip_zero_and_space(t_flag_len *flag)
+{
+	int		i;
+	int		here;
+	int		size_str;
+	char	*swap;
+
+	i = 0;
+	here = 0;
+	size_str = ft_strlen(flag->final_flag);
+	while (flag->final_flag[here + 1] && (flag->final_flag[here]
+	== flag->final_flag[here + 1]))
+		here++;
+	if (here > 0)
+	{
+		while (here > 0)
+		{
+			*swap = flag->final_flag[size_str];
+			flag->final_flag[size_str] = flag->final_flag[i];
+			flag->final_flag[i] = *swap;
+			size_str--;
+			i++;
+		}
+	}
+}
+
 /*
 int		ft_position(char c, char *str)
 {
@@ -361,23 +480,3 @@ char	*ft_itoa_base(size_t nb, char *base)
 	}
 	return (dst);
 }*/
-
-
-// char	*ft_rev_string(char *str, int size)
-// {
-// 	int i;
-// //	int j;
-// 	char swap;
-
-// 	i = 0;
-// //	size_str = ft_strlen(str);
-// 	while (i < size)
-// 	{
-// 		swap = str[i];
-// 		str[i] = str[size];
-// 		str[size] = swap;
-// 		i++;
-// 		size --;
-// 	}
-// 	return (str);
-// }
