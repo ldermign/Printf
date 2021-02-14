@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:46:59 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/14 19:36:21 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/14 23:15:58 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ char	*create_string_of_width_and_precision(char *str)
 	if ((str_of_flag = ft_calloc((len_flag + 1), sizeof(char))) == NULL)
 		return (NULL);
 	i = start;
-	// printf("str: [%s], str_of_flag")
 	str_of_flag = ft_strncat(str_of_flag, &str[i], len_flag);
 	return (str_of_flag);
 }
@@ -125,12 +124,23 @@ void		string_of_flags(va_list ap, t_flag_len *flag)
 		(flag->nbr_width + 1))) == NULL)
 			return ;
 	}
-	if (flag->width >= 0 && flag->precision)
+	if (flag->width >= 0 && flag->precision >= 0)
 	{
-		flag_width(flag);
-		flag_precision(flag);
-		if (flag->str_width != NULL && flag->str_precision != NULL)
-			join_str_width_and_precision(flag);
+		if (flag->padded_zero == 1 && (flag->conv_c == 1 || flag->conv_p == 1
+		|| flag->conv_s == 1 || flag->conv_per == 1))
+		{
+			if (!(flag->final_str_flag = ft_calloc(flag->nbr_width + 1,
+			sizeof(char))))
+				return ;
+			ft_fill_with_c(flag->final_str_flag, '0', flag->nbr_width + 1);
+		}
+		else
+		{
+			flag_width(flag);
+			flag_precision(flag);
+			if (flag->str_width != NULL && flag->str_precision != NULL)
+				join_str_width_and_precision(flag);
+		}
 	}
 	flag->size_final_str_flag = ft_strlen(flag->final_str_flag);
 	if (flag->minus == 1)

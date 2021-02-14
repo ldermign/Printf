@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/14 19:46:06 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/14 23:08:55 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	ft_putstr(char *str, t_flag_len *len)
 	write(1, str, size);
 	len->final_len += (int)size;
 }
+
 void	ft_fill_with_c(char *str, char c, int size)
 {
 	int i;
@@ -139,7 +140,8 @@ char	*ft_itoa(int nb)
 		return (NULL);
 	if (nb_long < 0 && (nb_long = -nb_long))
 		*dst = '-';
-	dst[len--] = '\0';
+	dst[len] = '\0';
+	len--;
 	while (len >= (nb < 0))
 	{
 		dst[len--] = (nb_long % 10) + '0';
@@ -193,16 +195,16 @@ void	ft_putnbr_base_printf(long nbr, char *base, t_flag_len *len)
 	}
 }
 
-void	ft_putnbr(unsigned int nbr, t_flag_len *len)
-{
-	if (nbr > 9)
-	{
-		ft_putnbr((nbr / 10), len);
-		ft_putnbr((nbr % 10), len);
-	}
-	else
-		ft_putchar((nbr + '0'), len);
-}
+// void	ft_putnbr(unsigned int nbr, t_flag_len *len)
+// {
+// 	if (nbr > 9)
+// 	{
+// 		ft_putnbr((nbr / 10), len);
+// 		ft_putnbr((nbr % 10), len);
+// 	}
+// 	else
+// 		ft_putchar((nbr + '0'), len);
+// }
 
 void	ft_putnbr_adr(unsigned long nbr, t_flag_len *len)
 {
@@ -243,8 +245,6 @@ char	*ft_strncat(char *dst, char *src, size_t nb)
 
 	i = 0;
 	j = 0;
-	// if (dst == NULL || src == NULL || nb < 0)
-	// 	return (NULL);
 	while (dst[i])
 		i++;
 	while (src[j] && j < nb)
