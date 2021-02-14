@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:46:59 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/14 15:04:07 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/14 17:25:13 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void		string_of_flags(va_list ap, t_flag_len *flag)
 		(flag->nbr_width + 1))) == NULL)
 			return ;
 	}
-	if (flag->width >= 0)
+	if (flag->width >= 0 && flag->precision)
 	{
 		flag_width(flag);
 		flag_precision(flag);

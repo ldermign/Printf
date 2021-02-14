@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 09:36:41 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/14 14:46:31 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/14 17:29:09 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	width_sup(t_flag_len *flag)
 	j = 0;
 	max = flag->nbr_width;
 	min = flag->nbr_precision;
-	while (i <= (max - min))
+	while (i < (max - min))
 	{
 		flag->final_str_flag[i] = flag->str_width[i];
 		i++;
@@ -73,30 +73,24 @@ void	flip_zero_and_space(t_flag_len *flag)
 	int		i;
 	size_t	here;
 	size_t	size;
-	char	*swap;
+	char	swap;
 
 	i = 0;
 	here = 0;
 	size = flag->size_final_str_flag;
-	swap = NULL;
 	while (here < flag->size_final_str_flag && (flag->final_str_flag[here]
 	== flag->final_str_flag[here + 1]))
 		here++;
-	printf("here = %zu, size = %zu\n", here, size);
 	if (here > 0)
 	{
-		printf("666\n");
 		size--;
-		// while (size != here)
-		// {
-		// 	printf("i = {%c}\n", flag->final_str_flag[i]);
-		// 	printf("size = {%c}\n", flag->final_str_flag[size]);
-		// 	printf("here = %zu, size = %zu, i = %d\n", here, size, i);
-		// 	*swap = flag->final_str_flag[size];
-		// 	flag->final_str_flag[size] = flag->final_str_flag[i];
-		// 	flag->final_str_flag[i] = *swap;
-		// 	size--;
-		// 	i++;
-		// }
+		while (size != here)
+		{
+			swap = flag->final_str_flag[size];
+			flag->final_str_flag[size] = flag->final_str_flag[i];
+			flag->final_str_flag[i] = swap;
+			size--;
+			i++;
+		}
 	}
 }
