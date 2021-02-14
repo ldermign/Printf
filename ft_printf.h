@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/14 09:45:59 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/14 15:00:30 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ int				ft_printf(const char *str, ...);
 typedef	struct	s_struct
 {
 	int		final_len;
-	int		i;
-	int		j;
 	int		minus;
 	int		padded_zero;
 	int		width;
@@ -61,6 +59,13 @@ typedef	struct	s_struct
 	char	*str_width;
 	char	*final_str_flag;
 	size_t	size_final_str_flag;
+	int		conv_c;
+	int		conv_s;
+	int		conv_p;
+	int		conv_d_i;
+	int		conv_u;
+	int		conv_x;
+	int		conv_per;
 }				t_flag_len;
 void			ft_init_flag_len_flag(t_flag_len *flag);
 
@@ -99,15 +104,16 @@ void			ft_fill_with_c(char *str, char c, int size);
 void			join_str_width_and_precision(t_flag_len *flag);
 char   			*fusion_conv_strflag(char *str, int nbr, t_flag_len *flag);
 void			flip_zero_and_space(t_flag_len *flag);
+void			*ft_calloc(size_t nmemb, size_t size);
 
 /*
 **	Flags
 */
 
 void			string_of_flags(va_list ap, t_flag_len *flag);
-int				which_flag(const char *str, t_flag_len *ntm);
-// void			flag_minus(va_list ap, t_flag_len *ntm);
-// void			flag_padded_zero(va_list ap, t_flag_len *ntm);
+int				which_flag(const char *str, t_flag_len *flag);
+// void			flag_minus(va_list ap, t_flag_len *flag);
+// void			flag_padded_zero(va_list ap, t_flag_len *flag);
 void			flag_precision(t_flag_len *flag);
 void			flag_width(t_flag_len *flag);
 
@@ -115,7 +121,7 @@ void			flag_width(t_flag_len *flag);
 **	Conversion
 */
 
-int				which_conv(const char *str, va_list ap, t_flag_len *ntm);
+int				which_conv(const char *str, va_list ap, t_flag_len *flag);
 void			conv_d_i(va_list ap, t_flag_len *flag);
 void			conv_s(va_list ap, t_flag_len *flag);
 void			conv_c(va_list ap, t_flag_len *flag);
@@ -129,8 +135,7 @@ void			conv_p(va_list ap, t_flag_len *flag);
 
 
 
-void    ft_printf_monuq(t_flag_len ntm);
-
+void 		printf_structure(t_flag_len *flag);
 
 
 

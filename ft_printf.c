@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/14 10:13:25 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/14 14:33:36 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,20 @@
 int		which_conv(const char *str, va_list ap, t_flag_len *flag)
 {
 	string_of_flags(ap, flag);
-	printf("{{{{%c}}}}", *str);
-	if (*str == 'c')
+	// printf("{{{{%c}}}}", *str);
+	if (*str == 'c' && (flag->conv_c = 1))
 		conv_c(ap, flag);
-	else if (*str == 's')
+	else if (*str == 's' && (flag->conv_s = 1))
 		conv_s(ap, flag);
-	else if (*str == 'p')
+	else if (*str == 'p' && (flag->conv_p = 1))
 		conv_p(ap, flag);
-	else if (*str == 'd')
+	else if ((*str == 'd' || *str == 'i') && (flag->conv_d_i = 1))
 		conv_d_i(ap, flag);
-	else if (*str == 'i')
-		conv_d_i(ap, flag);
-	else if (*str == 'u')
+	else if (*str == 'u' && (flag->conv_u = 1))
 		conv_u(ap, flag);
-	else if (*str == 'x' || *str == 'X')
+	else if ((*str == 'x' || *str == 'X') && (flag->conv_x = 1))
 		conv_x_X(*str, ap, flag);
-	else if (*str == '%')
+	else if (*str == '%' && (flag->conv_per = 1))
 		conv_per(flag);
 	return (1);
 }
@@ -134,15 +132,15 @@ int		main()
 	size_ft_printf = ft_printf(KCYN"positif [-20.10] -------> [d : %-*.*d].\n", 20, 10, test1);
 	size_printf = printf(KGRN"positif [-20.10] -------> [d : %-*.*d].\n", 20, 10, test1);
 	check_printf(size_ft_printf, size_printf);
-	write (1, "\n", 1);
-	size_ft_printf = ft_printf(KCYN"positif [-10.20] -------> [d : %-*.*d].\n", 10, 20, test1);
-	size_printf = printf(KGRN"positif [-10.20] -------> [d : %-*.*d].\n", 10, 20, test1);
-	check_printf(size_ft_printf, size_printf);
-	write (1, "\n", 1);
-	size_ft_printf = ft_printf(KCYN"positif [-10.10] -------> [d : %-*.*d].\n", 10, 10, test1);
-	size_printf = printf(KGRN"positif [-10.10] -------> [d : %-*.*d].\n", 10, 10, test1);
-	check_printf(size_ft_printf, size_printf);
-	write (1, "\n", 1);
+	// write (1, "\n", 1);
+	// size_ft_printf = ft_printf(KCYN"positif [-10.20] -------> [d : %-*.*d].\n", 10, 20, test1);
+	// size_printf = printf(KGRN"positif [-10.20] -------> [d : %-*.*d].\n", 10, 20, test1);
+	// check_printf(size_ft_printf, size_printf);
+	// write (1, "\n", 1);
+	// size_ft_printf = ft_printf(KCYN"positif [-10.10] -------> [d : %-*.*d].\n", 10, 10, test1);
+	// size_printf = printf(KGRN"positif [-10.10] -------> [d : %-*.*d].\n", 10, 10, test1);
+	// check_printf(size_ft_printf, size_printf);
+	// write (1, "\n", 1);
 
 	
 	// size_ft_printf = ft_printf(KCYN"negatif [20.10] -------> [d : %*.*d].\n", 20, 10, test2);

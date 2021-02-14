@@ -6,11 +6,29 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/14 09:37:08 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/14 15:02:05 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	size_t			i;
+	unsigned int	len;
+	unsigned char	*str;
+
+	i = 0;
+	len = nmemb * size;
+	if ((str = malloc(len)) == NULL)
+		return (NULL);
+	while (i < len)
+	{
+		str[i] = '\0';
+		i++;
+	}
+	return (str);
+}
 
 size_t	ft_strlen(const char *str)
 {
@@ -45,7 +63,7 @@ void	ft_fill_with_c(char *str, char c, int size)
 	int i;
 
 	i = 0;
-	while (i < size)
+	while (i < (size - 1))
 	{
 		str[i] = c;
 		i++;
@@ -139,6 +157,12 @@ int	ft_atoi_printf(char *str)
 	i = 0;
 	neg = 0;
 	nbr = 0;
+	while (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			neg++;
+		i++;
+	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		nbr *= 10;
@@ -219,6 +243,8 @@ char	*ft_strncat(char *dst, char *src, size_t nb)
 
 	i = 0;
 	j = 0;
+	// if (dst == NULL || src == NULL || nb < 0)
+	// 	return (NULL);
 	while (dst[i])
 		i++;
 	while (src[j] && j < nb)

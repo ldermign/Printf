@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 09:36:41 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/14 09:48:15 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/14 14:46:31 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	width_sup(t_flag_len *flag)
 	j = 0;
 	max = flag->nbr_width;
 	min = flag->nbr_precision;
-	while (i < (max - min))
+	while (i <= (max - min))
 	{
 		flag->final_str_flag[i] = flag->str_width[i];
 		i++;
@@ -37,32 +37,7 @@ void	width_sup(t_flag_len *flag)
 	flag->final_str_flag[i] = '\0';
 }
 
-void	precision_sup(t_flag_len *flag)
-{
-	int i;
-	int j;
-	int max;
-	int min;
-
-	i = 0;
-	j = 0;
-	max = flag->nbr_precision;
-	min = flag->nbr_width;
-	while (i <= (max - min))
-	{
-		flag->final_str_flag[i] = flag->str_precision[i];
-		i++;
-	}
-	while (i < max)
-	{
-		flag->final_str_flag[i] = flag->str_width[j];
-		i++;
-		j++;
-	}
-	flag->final_str_flag[i] = '\0';
-}
-
-void	precision_and_width_equal(t_flag_len *flag)
+void	precision_sup_or_equal_width(t_flag_len *flag)
 {
 	int i;
 	int size;
@@ -88,7 +63,7 @@ void	join_str_width_and_precision(t_flag_len *flag)
 	if ((flag->final_str_flag = malloc(sizeof(char) * (size + 1))) == NULL)
 		return ;
 	if (flag->nbr_precision >= flag->nbr_width)
-		precision_and_width_equal(flag);
+		precision_sup_or_equal_width(flag);
 	else
 		width_sup(flag);
 }
@@ -96,26 +71,32 @@ void	join_str_width_and_precision(t_flag_len *flag)
 void	flip_zero_and_space(t_flag_len *flag)
 {
 	int		i;
-	int		here;
-	int		size_str;
+	size_t	here;
+	size_t	size;
 	char	*swap;
 
 	i = 0;
 	here = 0;
-	size_str = ft_strlen(flag->final_str_flag);
+	size = flag->size_final_str_flag;
 	swap = NULL;
-	while (flag->final_str_flag[here + 1] && (flag->final_str_flag[here]
+	while (here < flag->size_final_str_flag && (flag->final_str_flag[here]
 	== flag->final_str_flag[here + 1]))
 		here++;
+	printf("here = %zu, size = %zu\n", here, size);
 	if (here > 0)
 	{
-		while (here > 0)
-		{
-			*swap = flag->final_str_flag[size_str];
-			flag->final_str_flag[size_str] = flag->final_str_flag[i];
-			flag->final_str_flag[i] = *swap;
-			size_str--;
-			i++;
-		}
+		printf("666\n");
+		size--;
+		// while (size != here)
+		// {
+		// 	printf("i = {%c}\n", flag->final_str_flag[i]);
+		// 	printf("size = {%c}\n", flag->final_str_flag[size]);
+		// 	printf("here = %zu, size = %zu, i = %d\n", here, size, i);
+		// 	*swap = flag->final_str_flag[size];
+		// 	flag->final_str_flag[size] = flag->final_str_flag[i];
+		// 	flag->final_str_flag[i] = *swap;
+		// 	size--;
+		// 	i++;
+		// }
 	}
 }

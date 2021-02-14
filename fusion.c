@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 23:48:27 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/14 09:50:05 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/14 12:40:40 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ char    *fusion_conv_strflag(char *str, int nbr, t_flag_len *flag)
     char    *dst;
 
     size_str = ft_strlen(str);
+	printf("666\n");
     if ((dst = malloc(sizeof(char) * ((flag->size_final_str_flag)
     + (nbr < 0)))) == NULL)
         return (NULL);

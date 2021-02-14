@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:57:13 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/13 22:19:19 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/14 14:38:17 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,54 +34,4 @@ void    flag_width(t_flag_len *flag)
     if (!(flag->str_width = malloc(sizeof(char) * (width + 1))))
         return ;
     ft_fill_with_c(flag->str_width, ' ', width + 1);
-}
-
-// void flag_minus(t_flag_len *flag)
-// {
-// 	va_arg(ap, int);
-//     (void)ntm;
-// }
-// char    *flag_padded_zero(t_flag_len *flag)
-// {
-// 	va_arg(ap, int);
-//     (void)ntm;
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void    ft_printf_monuq(t_flag_len ntm)
-{
-    printf("minus%d\n", ntm.minus);
-    printf("padded_zero%d\n", ntm.padded_zero);
-    printf("width%d\n", ntm.width);
-    printf("precision%d\n", ntm.precision);
 }
