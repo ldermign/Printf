@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/14 00:20:18 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/14 09:45:59 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ typedef	struct	s_struct
 	char	*str_of_flag;
 	char	*str_precision;
 	char	*str_width;
-	char	*final_flag;
+	char	*final_str_flag;
+	size_t	size_final_str_flag;
 }				t_flag_len;
 void			ft_init_flag_len_flag(t_flag_len *flag);
 

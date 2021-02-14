@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:46:59 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/14 00:28:29 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/14 10:13:44 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	ft_init_struct_flag(t_flag_len *flag)
 	flag->str_of_flag = NULL;
 	flag->str_precision = NULL;
 	flag->str_width = NULL;
-	flag->final_flag = NULL;
+	flag->final_str_flag = NULL;
+	flag->size_final_str_flag = 0;
 }
 
 char	*create_string_of_width_and_precision(char *str)
@@ -105,14 +106,16 @@ void	string_of_flag_to_int(va_list ap, t_flag_len *flag)
 
 void	string_of_flags(va_list ap, t_flag_len *flag)
 {
+	printf("minus = {%d}\n", flag->minus);
 	if (flag->minus == 1 && flag->padded_zero == 1)
 		flag->padded_zero = 0;
 	string_of_flag_to_int(ap, flag);
 	if (flag->padded_zero == 1 && flag->precision == -1 && flag->nbr_width > 0)
 	{
-		(!(flag->str_of_flag = malloc(sizeof(char) * (flag->nbr_width + 1))))
+		(flag->str_of_flag = malloc(sizeof(char) * (flag->nbr_width + 1)));
+		if (flag->str_of_flag == NULL)
 			return ;
-		ft_fill_with_c(flag->str_of_flag, '0', flag->nbr_width + 1)
+		ft_fill_with_c(flag->str_of_flag, '0', flag->nbr_width + 1);
 	}
 	if (flag->width > 0 && flag->precision > 0 && flag->minus == 0
 	&& flag->padded_zero == 0)
@@ -121,12 +124,19 @@ void	string_of_flags(va_list ap, t_flag_len *flag)
 	 	flag_width(flag);
 		join_str_width_and_precision(flag);
 	}
+	printf("minus = {%d}\n", flag->minus);
 	if (flag->minus == 1)
+	{
+		printf("test\n");
 		flip_zero_and_space(flag);
+	}
 	if (flag->str_precision != NULL)
 		free(flag->str_precision);
 	if (flag->str_width != NULL)
 		free(flag->str_width);
+	flag->size_final_str_flag = ft_strlen(flag->final_str_flag);
+	printf("size_final_str_flag = {%zu}\n", flag->size_final_str_flag);
+	printf("flag->final_flag{%s}\n", flag->final_str_flag);
 }
 
 int which_flag(const char *str, t_flag_len *flag)
@@ -136,7 +146,7 @@ int which_flag(const char *str, t_flag_len *flag)
 	avancement = 0;
 	ft_init_struct_flag(flag);
 	flag->str_of_flag = create_string_of_width_and_precision((char*)str);
-	while (ft_is_flag(*str) && str++)
+	while (++str && ft_is_flag(*str))
 	{
 		if (*str == '-')
 			flag->minus = 1;
