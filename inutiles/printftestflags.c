@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 22:01:20 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/14 14:07:45 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/14 18:28:50 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,7 @@ int main()
 	printf(KGRE"Taille = %d.\n", printf(KGRN"[-1.10] ------> [d : %-1.10d].\n", test1));
 	printf(KGRE"Taille = %d.\n", printf(KRED"[-1.10] ------> [d : %-1.10d].\n", test2));
 	printf(KGRE"Taille = %d.\n", printf(KGRN"[-10.10] -----> [d : %-10.10d].\n", test1));
-	printf(KGRE"Taille = %d.\n", printf(KRED"[-10.10] ------> [d : %-10.10d].\n", test2));
-
-	printf(KGRE"Taille = %d.\n", printf(KRED"[-10.10] ------> [d : %050.10d].\n", test2));
+	printf(KGRE"Taille = %d.\n", printf(KRED"[-10.10] -----> [d : %-10.10d].\n", test2));
 
     return (0);
 }

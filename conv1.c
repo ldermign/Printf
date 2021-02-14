@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/14 09:49:09 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/14 19:36:55 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void    conv_c(va_list ap, t_flag_len *flag)
     char cara;
 
     cara = va_arg(ap, int);
+	// if (flag->padded_zero == 0)
+	// 	flag sinon, non
     ft_putchar(cara, flag);
 }
 
@@ -42,13 +44,13 @@ void    conv_p(va_list ap, t_flag_len *flag)
 void    conv_d_i(va_list ap, t_flag_len *flag)
 {
 	char	*temp;
-//	char	*final_conv;
     int 	arg_int;
 
     arg_int = va_arg(ap, int);
 	temp = ft_itoa(arg_int);
-//	final_conv = fusion_conv_strflag(temp, arg_int, flag);
-	ft_putstr(temp, flag);
+	fusion_conv_strflag(temp, arg_int, flag);
+	printf("final_str_flag = {%s}\n", flag->final_str_flag);
+	ft_putstr(flag->final_str_flag, flag);
 }
 
 void    conv_u(va_list ap, t_flag_len *flag)
