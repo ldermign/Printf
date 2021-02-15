@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 23:48:27 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/15 12:45:07 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/15 20:34:56 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,21 +62,15 @@ void    fusion_c(int nbr, t_flag_len *flag)
 // s [10.30] -------> [d : pouet c'est relou].
 // s [-10.30] ------> [d : pouet c'est relou].
 
-void    fusion_s(char *str, t_flag_len *flag)
+void    fusion_s(char *str, int max, int len, t_flag_len *flag)
 {
     int i;
-    int max;
-    int len;
     int start;
 
     i = 0;
-    max = 0;
-    len = 0;
-    start = 0;
+    start = max - len;
     if (flag->final_str_flag != NULL)
         free(flag->final_str_flag);
-    max = flag->nbr_width;
-    len = flag->nbr_precision;
     if ((flag->final_str_flag = ft_calloc(max + 1, sizeof(char))) == NULL)
         return ;
     ft_fill_with_c(flag->final_str_flag, ' ', max + 1);
@@ -90,7 +84,6 @@ void    fusion_s(char *str, t_flag_len *flag)
     }
     else 
     {
-        start = max - len;
         while (start < max && str[i] && flag->final_str_flag[start])
         {
             flag->final_str_flag[start] = str[i];
@@ -105,9 +98,9 @@ void    fusion_conv_strflag(char *str, int nbr, t_flag_len *flag)
     if (flag->conv_c == 1 && flag->padded_zero == 0 && flag->precision == -1)
 		fusion_c(nbr, flag);
 	else if (flag->conv_s == 1 && flag->padded_zero == 0)
-		fusion_s(str, flag);
+		fusion_s(str, flag->nbr_width, flag->nbr_precision, flag);
 	else if (flag->conv_p == 1)
-	 	fusion_s(str, flag);
+	 	fusion_s(str, flag->nbr_width, nbr, flag);
 	// else if (flag->conv_d_i == 1)
 	// 	fusion_d_i(str, nbr, flag);
 	// else if (flag->conv_u == 1)

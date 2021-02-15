@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/15 16:10:33 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/15 20:19:18 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,32 +171,6 @@ void	*fill_from_end(char *dst, char *src, size_t n)
 // 	return (dst);
 // }
 
-int	ft_atoi_printf(char *str)
-{
-	int i;
-	int neg;
-	int nbr;
-
-	i = 0;
-	neg = 0;
-	nbr = 0;
-	while (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			neg++;
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		nbr *= 10;
-		nbr += str[i] - '0';
-		i++;
-	}
-	if (neg % 2 != 0)
-		nbr *= -1;
-	return (nbr);
-}
-
 void	ft_putnbr_base_printf(long nbr, char *base, t_flag_len *len)
 {
 	long size_base;
@@ -214,31 +188,6 @@ void	ft_putnbr_base_printf(long nbr, char *base, t_flag_len *len)
 		ft_putnbr_base_printf((nbr / size_base), base, len);
 		ft_putnbr_base_printf((nbr % size_base), base, len);
 	}
-}
-
-// void	ft_putnbr(unsigned int nbr, t_flag_len *len)
-// {
-// 	if (nbr > 9)
-// 	{
-// 		ft_putnbr((nbr / 10), len);
-// 		ft_putnbr((nbr % 10), len);
-// 	}
-// 	else
-// 		ft_putchar((nbr + '0'), len);
-// }
-
-void	ft_putnbr_adr(unsigned long nbr, t_flag_len *len)
-{
-	char *base;
-
-	base = "0123456789abcdef";
-	if (nbr >= 16)
-	{
-		ft_putnbr_adr((nbr / 16), len);
-		ft_putnbr_adr((nbr % 16), len);
-	}
-	else
-		ft_putchar(base[nbr], len);
 }
 
 char	*ft_strcat(char *dst, char *src)
@@ -331,18 +280,103 @@ int	ft_atoi(char *str)
 	return (nbr);
 }
 
+int	ft_atoi_printf(char *str)
+{
+	int i;
+	int neg;
+	int nbr;
 
-// size_t		ft_len_nb(size_t n, size_t base)
+	i = 0;
+	neg = 0;
+	nbr = 0;
+	if (str[i] == '-')
+	{
+		neg++;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		nbr *= 10;
+		nbr += str[i] - '0';
+		i++;
+	}
+	if (neg % 2 != 0)
+		nbr *= -1;
+	return (nbr);
+}
+
+
+
+size_t		ft_len_nbr(size_t nbr, size_t size_base)
+{
+	size_t	size_nbr;
+	
+	size_nbr = 0;
+	if (nbr == 0)
+		size_nbr = 0;
+	if (nbr < 0)
+	{
+		nbr *= -1;
+		size_nbr++;
+	}
+	while (nbr > 0)
+	{
+		nbr /= size_base;
+		size_nbr++;
+	}
+	return (size_nbr);
+}
+
+
+char	*ft_itoa_base(size_t nbr, char *base)
+{
+	size_t	size_base;
+	size_t	size_nbr;
+	size_t	temp;
+	char	*dst;
+
+	size_base = ft_strlen(base);
+	size_nbr = ft_len_nbr(nbr, size_base);
+	temp = 0;
+	if ((dst = malloc(sizeof(char) * (size_nbr + 1))) == NULL)
+		return (NULL);
+	dst[size_nbr--] = '\0';
+	if (nbr == 0)
+		dst[0] = '0';
+	if (nbr < 0)
+	{
+		dst[0] = '-';
+		nbr *= -1;
+	}
+	while (nbr > 0)
+	{
+		temp = nbr % size_base;
+		dst[size_nbr] = base[temp];
+		nbr /= size_base;
+		size_nbr--;
+	}
+	return (dst);
+}
+
+
+
+
 // {
-// 	size_t len_int;
-
-// 	len_int = 0;
-// 	while (n >= base)
+// 	char	*dst;
+// 	size_t	size_base;
+	
+// 	size_base = ft_strlen(base);
+// 	if ((dst = malloc(sizeof(char) * 2)) == NULL)
+// 		return (NULL);
+// 	if (nbr >= size_base)
+// 		dst = ft_strjoin(ft_itoa_base(nbr / size_base, base),
+// 		ft_itoa_base(nbr % size_base, base));
+// 	else
 // 	{
-// 		n /= base;
-// 		len_int++;
+// 		dst[0] = base[nbr];
+// 		dst[1] = '\0';
 // 	}
-// 	return (len_int + 1);
+// 	return (dst);
 // }
 
 // char	*ft_itoa_base(size_t nbr, char *base)
@@ -371,26 +405,6 @@ int	ft_atoi(char *str)
 // 	}
 // 	return (dst);
 // }
-
-
-char	*ft_itoa_base(size_t nbr, char *base)
-{
-	char	*dst;
-	size_t	size_base;
-	
-	size_base = ft_strlen(base);
-	if ((dst = malloc(sizeof(char) * 2)) == NULL)
-		return (NULL);
-	if (nbr >= size_base)
-		dst = ft_strjoin(ft_itoa_base(nbr / size_base, base),
-		ft_itoa_base(nbr % size_base, base));
-	else
-	{
-		dst[0] = base[nbr];
-		dst[1] = '\0';
-	}
-	return (dst);
-}
 
 
 /*char	*ft_itoa_base(size_t nb, char *base)

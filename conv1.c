@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/15 16:09:39 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/15 20:34:20 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void    conv_p(va_list ap, t_flag_len *flag)
 	arg_unsdint = (unsigned long)(adresse_ptr);
 	str_adresse = ft_itoa_base(arg_unsdint, "0123456789abcdef");
 	temp = ft_strjoin("0x", str_adresse);
-	if (flag->nbr_precision > (int)ft_strlen(temp))
+	if (flag->nbr_width < (int)ft_strlen(temp))
     	ft_putstr(temp, flag);
 	else
 	{
-		fusion_conv_strflag(temp, 0, flag);
+		fusion_conv_strflag(temp, ft_strlen(temp), flag);
 		ft_putstr(flag->final_str_flag, flag);
 	}
 }
