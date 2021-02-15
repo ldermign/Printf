@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/15 13:24:18 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/15 16:09:39 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void    conv_d_i(va_list ap, t_flag_len *flag)
 	temp = ft_itoa_base(arg_int, "0123456789");
 	if (flag->size_final_str_flag < ft_strlen(temp))
 		ft_putstr(temp, flag);
-
 	else
 	{
 		fusion_conv_strflag(temp, arg_int, flag);

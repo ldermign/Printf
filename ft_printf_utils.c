@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/15 13:25:04 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/15 16:10:33 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,8 +241,6 @@ void	ft_putnbr_adr(unsigned long nbr, t_flag_len *len)
 		ft_putchar(base[nbr], len);
 }
 
-
-
 char	*ft_strcat(char *dst, char *src)
 {
 	int i;
@@ -333,118 +331,69 @@ int	ft_atoi(char *str)
 	return (nbr);
 }
 
-// void	ft_putnbr_adr(unsigned long nbr, t_flag_len *len)
-// {
-// 	char *base;
 
-// 	base = "0123456789abcdef";
-// 	if (nbr >= 16)
+// size_t		ft_len_nb(size_t n, size_t base)
+// {
+// 	size_t len_int;
+
+// 	len_int = 0;
+// 	while (n >= base)
 // 	{
-// 		ft_putnbr_adr((nbr / 16), len);
-// 		ft_putnbr_adr((nbr % 16), len);
+// 		n /= base;
+// 		len_int++;
 // 	}
-// 	else
-// 		ft_putchar(base[nbr], len);
+// 	return (len_int + 1);
+// }
+
+// char	*ft_itoa_base(size_t nbr, char *base)
+// {
+// 	size_t	len_nbr;
+// 	size_t	size_base;
+// 	size_t	nbr_positif;
+// 	char	*dst;
+
+// 	size_base = ft_strlen(base);
+// 	len_nbr = ft_len_nb(nbr, size_base);
+// 	nbr_positif = nbr;
+// 	if ((dst = malloc(sizeof(char) * (len_nbr + 1 + (nbr < 0)))) == NULL)
+// 		return (NULL);
+// 	if (nbr_positif < 0)
+// 	{
+// 		nbr_positif = -nbr_positif;
+// 		len_nbr++;
+// 		dst[0] = '-';
+// 	}
+// 	dst[len_nbr--] = '\0';
+// 	while (len_nbr >= size_base)
+// 	{
+// 		dst[len_nbr--] = ft_itoa_base(nbr_positif % size_base, base);
+// 		nbr_positif /= size_base;
+// 	}
+// 	return (dst);
 // }
 
 
-size_t		ft_len_nb(size_t n, size_t base)
-{
-	size_t len_int;
-
-	len_int = 0;
-	if (n < 0)
-		n = -n;
-	while (n >= base)
-	{
-		n /= base;
-		len_int++;
-	}
-	return (len_int + 1);
-}
-
 char	*ft_itoa_base(size_t nbr, char *base)
 {
-	size_t	count;
-	size_t	size_base;
-	size_t	nbr_positif;
 	char	*dst;
-
-	count = 1;
+	size_t	size_base;
+	
 	size_base = ft_strlen(base);
-	if (nbr < 0)
-	{
-		count = 2;
-		nbr_positif = -nbr;
-	}
-	count = ft_len_nb(nbr, size_base);
-	if ((dst = malloc(sizeof(char) * (count + 1))) == NULL)
+	if ((dst = malloc(sizeof(char) * 2)) == NULL)
 		return (NULL);
-	if (nbr_positif < 0 && (nbr_positif = -nbr_positif))
-		dst[0] = '-';
-	dst[count--] = '\0';
-	while (count >= (nbr_positif < 0))
+	if (nbr >= size_base)
+		dst = ft_strjoin(ft_itoa_base(nbr / size_base, base),
+		ft_itoa_base(nbr % size_base, base));
+	else
 	{
-		dst[count--] = (nbr % size_base) + '0';
-		nbr_positif /= size_base;
+		dst[0] = base[nbr];
+		dst[1] = '\0';
 	}
 	return (dst);
 }
 
-/*
-int		ft_base_valid(char *str)
-{
-	int i;
-	int j;
 
-	i = 0;
-	j = 1;
-	while (str[i])
-	{
-		if (str[i] == '-' || str[i] == '+' || str[i] < 32 || str[i] > 126)
-			return (0);
-		while (str[j])
-		{
-			if (str[i] == str[j])
-				return (0);
-			j++;
-		}
-		i++;
-		j = i + 1;
-	}
-	if (ft_strlen(str) < 2)
-		return (0);
-	return (1);
-}
-
-int		ft_atoi_base(char *str, char *base)
-{
-	int neg;
-	int nbr;
-
-	neg = 0;
-	nbr = 0;
-	if (!(ft_base_valid(base)))
-		return (0);
-	while ((*str >= 9 && *str <= 13) || (*str == 32))
-		str++;
-	while (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			neg++;
-		str++;
-	}
-	while (*str && ft_position(*str, base) != -1)
-	{
-		nbr *= ft_strlen(base) + ft_position(*str, base);
-		str++;
-	}
-	if (neg % 2 != 0)
-		nbr *= -1;
-	return (nbr);
-}
-
-char	*ft_itoa_base(size_t nb, char *base)
+/*char	*ft_itoa_base(size_t nb, char *base)
 {
 	long	nb_long;
 	int		size_base;
