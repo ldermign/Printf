@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/14 23:08:55 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/15 13:25:04 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,42 +113,63 @@ void	*fill_from_end(char *dst, char *src, size_t n)
 	return (dst);
 }
 
-int		ft_len_nb(long n)
-{
-	int len_int;
 
-	len_int = 0;
-	if (n < 0)
-		n = -n;
-	while (n >= 10)
-	{
-		n /= 10;
-		len_int++;
-	}
-	return (len_int + 1);
-}
 
-char	*ft_itoa(int nb)
-{
-	char	*dst;
-	long	nb_long;
-	int		len;
+// char	*ft_itoa(size_t nbr)
+// {
+// 	char	*dst;
+// 	size_t	len;
 
-	nb_long = nb;
-	len = ft_len_nb(nb_long) + (nb_long < 0);
-	if ((dst = (char*)malloc(sizeof(char) * len + 1 + (nb < 0))) == NULL)
-		return (NULL);
-	if (nb_long < 0 && (nb_long = -nb_long))
-		*dst = '-';
-	dst[len] = '\0';
-	len--;
-	while (len >= (nb < 0))
-	{
-		dst[len--] = (nb_long % 10) + '0';
-		nb_long /= 10;
-	}
-	return (dst);
-}
+// 	len = ft_len_nb(nbr) + (nbr < 0);
+// 	if ((dst = (char*)malloc(sizeof(char) * len + 1 + (nbr < 0))) == NULL)
+// 		return (NULL);
+// 	if (nbr < 0 && (nbr = -nbr))
+// 		*dst = '-';
+// 	dst[len] = '\0';
+// 	len--;
+// 	while (len >= (nbr < 0))
+// 	{
+// 		dst[len--] = (nbr % 10) + '0';
+// 		nbr /= 10;
+// 	}
+// 	return (dst);
+// }
+
+// int		ft_len_int(long n)
+// {
+// 	int len_int;
+
+// 	len_int = 0;
+// 	if (n < 0)
+// 		n = -n;
+// 	while (n >= 10)
+// 	{
+// 		n /= 10;
+// 		len_int++;
+// 	}
+// 	return (len_int + 1);
+// }
+
+// char	*ft_itoa(int n)
+// {
+// 	char	*dst;
+// 	long	nb;
+// 	int		len;
+
+// 	nb = n;
+// 	len = ft_len_int(nb) + (nb < 0);
+// 	if ((dst = (char*)malloc(sizeof(char) * len + 1 + (n < 0))) == NULL)
+// 		return (NULL);
+// 	if (nb < 0 && (nb = -nb))
+// 		*dst = '-';
+// 	dst[len--] = '\0';
+// 	while (len >= (n < 0))
+// 	{
+// 		dst[len--] = (nb % 10) + '0';
+// 		nb /= 10;
+// 	}
+// 	return (dst);
+// }
 
 int	ft_atoi_printf(char *str)
 {
@@ -219,6 +240,8 @@ void	ft_putnbr_adr(unsigned long nbr, t_flag_len *len)
 	else
 		ft_putchar(base[nbr], len);
 }
+
+
 
 char	*ft_strcat(char *dst, char *src)
 {
@@ -310,19 +333,65 @@ int	ft_atoi(char *str)
 	return (nbr);
 }
 
+// void	ft_putnbr_adr(unsigned long nbr, t_flag_len *len)
+// {
+// 	char *base;
 
-/*
-int		ft_position(char c, char *str)
+// 	base = "0123456789abcdef";
+// 	if (nbr >= 16)
+// 	{
+// 		ft_putnbr_adr((nbr / 16), len);
+// 		ft_putnbr_adr((nbr % 16), len);
+// 	}
+// 	else
+// 		ft_putchar(base[nbr], len);
+// }
+
+
+size_t		ft_len_nb(size_t n, size_t base)
 {
-	int i;
+	size_t len_int;
 
-	i = -1;
-	while (str[++i])
-		if (str[i] == c)
-			return (i);
-	return (-1);
+	len_int = 0;
+	if (n < 0)
+		n = -n;
+	while (n >= base)
+	{
+		n /= base;
+		len_int++;
+	}
+	return (len_int + 1);
 }
 
+char	*ft_itoa_base(size_t nbr, char *base)
+{
+	size_t	count;
+	size_t	size_base;
+	size_t	nbr_positif;
+	char	*dst;
+
+	count = 1;
+	size_base = ft_strlen(base);
+	if (nbr < 0)
+	{
+		count = 2;
+		nbr_positif = -nbr;
+	}
+	count = ft_len_nb(nbr, size_base);
+	if ((dst = malloc(sizeof(char) * (count + 1))) == NULL)
+		return (NULL);
+	if (nbr_positif < 0 && (nbr_positif = -nbr_positif))
+		dst[0] = '-';
+	dst[count--] = '\0';
+	while (count >= (nbr_positif < 0))
+	{
+		dst[count--] = (nbr % size_base) + '0';
+		nbr_positif /= size_base;
+	}
+	return (dst);
+}
+
+/*
 int		ft_base_valid(char *str)
 {
 	int i;

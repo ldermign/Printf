@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/14 18:54:45 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/15 13:23:33 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 #define KWHT  "\x1B[0;37m" // BLANC
 #define KGRE  "\x1b[1;30m" // VERT
 
-
+// printf("666666\n");
 # include <libc.h> /////////////////////////////////////////////////////////////
 
 
@@ -88,7 +88,7 @@ int				ft_is_all(char c);
 void			ft_putchar(char c, t_flag_len *len);
 void			ft_putstr(char *str, t_flag_len *len);
 size_t			ft_strlen(const char *str);
-char			*ft_itoa(int nb);
+char			*ft_itoa(size_t nb);
 char			*ft_itoa_base(size_t nb, char *base);
 void			ft_putnbr_base_printf(long nbr, char *base, t_flag_len *len);
 char			*ft_strcat(char *dst, char *src);
@@ -105,6 +105,7 @@ void			join_str_width_and_precision(t_flag_len *flag);
 void   			fusion_conv_strflag(char *str, int nbr, t_flag_len *flag);
 void			flip_zero_and_space(t_flag_len *flag);
 void			*ft_calloc(size_t nmemb, size_t size);
+char			*ft_itoa_base(size_t nbr, char *base);
 
 /*
 **	Flags

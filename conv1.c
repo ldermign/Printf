@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/14 23:14:59 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/15 13:24:18 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,49 @@
 
 void    conv_c(va_list ap, t_flag_len *flag)
 {
-	// juste la largeur
     char cara;
-
     cara = va_arg(ap, int);
-	// if (flag->padded_zero == 0)
-	// 	flag sinon, non
-    ft_putchar(cara, flag);
+	if (flag->nbr_width < 1) 
+		ft_putchar(cara, flag);
+	else
+	{
+		fusion_conv_strflag(NULL, cara, flag);
+    	ft_putstr(flag->final_str_flag, flag);
+	}
 }
 
 void    conv_s(va_list ap, t_flag_len *flag)
 {
-	// juste pas 0
     char	*arg_char;
 
     arg_char = va_arg(ap, char *);
-    ft_putstr(arg_char, flag);
+	if (flag->nbr_precision > (int)ft_strlen(arg_char))
+    	ft_putstr(arg_char, flag);
+	else
+	{
+		fusion_conv_strflag(arg_char, 0, flag);
+		ft_putstr(flag->final_str_flag, flag);
+	}
 }
 
 void    conv_p(va_list ap, t_flag_len *flag)
 {
-	// pour p, juste gerer la largeur et le minus
 	unsigned long 	arg_unsdint;
 	void			*adresse_ptr;
+	char			*temp;
+	char			*str_adresse;
 
     adresse_ptr = va_arg(ap, void*);
 	arg_unsdint = (unsigned long)(adresse_ptr);
-	ft_putstr("0x", flag);
-	ft_putnbr_adr(arg_unsdint, flag);
+	str_adresse = ft_itoa_base(arg_unsdint, "0123456789abcdef");
+	temp = ft_strjoin("0x", str_adresse);
+	if (flag->nbr_precision > (int)ft_strlen(temp))
+    	ft_putstr(temp, flag);
+	else
+	{
+		fusion_conv_strflag(temp, 0, flag);
+		ft_putstr(flag->final_str_flag, flag);
+	}
 }
 
 void    conv_d_i(va_list ap, t_flag_len *flag)
@@ -50,9 +65,10 @@ void    conv_d_i(va_list ap, t_flag_len *flag)
     int 	arg_int;
 
     arg_int = va_arg(ap, int);
-	temp = ft_itoa(arg_int);
+	temp = ft_itoa_base(arg_int, "0123456789");
 	if (flag->size_final_str_flag < ft_strlen(temp))
 		ft_putstr(temp, flag);
+
 	else
 	{
 		fusion_conv_strflag(temp, arg_int, flag);
@@ -66,7 +82,7 @@ void    conv_u(va_list ap, t_flag_len *flag)
     unsigned int 	arg_unsdint;
 
     arg_unsdint = va_arg(ap, unsigned int);
-	temp = ft_itoa(arg_unsdint);
+	temp = ft_itoa_base(arg_unsdint, "0123456789");
 	if (flag->size_final_str_flag < ft_strlen(temp))
 		ft_putstr(temp, flag);
 	else

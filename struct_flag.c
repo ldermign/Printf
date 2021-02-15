@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:46:59 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/14 23:15:58 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/15 11:46:27 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,45 +151,28 @@ void		string_of_flags(va_list ap, t_flag_len *flag)
 		free(flag->str_width);
 }
 
-int which_flag(const char *str, t_flag_len *flag)
+int		which_flag(const char *str, t_flag_len *flag)
 {
 	int avancement;
 
 	avancement = 0;
 	ft_init_struct_flag(flag);
 	flag->str_of_flag = create_string_of_width_and_precision((char*)str);
-	if (*str == '-')
+	if (*str == '-' && ++str)
 		flag->minus = 1;
-	else if (*str == '0' && flag->minus == 0)
+	else if (*str == '0' && flag->minus == 0 && ++str)
 		flag->padded_zero = 1;
-	while (++str && ft_is_flag(*str))
-	{
-		if (*str == '*' || ft_is_digit(*str) || *str == '.')
-		{
-			flag->width = 1;
-			while ((*str == '*' || ft_is_digit(*str)) && str++)
-				avancement++;
-			if (*str == '.' && (ft_is_digit(*(str + 1))
-			|| *(str + 1) == '*'))
-				flag->precision = 1;
-		}
+	if (flag->minus == 1 || flag->padded_zero == 1)
 		avancement++;
+	while (ft_is_flag(*str) && str++)
+	{
+		if (*str == '*' || ft_is_digit(*str))
+			flag->width = 1;
+		while ((*str == '*' || ft_is_digit(*str)) && str++)
+			avancement++;
+		if (*str == '.' && (ft_is_digit(*(str + 1)) || *(str + 1) == '*'))
+			flag->precision = 1;
+		++avancement;
 	}
 	return (avancement);
-}
-
-int		ft_check_flag(const char *str)
-{
-	str++;
-	if (!ft_is_all(*str))
-		return (-1);
-	while (ft_is_all(*str))
-	{
-		if (ft_is_digit(*str) && *(str + 1) == '*')
-			return (-1);
-		if (*str == '*' && ft_is_digit(*(str + 1)))
-			return (-1);
-		str++;
-	}
-	return (1);
 }
