@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:46:59 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/15 20:16:36 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/15 21:56:17 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,43 +112,6 @@ void	string_of_flag_to_int(va_list ap, t_flag_len *flag)
 		if (flag->str_of_flag[i] == '*')
 			flag->nbr_precision = va_arg(ap, int);
 	}
-}
-
-void		string_of_flags(va_list ap, t_flag_len *flag)
-{
-	string_of_flag_to_int(ap, flag);
-	if (flag->padded_zero == 1 && flag->nbr_width >= 0 && flag->precision == -1)
-	{
-		ft_fill_with_c(flag->final_str_flag, '0', flag->nbr_width + 1);
-		if ((flag->final_str_flag = malloc(sizeof(char) *
-		(flag->nbr_width + 1))) == NULL)
-			return ;
-	}
-	if (flag->width >= 0 && flag->precision >= 0)
-	{
-		if (flag->padded_zero == 1 && (flag->conv_c == 1 || flag->conv_p == 1
-		|| flag->conv_s == 1 || flag->conv_per == 1))
-		{
-			if (!(flag->final_str_flag = ft_calloc(flag->nbr_width + 1,
-			sizeof(char))))
-				return ;
-			ft_fill_with_c(flag->final_str_flag, '0', flag->nbr_width + 1);
-		}
-		else
-		{
-			flag_width(flag);
-			flag_precision(flag);
-			if (flag->str_width != NULL && flag->str_precision != NULL)
-				join_str_width_and_precision(flag);
-		}
-	}
-	flag->size_final_str_flag = ft_strlen(flag->final_str_flag);
-	if (flag->minus == 1)
-		flip_zero_and_space(flag);
-	if (flag->str_precision != NULL)
-		free(flag->str_precision);
-	if (flag->str_width != NULL)
-		free(flag->str_width);
 }
 
 int		which_flag(const char *str, t_flag_len *flag)
