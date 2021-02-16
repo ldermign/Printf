@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/16 12:23:40 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/16 22:08:23 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,12 @@ void    conv_d_i(va_list ap, t_flag_len *flag)
 	temp = ft_itoa(arg_int);
 	size_temp = ft_strlen(temp);
 	if ((size_temp > flag->nbr_precision) && (size_temp > flag->nbr_width))
-		ft_putstr(temp, flag);	
+		ft_putstr(temp, flag);
 	else
 	{
 		fusion_conv_strflag(temp, arg_int, flag);
-		// if (arg_int > 0) //&& flag->nbr_precision > 0)
-			ft_putstr(flag->final_str_flag, flag);
+		ft_putstr(flag->final_str_flag, flag);
 	}
-	// ft_putstr(flag->final_str_flag, flag);
 }
 
 void    conv_u(va_list ap, t_flag_len *flag)
@@ -86,9 +84,9 @@ void    conv_u(va_list ap, t_flag_len *flag)
 	int				size_temp;
 
     arg_unsdint = va_arg(ap, unsigned int);
-	temp = ft_itoa_base(arg_unsdint, "0123456789");
+	temp = ft_itoa(arg_unsdint);
 	size_temp = ft_strlen(temp);
-	if (size_temp > (flag->nbr_precision || flag->nbr_width))
+	if ((size_temp > flag->nbr_precision) && (size_temp > flag->nbr_width))
 		ft_putstr(temp, flag);
 	else
 	{

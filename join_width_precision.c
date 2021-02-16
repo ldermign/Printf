@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 09:36:41 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/16 13:00:35 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/16 22:32:52 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	precision_sup_or_equal_width(t_flag_len *flag)
 
 	i = 0;
 	size = flag->nbr_precision;
-	while (i < size)
+	while ((i < size))
 	{
 		flag->final_str_flag[i] = flag->str_precision[i];
 		i++;
@@ -90,17 +90,16 @@ void	join_str_width_and_precision(int nbr, t_flag_len *flag)
 {
 	int size;
 	
+	size = 0;
 	if (flag->nbr_precision >= flag->nbr_width)
 		size = flag->nbr_precision;
-	else
+	else if (flag->nbr_precision < flag->nbr_width)
 		size = flag->nbr_width;
-	if (nbr < 0 && flag->minus == 1 && flag->nbr_precision >= flag->nbr_width)
-		size++;
 	if ((flag->final_str_flag = ft_calloc(size + 1, sizeof(char))) == NULL)
 		return ;
 	if (flag->nbr_precision >= flag->nbr_width)
 		precision_sup_or_equal_width(flag);
-	else
+	else if (flag->nbr_precision < flag->nbr_width)
 		width_sup(flag);
 	flag->size_final_str_flag = ft_strlen(flag->final_str_flag) + (nbr < 0);
 	if (flag->minus == 1)
