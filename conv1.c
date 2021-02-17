@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/16 22:08:23 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/17 11:50:04 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void    conv_c(va_list ap, t_flag_len *flag)
 {
-    char cara;
-    cara = va_arg(ap, int);
+    const int cara = va_arg(ap, int);
+	
 	if (flag->nbr_width < 1) 
 		ft_putchar(cara, flag);
 	else
@@ -61,14 +61,14 @@ void    conv_p(va_list ap, t_flag_len *flag)
 
 void    conv_d_i(va_list ap, t_flag_len *flag)
 {
-	char	*temp;
-    int 	arg_int;
+	int 	arg_int;
 	int		size_temp;
+	char	*temp;
 
     arg_int = va_arg(ap, int);
 	temp = ft_itoa(arg_int);
 	size_temp = ft_strlen(temp);
-	if ((size_temp > flag->nbr_precision) && (size_temp > flag->nbr_width))
+	if ((size_temp >= flag->nbr_precision) && (size_temp >= flag->nbr_width))
 		ft_putstr(temp, flag);
 	else
 	{
@@ -79,14 +79,14 @@ void    conv_d_i(va_list ap, t_flag_len *flag)
 
 void    conv_u(va_list ap, t_flag_len *flag)
 {
-	char			*temp;
-    unsigned int 	arg_unsdint;
+	unsigned int 	arg_unsdint;
 	int				size_temp;
+	char			*temp;
 
     arg_unsdint = va_arg(ap, unsigned int);
 	temp = ft_itoa(arg_unsdint);
 	size_temp = ft_strlen(temp);
-	if ((size_temp > flag->nbr_precision) && (size_temp > flag->nbr_width))
+	if ((size_temp >= flag->nbr_precision) && (size_temp >= flag->nbr_width))
 		ft_putstr(temp, flag);
 	else
 	{
@@ -97,9 +97,9 @@ void    conv_u(va_list ap, t_flag_len *flag)
 
 void	conv_x_X(char c, va_list ap, t_flag_len *len)
 {
-	// tous les flags :/
 	unsigned int	arg_unsdint;
 	char			*base;
+	// char			*temp;
 	
 	arg_unsdint = va_arg(ap, unsigned int);
 	if (c == 'x')
@@ -111,14 +111,13 @@ void	conv_x_X(char c, va_list ap, t_flag_len *len)
 
 void    conv_per(t_flag_len *flag)
 {
-	// tous les flags ce batard
-	
-    // ft_putstr("\%", flag);
-	if (flag->size_final_str_flag < ft_strlen("\%"))
-		ft_putstr("\%", flag);
+	const int	charac = '%';
+
+	if (flag->size_final_str_flag < ft_strlen("%"))
+		ft_putstr("%", flag);
 	else
 	{
-		fusion_conv_strflag("\%", 0, flag);
+		fusion_conv_strflag(NULL, charac, flag);
 		ft_putstr(flag->final_str_flag, flag);
 	}
-}
+}	

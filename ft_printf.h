@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/16 22:31:49 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/17 09:01:45 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,9 @@ void			*ft_memmove(char *dst, char *src, size_t n);
 void			*fill_from_end(char *dst, char *src, size_t n);
 int				ft_atoi(char *str);
 void			ft_fill_with_c(char *str, char c, int size);
-void			join_str_width_and_precision(int nbr, t_flag_len *flag);
+void			join_str_width_and_precision(t_flag_len *flag);
 void   			fusion_conv_strflag(char *str, int nbr, t_flag_len *flag);
-void	flip_zero_and_space(t_flag_len *flag);
+void			flip_zero_and_space(t_flag_len *flag);
 void			*ft_calloc(size_t nmemb, size_t size);
 char			*ft_itoa_base(size_t nbr, char *base);
 

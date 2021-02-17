@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/16 22:11:07 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/17 11:41:57 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int		main()
 	//test flags
 
 
-	// unsigned int	test_u = 42;
+	unsigned int	test_u = 42;
 	// unsigned int	test_x_X = 420;
 	char 			*test_s = "pouet c'est relou";
 	char				test_c = 'q';
@@ -277,87 +277,199 @@ int		main()
 	size_ft_printf = ft_printf(KCYN"negatif [020.20] ------> [d : %0*.*d].\n", 20, 20, test2);
 	check_printf(size_ft_printf, size_printf);
 
+///////////////////////////////////////////////////////////////
+
+	size_printf = printf(KGRN"positif [10] -------> [d : %*.1d].\n", 10, test1);
+	size_ft_printf = ft_printf(KCYN"positif [10] -------> [d : %*d].\n", 10, test1);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"negatif [10] -------> [d : %*.1d].\n", 10, test2);
+	size_ft_printf = ft_printf(KCYN"negatif [10] -------> [d : %*d].\n", 10, test2);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [-10] ------> [d : %-*d].\n", 10, test1);
+	size_ft_printf = ft_printf(KCYN"positif [-10] ------> [d : %-*d].\n", 10, test1);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"negatif [-10] ------> [d : %-*d].\n", 10, test2);
+	size_ft_printf = ft_printf(KCYN"negatif [-10] ------> [d : %-*d].\n", 10, test2);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [010] ------> [d : %0*d].\n", 10, test1);
+	size_ft_printf = ft_printf(KCYN"positif [010] ------> [d : %0*d].\n", 10, test1);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"negatif [010] ------> [d : %0*d].\n", 10, test2);
+	size_ft_printf = ft_printf(KCYN"negatif [010] ------> [d : %0*d].\n", 10, test2);
+	check_printf(size_ft_printf, size_printf);
+
+	size_printf = printf(KGRN"positif [20] -------> [d : %*d].\n", 20, test1);
+	size_ft_printf = ft_printf(KCYN"positif [20] -------> [d : %*d].\n", 20, test1);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"negatif [20] -------> [d : %*d].\n", 20, test2);
+	size_ft_printf = ft_printf(KCYN"negatif [20] -------> [d : %*d].\n", 20, test2);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [-20] ------> [d : %-*d].\n", 20, test1);
+	size_ft_printf = ft_printf(KCYN"positif [-20] ------> [d : %-*d].\n", 20, test1);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"negatif [-20] ------> [d : %-*d].\n", 20, test2);
+	size_ft_printf = ft_printf(KCYN"negatif [-20] ------> [d : %-*d].\n", 20, test2);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [020] ------> [d : %0*d].\n", 20, test1);
+	size_ft_printf = ft_printf(KCYN"positif [020] ------> [d : %0*d].\n", 20, test1);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"negatif [020] ------> [d : %0*d].\n", 20, test2);
+	size_ft_printf = ft_printf(KCYN"negatif [020] ------> [d : %0*d].\n", 20, test2);
+	check_printf(size_ft_printf, size_printf);
+
+	size_printf = printf(KGRN"positif [20] -------> [d : %*d].\n", 20, test1);
+	size_ft_printf = ft_printf(KCYN"positif [20] -------> [d : %*d].\n", 20, test1);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"negatif [20] -------> [d : %*d].\n", 20, test2);
+	size_ft_printf = ft_printf(KCYN"negatif [20] -------> [d : %*d].\n", 20, test2);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [-20] ------> [d : %-*d].\n", 20, test1);
+	size_ft_printf = ft_printf(KCYN"positif [-20] ------> [d : %-*d].\n", 20, test1);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"negatif [-20] ------> [d : %-*d].\n", 20, test2);
+	size_ft_printf = ft_printf(KCYN"negatif [-20] ------> [d : %-*d].\n", 20, test2);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [020] ------> [d : %0*d].\n", 20, test1);
+	size_ft_printf = ft_printf(KCYN"positif [020] ------> [d : %0*d].\n", 20, test1);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"negatif [020] ------> [d : %0*d].\n", 20, test2);
+	size_ft_printf = ft_printf(KCYN"negatif [020] ------> [d : %0*d].\n", 20, test2);
+	check_printf(size_ft_printf, size_printf);
+
+/////////////////////////////////////////////////////////////////////////
 
 
 
 
 
 
-	// size_printf = printf(KGRN"positif [10.20] -------> [u : %*.*u].\n", 10, 20, test_u);
-	// size_ft_printf = ft_printf(KCYN"positif [10.20] -------> [u : %*.*u].\n", 10, 20, test_u);
-	// check_printf(size_ft_printf, size_printf);
-	// size_printf = printf(KGRN"negatif [10.20] -------> [u : %*.*u].\n", 10, 20, test_u);
-	// size_ft_printf = ft_printf(KCYN"negatif [10.20] -------> [u : %*.*u].\n", 10, 20, test_u);
-	// check_printf(size_ft_printf, size_printf);
-	// size_printf = printf(KGRN"positif [-10.20] ------> [u : %-*.*u].\n", 10, 20, test_u);
-	// size_ft_printf = ft_printf(KCYN"positif [-10.20] ------> [u : %-*.*u].\n", 10, 20, test_u);
-	// check_printf(size_ft_printf, size_printf);
-	// size_printf = printf(KGRN"negatif [-10.20] ------> [u : %-*.*u].\n", 10, 20, test_u);
-	// size_ft_printf = ft_printf(KCYN"negatif [-10.20] ------> [u : %-*.*u].\n", 10, 20, test_u);
-	// check_printf(size_ft_printf, size_printf);
-	// size_printf = printf(KGRN"positif [010.20] ------> [u : %0*.*u].\n", 10, 20, test_u);
-	// size_ft_printf = ft_printf(KCYN"positif [010.20] ------> [u : %0*.*u].\n", 10, 20, test_u);
-	// check_printf(size_ft_printf, size_printf);
-	// size_printf = printf(KGRN"negatif [010.20] ------> [u : %0*.*u].\n", 10, 20, test_u);
-	// size_ft_printf = ft_printf(KCYN"negatif [010.20] ------> [u : %0*.*u].\n", 10, 20, test_u);
-	// check_printf(size_ft_printf, size_printf);
 
-	// size_printf = printf(KGRN"positif [20.10] -------> [u : %*.*u].\n", 20, 10, test_u);
-	// size_ft_printf = ft_printf(KCYN"positif [20.10] -------> [u : %*.*u].\n", 20, 10, test_u);
-	// check_printf(size_ft_printf, size_printf);
-	// size_printf = printf(KGRN"negatif [20.10] -------> [u : %*.*u].\n", 20, 10, test_u);
-	// size_ft_printf = ft_printf(KCYN"negatif [20.10] -------> [u : %*.*u].\n", 20, 10, test_u);
-	// check_printf(size_ft_printf, size_printf);
-	// size_printf = printf(KGRN"positif [-20.10] ------> [u : %-*.*u].\n", 20, 10, test_u);
-	// size_ft_printf = ft_printf(KCYN"positif [-20.10] ------> [u : %-*.*u].\n", 20, 10, test_u);
-	// check_printf(size_ft_printf, size_printf);
-	// size_printf = printf(KGRN"negatif [-20.10] ------> [u : %-*.*u].\n", 20, 10, test_u);
-	// size_ft_printf = ft_printf(KCYN"negatif [-20.10] ------> [u : %-*.*u].\n", 20, 10, test_u);
-	// check_printf(size_ft_printf, size_printf);
-	// size_printf = printf(KGRN"positif [020.10] ------> [u : %0*.*u].\n", 20, 10, test_u);
-	// size_ft_printf = ft_printf(KCYN"positif [020.10] ------> [u : %0*.*u].\n", 20, 10, test_u);
-	// check_printf(size_ft_printf, size_printf);
-	// size_printf = printf(KGRN"negatif [020.10] ------> [u : %0*.*u].\n", 20, 10, test_u);
-	// size_ft_printf = ft_printf(KCYN"negatif [020.10] ------> [u : %0*.*u].\n", 20, 10, test_u);
-	// check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [10.20] -------> [u : %*.*u].\n", 10, 20, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [10.20] -------> [u : %*.*u].\n", 10, 20, test_u);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [-10.20] ------> [u : %-*.*u].\n", 10, 20, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [-10.20] ------> [u : %-*.*u].\n", 10, 20, test_u);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [010.20] ------> [u : %0*.*u].\n", 10, 20, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [010.20] ------> [u : %0*.*u].\n", 10, 20, test_u);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [20.10] -------> [u : %*.*u].\n", 20, 10, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [20.10] -------> [u : %*.*u].\n", 20, 10, test_u);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [-20.10] ------> [u : %-*.*u].\n", 20, 10, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [-20.10] ------> [u : %-*.*u].\n", 20, 10, test_u);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [020.10] ------> [u : %0*.*u].\n", 20, 10, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [020.10] ------> [u : %0*.*u].\n", 20, 10, test_u);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [2.2] -------> [u : %*.*u].\n", 2, 2, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [2.2] -------> [u : %*.*u].\n", 2, 2, test_u);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [-2.2] ------> [u : %-*.*u].\n", 2, 2, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [-2.2] ------> [u : %-*.*u].\n", 2, 2, test_u);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [02.2] ------> [u : %0*.*u].\n", 2, 2, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [02.2] ------> [u : %0*.*u].\n", 2, 2, test_u);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [20.20] -------> [u : %*.*u].\n", 20, 20, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [20.20] -------> [u : %*.*u].\n", 20, 20, test_u);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [-20.20] ------> [u : %-*.*u].\n", 20, 20, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [-20.20] ------> [u : %-*.*u].\n", 20, 20, test_u);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [020.20] ------> [u : %0*.*u].\n", 20, 20, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [020.20] ------> [u : %0*.*u].\n", 20, 20, test_u);
+	check_printf(size_ft_printf, size_printf);
 
-	// size_printf = printf(KGRN"positif [2.2] -------> [u : %*.*u].\n", 2, 2, test_u);
-	// size_ft_printf = ft_printf(KCYN"positif [2.2] -------> [u : %*.*u].\n", 2, 2, test_u);
-	// check_printf(size_ft_printf, size_printf);
-	// size_printf = printf(KGRN"negatif [2.2] -------> [u : %*.*u].\n", 2, 2, test_u);
-	// size_ft_printf = ft_printf(KCYN"negatif [2.2] -------> [u : %*.*u].\n", 2, 2, test_u);
-	// check_printf(size_ft_printf, size_printf);
-	// size_printf = printf(KGRN"positif [-2.2] ------> [u : %-*.*u].\n", 2, 2, test_u);
-	// size_ft_printf = ft_printf(KCYN"positif [-2.2] ------> [u : %-*.*u].\n", 2, 2, test_u);
-	// check_printf(size_ft_printf, size_printf);
-	// size_printf = printf(KGRN"negatif [-2.2] ------> [u : %-*.*u].\n", 2, 2, test_u);
-	// size_ft_printf = ft_printf(KCYN"negatif [-2.2] ------> [u : %-*.*u].\n", 2, 2, test_u);
-	// check_printf(size_ft_printf, size_printf);
-	// size_printf = printf(KGRN"positif [02.2] ------> [u : %0*.*u].\n", 2, 2, test_u);
-	// size_ft_printf = ft_printf(KCYN"positif [02.2] ------> [u : %0*.*u].\n", 2, 2, test_u);
-	// check_printf(size_ft_printf, size_printf);
-	// size_printf = printf(KGRN"negatif [02.2] ------> [u : %0*.*u].\n", 2, 2, test_u);
-	// size_ft_printf = ft_printf(KCYN"negatif [02.2] ------> [u : %0*.*u].\n", 2, 2, test_u);
-	// check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [10.20] -------> [u : %*.*u].\n", 10, 20, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [10.20] -------> [u : %*.*u].\n", 10, 20, test_u);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [-10.20] ------> [u : %-*.*u].\n", 10, 20, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [-10.20] ------> [u : %-*.*u].\n", 10, 20, test_u);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [010.20] ------> [u : %0*.*u].\n", 10, 20, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [010.20] ------> [u : %0*.*u].\n", 10, 20, test_u);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [20.10] -------> [u : %*.*u].\n", 20, 10, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [20.10] -------> [u : %*.*u].\n", 20, 10, test_u);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [-20.10] ------> [u : %-*.*u].\n", 20, 10, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [-20.10] ------> [u : %-*.*u].\n", 20, 10, test_u);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [020.10] ------> [u : %0*.*u].\n", 20, 10, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [020.10] ------> [u : %0*.*u].\n", 20, 10, test_u);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [2.2] -------> [u : %*.*u].\n", 2, 2, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [2.2] -------> [u : %*.*u].\n", 2, 2, test_u);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [-2.2] ------> [u : %-*.*u].\n", 2, 2, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [-2.2] ------> [u : %-*.*u].\n", 2, 2, test_u);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [02.2] ------> [u : %0*.*u].\n", 2, 2, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [02.2] ------> [u : %0*.*u].\n", 2, 2, test_u);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [20.20] -------> [u : %*.*u].\n", 20, 20, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [20.20] -------> [u : %*.*u].\n", 20, 20, test_u);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [-20.20] ------> [u : %-*.*u].\n", 20, 20, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [-20.20] ------> [u : %-*.*u].\n", 20, 20, test_u);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"positif [020.20] ------> [u : %0*.*u].\n", 20, 20, test_u);
+	size_ft_printf = ft_printf(KCYN"positif [020.20] ------> [u : %0*.*u].\n", 20, 20, test_u);
+	check_printf(size_ft_printf, size_printf);
 
-	// size_printf = printf(KGRN"positif [20.20] -------> [u : %*.*u].\n", 20, 20, test_u);
-	// size_ft_printf = ft_printf(KCYN"positif [20.20] -------> [u : %*.*u].\n", 20, 20, test_u);
-	// check_printf(size_ft_printf, size_printf);
-	// size_printf = printf(KGRN"negatif [20.20] -------> [u : %*.*u].\n", 20, 20, test_u);
-	// size_ft_printf = ft_printf(KCYN"negatif [20.20] -------> [u : %*.*u].\n", 20, 20, test_u);
-	// check_printf(size_ft_printf, size_printf);
-	// size_printf = printf(KGRN"positif [-20.20] ------> [u : %-*.*u].\n", 20, 20, test_u);
-	// size_ft_printf = ft_printf(KCYN"positif [-20.20] ------> [u : %-*.*u].\n", 20, 20, test_u);
-	// check_printf(size_ft_printf, size_printf);
-	// size_printf = printf(KGRN"negatif [-20.20] ------> [u : %-*.*u].\n", 20, 20, test_u);
-	// size_ft_printf = ft_printf(KCYN"negatif [-20.20] ------> [u : %-*.*u].\n", 20, 20, test_u);
-	// check_printf(size_ft_printf, size_printf);
-	// size_printf = printf(KGRN"positif [020.20] ------> [u : %0*.*u].\n", 20, 20, test_u);
-	// size_ft_printf = ft_printf(KCYN"positif [020.20] ------> [u : %0*.*u].\n", 20, 20, test_u);
-	// check_printf(size_ft_printf, size_printf);
-	// size_printf = printf(KGRN"negatif [020.20] ------> [u : %0*.*u].\n", 20, 20, test_u);
-	// size_ft_printf = ft_printf(KCYN"negatif [020.20] ------> [u : %0*.*u].\n", 20, 20, test_u);
-	// check_printf(size_ft_printf, size_printf);
+
+/////////////////////////////////////////////////////////////////
+
+
+
+
+	size_printf = printf(KGRN"percent [10] ----------> [percent : %10%].\n");
+	size_ft_printf = ft_printf(KCYN"percent [10] ----------> [percent : %10%].\n");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"percent [-10] ---------> [percent : %-10%].\n");
+	size_ft_printf = ft_printf(KCYN"percent [-10] ---------> [percent : %-10%].\n");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"percent [010] ---------> [percent : %010%].\n");
+	size_ft_printf = ft_printf(KCYN"percent [010] ---------> [percent : %010%].\n");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"percent [2] -----------> [percent : %2%].\n");
+	size_ft_printf = ft_printf(KCYN"percent [2] -----------> [percent : %2%].\n");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"percent [-2] ----------> [percent : %-2%].\n");
+	size_ft_printf = ft_printf(KCYN"percent [-2] ----------> [percent : %-2%].\n");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"percent [02] ----------> [percent : %02%].\n");
+	size_ft_printf = ft_printf(KCYN"percent [02] ---------> [percent : %02%].\n");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"percent [20] ----------> [percent : %20%].\n");
+	size_ft_printf = ft_printf(KCYN"percent [20] ----------> [percent : %20%].\n");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"percent [-20] ---------> [percent : %-20%].\n");
+	size_ft_printf = ft_printf(KCYN"percent [-20] ---------> [percent : %-20%].\n");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"percent [020] ---------> [percent : %020%].\n");
+	size_ft_printf = ft_printf(KCYN"percent [020] ---------> [percent : %020%].\n");
+	check_printf(size_ft_printf, size_printf);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	
 	// write (1, "\n", 1);

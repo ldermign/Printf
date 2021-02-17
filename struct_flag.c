@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:46:59 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/15 21:56:17 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/17 11:42:47 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	string_of_flag_to_int(va_list ap, t_flag_len *flag)
 	i = 0;
 	start = 0;
 	len_int = 0;
-	while (ft_is_digit(flag->str_of_flag[i]))
+	while (flag->str_of_flag[i] && ft_is_digit(flag->str_of_flag[i]))
 	{
 		len_int++;
 		i++;
@@ -92,11 +92,11 @@ void	string_of_flag_to_int(va_list ap, t_flag_len *flag)
 		flag->minus = 1;
 	}
 	i++;
-	if (flag->str_of_flag[i] == '.')
+	if (flag->str_of_flag[i] && flag->str_of_flag[i] == '.')
 	{
 		i++;
 		start = i;
-		while (ft_is_digit(flag->str_of_flag[i]))
+		while (flag->str_of_flag[i] && ft_is_digit(flag->str_of_flag[i]))
 		{
 			len_int++;
 			i++;
