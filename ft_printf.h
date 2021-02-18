@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/17 09:01:45 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/18 11:19:52 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 #define KCYN  "\x1B[0;36m" // CYAN
 #define KWHT  "\x1B[0;37m" // BLANC
 #define KGRE  "\x1b[1;30m" // VERT
+#define CLR_COLOR "\x1b[0m" // CLEAR COLOR
 
 // printf("666666\n");
 # include <libc.h> /////////////////////////////////////////////////////////////
@@ -54,7 +55,6 @@ typedef	struct	s_struct
 	int		precision;
 	int		nbr_width;
 	int		nbr_precision;
-	char	*str_of_flag;
 	char	*str_precision;
 	char	*str_width;
 	char	*final_str_flag;
@@ -111,12 +111,12 @@ char			*ft_itoa_base(size_t nbr, char *base);
 **	Flags
 */
 
-int				which_flag(const char *str, t_flag_len *flag);
+int				which_flag(const char *str, va_list ap, t_flag_len *flag);
 // void			flag_minus(va_list ap, t_flag_len *flag);
 // void			flag_padded_zero(va_list ap, t_flag_len *flag);
 void			flag_precision(t_flag_len *flag);
 void			flag_width(t_flag_len *flag);
-void	string_of_flag_to_int(va_list ap, t_flag_len *flag);
+void			string_of_flag_to_int(char *str, va_list ap, t_flag_len *flag);
 
 /*
 **	Conversion

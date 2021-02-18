@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/17 11:50:04 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/18 15:18:06 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void    conv_c(va_list ap, t_flag_len *flag)
 {
     const int cara = va_arg(ap, int);
 	
-	if (flag->nbr_width < 1) 
+	if (flag->nbr_width < 1)
 		ft_putchar(cara, flag);
 	else
 	{
@@ -95,25 +95,34 @@ void    conv_u(va_list ap, t_flag_len *flag)
 	}
 }
 
-void	conv_x_X(char c, va_list ap, t_flag_len *len)
+void	conv_x_X(char c, va_list ap, t_flag_len *flag)
 {
 	unsigned int	arg_unsdint;
+	int				size_temp;
 	char			*base;
-	// char			*temp;
+	char			*temp;
 	
 	arg_unsdint = va_arg(ap, unsigned int);
 	if (c == 'x')
 		base = "0123456789abcdef";
 	if (c == 'X')
 		base = "0123456789ABCDEF";
-	ft_putnbr_base_printf(arg_unsdint, base, len);
+	temp = ft_itoa_base(arg_unsdint, base);
+	size_temp = ft_strlen(temp);
+	if ((size_temp >= flag->nbr_precision) && (size_temp >= flag->nbr_width))
+		ft_putstr(temp, flag);
+	else
+	{
+		fusion_conv_strflag(temp, arg_unsdint, flag);
+		ft_putstr(flag->final_str_flag, flag);
+	}
 }
 
 void    conv_per(t_flag_len *flag)
 {
 	const int	charac = '%';
 
-	if (flag->size_final_str_flag < ft_strlen("%"))
+	if ((1 >= flag->nbr_precision) && (1 >= flag->nbr_width))
 		ft_putstr("%", flag);
 	else
 	{

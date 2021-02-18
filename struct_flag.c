@@ -6,21 +6,20 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:46:59 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/17 11:42:47 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/18 15:00:14 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 void	ft_init_struct_flag(t_flag_len *flag)
-{
+{ // eventuellement faire bzero pour faire plaisir a benji 
 	flag->minus = 0;
 	flag->padded_zero = 0;
 	flag->width = -1;
 	flag->precision = -1;
 	flag->nbr_width = 0;
 	flag->nbr_precision = 0;
-	flag->str_of_flag = NULL;
 	flag->str_precision = NULL;
 	flag->str_width = NULL;
 	flag->final_str_flag = NULL;
@@ -34,108 +33,125 @@ void	ft_init_struct_flag(t_flag_len *flag)
 	flag->conv_per = 0;
 }
 
-char	*create_string_of_width_and_precision(char *str)
-{
-	int		i;
-	int		start;
-	int		len_flag;
-	char	*str_of_flag;
+// char	*create_string_of_width_and_precision(char *str)
+// {
+// 	int		i;
+// 	int		start;
+// 	int		len_flag;
+// 	char	*str_of_flag;
 
-	i = 0;
-	start = 0;
-	len_flag = 0;
-	if (str[i] == '0' || str[i] == '-')
+// 	i = 0;
+// 	start = 0;
+// 	len_flag = 0;
+// 	if (str[i] == '0' || str[i] == '-')
+// 	{
+// 		i++;
+// 		start++;
+// 	}
+// 	while (ft_is_flag(str[i]))
+// 	{
+// 		i++;
+// 		len_flag++;
+// 	}
+// 	if ((str_of_flag = ft_calloc((len_flag + 1), sizeof(char))) == NULL)
+// 		return (NULL);
+// 	i = start;
+// 	str_of_flag = ft_strncat(str_of_flag, &str[i], len_flag);
+// 	return (str_of_flag);
+// }
+
+int		ft_nblen(long n)
+{
+	int len_int;
+
+	len_int = 1;
+	if (n < 0)
 	{
-		i++;
-		start++;
+		n = -n;
+		len_int++;
 	}
-	while (ft_is_flag(str[i]))
+	while (n >= 10)
 	{
-		i++;
-		len_flag++;
+		n /= 10;
+		len_int++;
 	}
-	if ((str_of_flag = ft_calloc((len_flag + 1), sizeof(char))) == NULL)
-		return (NULL);
-	i = start;
-	str_of_flag = ft_strncat(str_of_flag, &str[i], len_flag);
-	return (str_of_flag);
+	return (len_int);
 }
 
-void	string_of_flag_to_int(va_list ap, t_flag_len *flag)
+
+void	string_of_flag_to_int(char *str, va_list ap, t_flag_len *flag)
 {
 	int		i;
-	int		start;
-	int		len_int;
-	char	*temp;
 
 	i = 0;
-	start = 0;
-	len_int = 0;
-	while (flag->str_of_flag[i] && ft_is_digit(flag->str_of_flag[i]))
+	if (str[i] == '-' || str[i] == '0')
+		i++;
+	if (str[i] && str[i] == '*')
 	{
-		len_int++;
+		flag->nbr_width = va_arg(ap, int);
+		// printf("flag->nbr_width = {%d}\n", flag->nbr_width);
+		// printf("str[i] = {%c}\n", str[i]);
 		i++;
 	}
-	if (len_int > 0)
+	else
 	{
-		if ((temp = ft_calloc(len_int + 1, sizeof(char))) == NULL)
-			return ;
-		ft_strcat(temp, &flag->str_of_flag[start]);
-		flag->nbr_width = ft_atoi_printf(temp);
-		free(temp);
+		flag->nbr_width = ft_atoi_printf(&str[i]);
+		i += ft_nblen(flag->nbr_width) + 1;
 	}
-	if (flag->str_of_flag[i] == '*')
-		flag->nbr_width = va_arg(ap, int);
 	if (flag->nbr_width < 0)
 	{
 		flag->nbr_width *= -1;
 		flag->minus = 1;
 	}
-	i++;
-	if (flag->str_of_flag[i] && flag->str_of_flag[i] == '.')
-	{
+	if (str[i] && str[i] == '.')
 		i++;
-		start = i;
-		while (flag->str_of_flag[i] && ft_is_digit(flag->str_of_flag[i]))
-		{
-			len_int++;
-			i++;
-		}
-		if (len_int > 0)
-		{
-			if ((temp = ft_calloc(len_int + 1, sizeof(char))) == NULL)
-				return ;
-			ft_strcat(temp, &flag->str_of_flag[start]);
-			flag->nbr_precision = ft_atoi_printf(temp);
-			free(temp);
-		}
-		if (flag->str_of_flag[i] == '*')
-			flag->nbr_precision = va_arg(ap, int);
-	}
+	if (str[i] == '*' && ++i)
+		flag->nbr_precision = va_arg(ap, int);
+	else
+		flag->nbr_precision = ft_atoi_printf(&str[i]);
+	if (flag->nbr_precision < 0)
+		flag->nbr_precision *= -1;
+	// printf("flag->nbr_width = {%d}\n", flag->nbr_width);
+	// printf(KYEL"%s:%d:"CLR_COLOR" DEBUG\n", __func__, __LINE__);
 }
 
-int		which_flag(const char *str, t_flag_len *flag)
+int		which_flag(const char *str, va_list ap, t_flag_len *flag)
 {
-	int avancement;
+	int i;
 
-	avancement = 0;
+	i = 0;
 	ft_init_struct_flag(flag);
-	flag->str_of_flag = create_string_of_width_and_precision((char*)str);
-	if (*str == '-' && ++str)
-		flag->minus = 1;
-	else if (*str == '0' && flag->minus == 0 && ++str)
-		flag->padded_zero = 1;
-	if (flag->minus == 1 || flag->padded_zero == 1)
-		avancement++;
-	while (ft_is_flag(*str) && str++)
+	string_of_flag_to_int((char*)str, ap, flag);
+	if (str[i] == '-')
 	{
-		if (*str == '*' || ft_is_digit(*str))
-			flag->width = 1;
-		while ((*str == '*' || ft_is_digit(*str)) && str++)
-			avancement++;
-		if (*str == '.' && (ft_is_digit(*(str + 1)) || *(str + 1) == '*'))
-			flag->precision = 1;
-		++avancement;
+		flag->minus = 1;
+		i++;
 	}
-	return (avancement);
+	if (str[i] == '0' && flag->minus == 0)
+	{
+		flag->padded_zero = 1;
+		i++;
+	}
+	if (str[i] == '*' || ft_is_digit(str[i]))
+	{
+		flag->width = 1;
+		i++;
+		while (str[i] && ft_is_digit(str[i]))
+			i++;
+	}
+	if (str[i] == '.' && (ft_is_digit(str[i + 1]) || str[i + 1] == '*'))
+	{
+		flag->precision = 1;
+		i++;
+	}
+	if (str[i] == '.')
+		i++;
+	if (str[i] == '*' || ft_is_digit(str[i]))
+	{
+		i++;
+		while (str[i] && ft_is_digit(str[i]))
+			i++;
+	}
+	// printf(KYEL"%s:%d:"CLR_COLOR" DEBUG\n", __func__, __LINE__);
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 11:55:16 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/14 14:38:14 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/18 14:05:36 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 void    printf_structure(t_flag_len *flag)
 {
-    printf("\n---------------------------\n");
+    printf("\n-------------------------------------\n");
     printf("minus = {%d}\n", flag->minus);
     printf("padded_zero = {%d}\n", flag->padded_zero);
     printf("width = {%d}\n", flag->width);
     printf("precision = {%d}\n", flag->precision);
     printf("nbr_width = {%d}\n", flag->nbr_width);
     printf("nbr_precision = {%d}\n", flag->nbr_precision);
-    printf("str_of_flag = {%s}\n", flag->str_of_flag);
     printf("str_precision = {%s}\n", flag->str_precision);
     printf("str_width = {%s}\n", flag->str_width);
     printf("final_str_flag = {%s}\n", flag->final_str_flag);
@@ -33,7 +32,7 @@ void    printf_structure(t_flag_len *flag)
     printf("conv_u = {%d}\n", flag->conv_u);
     printf("conv_x = {%d}\n", flag->conv_x);
     printf("conv_per = {%d}\n", flag->conv_per);
-    printf("---------------------------\n");
+    printf("-------------------------------------\n");
 }
 
 void    ft_printf_monuq(t_flag_len ntm)

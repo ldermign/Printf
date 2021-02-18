@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 23:48:27 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/17 11:29:59 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/18 15:22:49 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void        ft_nbr_inf_zero(int place_space, int place_zero, t_flag_len *flag)
 {
-    if (flag->padded_zero == 1 && flag->width == -1)
+    if (flag->padded_zero == 1 && flag->precision == -1)
         flag->final_str_flag[0] = '-';
     if (flag->nbr_precision >= flag->nbr_width)
         ft_putchar('-', flag);
@@ -25,7 +25,8 @@ void        ft_nbr_inf_zero(int place_space, int place_zero, t_flag_len *flag)
         else if (flag->minus == 1 && flag->width == 1)
         {
             flag->final_str_flag[0] = '-';
-            flag->final_str_flag[place_zero] = '0';
+            if (place_zero != (int)flag->size_final_str_flag)
+                flag->final_str_flag[place_zero] = '0';
         }
     }
 }
@@ -52,11 +53,14 @@ void    fusion_c(int nbr, t_flag_len *flag)
 {
     if (!(flag->final_str_flag = ft_calloc(flag->nbr_width + 1, sizeof(char))))
         return ;
-    ft_fill_with_c(flag->final_str_flag, ' ', flag->nbr_width + 1);
+    if (flag->conv_per == 1 && flag->padded_zero == 1)
+        ft_fill_with_c(flag->final_str_flag, '0', flag->nbr_width + 1);
+    else
+        ft_fill_with_c(flag->final_str_flag, ' ', flag->nbr_width + 1);
     if (flag->minus == 1)
         flag->final_str_flag[0] = nbr;
     else
-    flag->final_str_flag[flag->nbr_width - 1] = nbr;
+        flag->final_str_flag[flag->nbr_width - 1] = nbr;
 }
 
 void    fusion_s(char *str, int max, int len, t_flag_len *flag)
@@ -99,7 +103,7 @@ void    fusion_d_i_u(char *str, int nbr, t_flag_len *flag)
     size_nbr = ft_strlen(str);
     join_str_width_and_precision(flag);
     place_zero = check_where_zero_or_space(flag, '0');
-    place_space = check_where_zero_or_space(flag, '.');
+    place_space = check_where_zero_or_space(flag, ' ');
     if (nbr == 0 && flag->nbr_precision != 0)
         str[0] = ' ';
     if (nbr < 0)
@@ -108,14 +112,14 @@ void    fusion_d_i_u(char *str, int nbr, t_flag_len *flag)
         place_zero++;
     if (flag->minus == 1 && size_nbr && flag->precision == -1)
         place_zero = size_nbr;
-    while (size_nbr >= 0 && place_zero >= 0)
+    while (size_nbr >= 0 && place_zero >= 0 && size_nbr-- && place_zero--)
     {
-        if (str[size_nbr] == '-' && flag->final_str_flag[place_zero] == '.')
+        if (str[size_nbr] != '\0' && (ft_is_digit(str[size_nbr])
+        || (str[size_nbr] >= 'a' && str[size_nbr] <= 'z')
+        || (str[size_nbr] >= 'A' && str[size_nbr] <= 'Z')))
             flag->final_str_flag[place_zero] = str[size_nbr];
-        if (str[size_nbr] != '\0' && ft_is_digit(str[size_nbr]))
+        if (str[size_nbr] == '-' && flag->final_str_flag[place_zero] == ' ')
             flag->final_str_flag[place_zero] = str[size_nbr];
-        size_nbr--;
-        place_zero--;
     }
 }
 
@@ -131,8 +135,8 @@ void    fusion_conv_strflag(char *str, int nbr, t_flag_len *flag)
 		fusion_d_i_u(str, nbr, flag);
 	else if (flag->conv_u == 1)
 	 	fusion_d_i_u(str, nbr, flag);
-	// else if (flag->conv_x == 1)
-	// 	fusion_x(str, nbr, flag);
+	else if (flag->conv_x == 1)
+		fusion_d_i_u(str, nbr, flag);
 	else if (flag->conv_per == 1)
 		fusion_c(nbr, flag);
 }

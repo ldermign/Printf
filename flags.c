@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:57:13 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/17 11:46:51 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/18 15:22:34 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ void    flag_width(t_flag_len *flag)
     {
         if (!(flag->str_width = ft_calloc(width + 1, sizeof(char))))
             return ;
-        ft_fill_with_c(flag->str_width, '.', width + 1);
+        ft_fill_with_c(flag->str_width, ' ', width + 1);
     }
 }
