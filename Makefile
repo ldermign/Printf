@@ -3,33 +3,44 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ldermign <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/04 09:47:47 by ldermign          #+#    #+#              #
-#    Updated: 2021/01/05 10:23:22 by ldermign         ###   ########.fr        #
+#    Updated: 2021/02/19 08:33:01 by ldermign         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	ft_printf.a
+NAME		=	libftprintf.a
 
-SRCS_PRINTF	=	// sources .
+SRCS		=	check.c conv1.c flags.c ft_printf_utils.c ft_printf.c \
+				join_width_precision.c struct_flag.c fusion.c
 
-SRCS_LIBFT	=	./libft
-
-SRCS_CONV	=	./conversion
+OBJS		=	${SRCS:.c=.o}
 
 CC			=	clang
 
 CFLAGS		=	-Wall -Wextra -Werror
 
-${NAME}
+LIBC		=	ar rc
+
+LIBR		=	ranlib
+
+RM			=	rm -f
+
+.c.o:
+			${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I ${INCS}
+
+$(NAME):	${OBJS} ./ft_printf.h
+			${LIBC} ${NAME} ${OBJS}
+			${LIBR}	${NAME}
 
 all:		${NAME}
 
-clean:		rm -rf ${}
+clean:
+			${RM} ${OBJS}
 
 fclean:		clean
-			rm -rf ${NAME}
+			${RM} ${NAME}
 
 re:			fclean all
 

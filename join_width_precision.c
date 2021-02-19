@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 09:36:41 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/18 14:55:50 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/19 11:46:48 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	precision_sup_or_equal_width(t_flag_len *flag)
 
 	i = 0;
 	size = flag->nbr_precision;
-	while ((i < size))
+	while (i < size)
 	{
 		flag->final_str_flag[i] = flag->str_precision[i];
 		i++;

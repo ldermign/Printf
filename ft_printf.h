@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/18 11:19:52 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/19 09:06:15 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <string.h>
-
+# include <stdarg.h>
 
 /*
 **	TEJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
@@ -35,10 +34,6 @@
 
 // printf("666666\n");
 # include <libc.h> /////////////////////////////////////////////////////////////
-
-
-#define ERR(FILE, FUNC, LINE) printf(KYEL"%s:%s:%d\033[0m", FILE, FUNC, LINE)
-
 
 int				ft_printf(const char *str, ...);
 
@@ -100,8 +95,6 @@ void			*ft_memmove(char *dst, char *src, size_t n);
 void			*fill_from_end(char *dst, char *src, size_t n);
 int				ft_atoi(char *str);
 void			ft_fill_with_c(char *str, char c, int size);
-void			join_str_width_and_precision(t_flag_len *flag);
-void   			fusion_conv_strflag(char *str, int nbr, t_flag_len *flag);
 void			flip_zero_and_space(t_flag_len *flag);
 void			*ft_calloc(size_t nmemb, size_t size);
 char			*ft_itoa_base(size_t nbr, char *base);
@@ -111,17 +104,16 @@ char			*ft_itoa_base(size_t nbr, char *base);
 **	Flags
 */
 
+void			string_of_flag_to_int(char *str, va_list ap, t_flag_len *flag);
 int				which_flag(const char *str, va_list ap, t_flag_len *flag);
-// void			flag_minus(va_list ap, t_flag_len *flag);
-// void			flag_padded_zero(va_list ap, t_flag_len *flag);
 void			flag_precision(t_flag_len *flag);
 void			flag_width(t_flag_len *flag);
-void			string_of_flag_to_int(char *str, va_list ap, t_flag_len *flag);
 
 /*
 **	Conversion
 */
 
+void			join_str_width_and_precision(t_flag_len *flag);
 int				which_conv(const char *str, va_list ap, t_flag_len *flag);
 void			conv_d_i(va_list ap, t_flag_len *flag);
 void			conv_s(va_list ap, t_flag_len *flag);
@@ -130,13 +122,19 @@ void			conv_u(va_list ap, t_flag_len *flag);
 void			conv_per(t_flag_len *flag);
 void			conv_x_X(char c, va_list ap, t_flag_len *len);
 void			conv_p(va_list ap, t_flag_len *flag);
+void   			fusion_conv_strflag(char *str, int nbr, t_flag_len *flag);
 
 
 
 
 
 
-void 		printf_structure(t_flag_len *flag);
+
+void    printf_structure(t_flag_len *flag);
+
+
+
+
 
 
 
