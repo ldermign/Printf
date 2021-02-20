@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 09:36:41 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/19 11:46:48 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/20 12:26:34 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,9 @@ void	join_str_width_and_precision(t_flag_len *flag)
 		precision_sup_or_equal_width(flag);
 	else if (flag->nbr_precision < flag->nbr_width)
 		width_sup(flag);
-	if (flag->padded_zero == 1 && flag->precision == -1)
+	if (flag->padded_zero == 1 && flag->precision == -1 && flag->minus == 1)
+		ft_fill_with_c(flag->final_str_flag, ' ', size + 1);
+	if (flag->padded_zero == 1 && flag->precision == -1 && flag->minus == 0)
 		ft_fill_with_c(flag->final_str_flag, '0', size + 1);
 	flag->size_final_str_flag = ft_strlen(flag->final_str_flag);
 	if (flag->minus == 1)

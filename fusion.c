@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 23:48:27 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/19 10:47:21 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/20 15:35:06 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,24 +70,24 @@ void    fusion_s(char *str, int max, int len, t_flag_len *flag)
 
     i = 0;
     start = max - len;
-    if ((flag->final_str_flag = ft_calloc(max + 1, sizeof(char))) == NULL)
-        return ;
+    if (!(flag->final_str_flag = ft_calloc(max + 1, sizeof(char))))
+            return ;
     ft_fill_with_c(flag->final_str_flag, ' ', max + 1);
-    if (flag->minus == 1)
+    if (flag->minus == 0)
+    {
+        while (str[i] && flag->final_str_flag[start] && start < max)
+        {
+            flag->final_str_flag[start] = str[i];
+            i++;
+            start++;
+        }
+    }
+    else
     {
         while (i < len && str[i] && flag->final_str_flag[i])
         {
             flag->final_str_flag[i] = str[i];
             i++;
-        }
-    }
-    else 
-    {
-        while (start < max && str[i] && flag->final_str_flag[start])
-        {
-            flag->final_str_flag[start] = str[i];
-            i++;
-            start++;
         }
     }
 }
@@ -125,18 +125,26 @@ void    fusion_d_i_u(char *str, int nbr, t_flag_len *flag)
 
 void    fusion_conv_strflag(char *str, int nbr, t_flag_len *flag)
 {
-    if (flag->conv_c == 1 && flag->padded_zero == 0 && flag->precision == -1)
+    int min;
+    int max;
+
+    if (flag->nbr_precision >= flag->nbr_width)
+    {
+        max = flag->nbr_precision;
+        min = flag->nbr_width;
+    }
+    else
+    {
+        max = flag->nbr_width;
+        min = flag->nbr_precision;
+    }
+    if ((flag->conv_c == 1 && flag->padded_zero == 0 && flag->precision == -1)
+    || flag->conv_per == 1)
 		fusion_c(nbr, flag);
 	else if (flag->conv_s == 1 && flag->padded_zero == 0)
-		fusion_s(str, flag->nbr_width, flag->nbr_precision, flag);
+		fusion_s(str, max, min, flag);
 	else if (flag->conv_p == 1)
-	 	fusion_s(str, flag->nbr_width, nbr, flag);
-	else if (flag->conv_d_i == 1)
+	 	fusion_s(str, flag->nbr_width, ft_strlen(str), flag);
+	else if (flag->conv_d_i == 1 || flag->conv_u == 1 || flag->conv_x == 1)
 		fusion_d_i_u(str, nbr, flag);
-	else if (flag->conv_u == 1)
-	 	fusion_d_i_u(str, nbr, flag);
-	else if (flag->conv_x == 1)
-		fusion_d_i_u(str, nbr, flag);
-	else if (flag->conv_per == 1)
-		fusion_c(nbr, flag);
 }

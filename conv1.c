@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/18 15:18:06 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/20 15:37:41 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,16 @@ void    conv_c(va_list ap, t_flag_len *flag)
 void    conv_s(va_list ap, t_flag_len *flag)
 {
     char	*arg_char;
+	int		size_arg;
 
     arg_char = va_arg(ap, char *);
-	if (flag->nbr_precision > (int)ft_strlen(arg_char))
+	size_arg = (int)ft_strlen(arg_char);
+	if (arg_char == NULL || arg_char == 0)
+		arg_char = "(null)";
+	if (flag->nbr_precision <= 0)
+        return ;
+	if (ft_no_flag(flag)
+	|| ((flag->nbr_precision > size_arg) && (flag->nbr_width < size_arg)))
     	ft_putstr(arg_char, flag);
 	else
 	{
@@ -50,7 +57,7 @@ void    conv_p(va_list ap, t_flag_len *flag)
 	arg_unsdint = (unsigned long)(adresse_ptr);
 	str_adresse = ft_itoa_base(arg_unsdint, "0123456789abcdef");
 	temp = ft_strjoin("0x", str_adresse);
-	if (flag->nbr_width < (int)ft_strlen(temp))
+	if (ft_no_flag(flag) || flag->nbr_width < (int)ft_strlen(temp))
     	ft_putstr(temp, flag);
 	else
 	{
@@ -84,7 +91,7 @@ void    conv_u(va_list ap, t_flag_len *flag)
 	char			*temp;
 
     arg_unsdint = va_arg(ap, unsigned int);
-	temp = ft_itoa(arg_unsdint);
+	temp = ft_itoa_unsd(arg_unsdint);
 	size_temp = ft_strlen(temp);
 	if ((size_temp >= flag->nbr_precision) && (size_temp >= flag->nbr_width))
 		ft_putstr(temp, flag);

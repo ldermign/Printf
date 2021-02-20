@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/16 10:00:07 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/20 11:05:44 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,6 @@ void	*fill_from_end(char *dst, char *src, size_t n)
 	}
 	return (dst);
 }
-
-
 
 void	ft_putnbr_base_printf(long nbr, char *base, t_flag_len *len)
 {
@@ -359,6 +357,27 @@ char	*ft_itoa(int n)
 	char	*dst;
 	long	nb;
 	int		len;
+
+	nb = n;
+	len = ft_len_int(nb) + (nb < 0);
+	if ((dst = (char*)malloc(sizeof(char) * len + 1 + (n < 0))) == NULL)
+		return (NULL);
+	if (nb < 0 && (nb = -nb))
+		*dst = '-';
+	dst[len--] = '\0';
+	while (len >= (n < 0))
+	{
+		dst[len--] = (nb % 10) + '0';
+		nb /= 10;
+	}
+	return (dst);
+}
+
+char	*ft_itoa_unsd(unsigned int n)
+{
+	char			*dst;
+	int				len;
+	unsigned int	nb;
 
 	nb = n;
 	len = ft_len_int(nb) + (nb < 0);

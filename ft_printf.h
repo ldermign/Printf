@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/19 09:06:15 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/20 11:05:59 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int				ft_is_digit(char c);
 int				ft_is_conv(char c);
 int				ft_is_width(char c); //largeur
 int				ft_is_all(char c);
+int				ft_no_flag(t_flag_len *flag);
 
 /*
 **	Utils
@@ -98,6 +99,7 @@ void			ft_fill_with_c(char *str, char c, int size);
 void			flip_zero_and_space(t_flag_len *flag);
 void			*ft_calloc(size_t nmemb, size_t size);
 char			*ft_itoa_base(size_t nbr, char *base);
+char			*ft_itoa_unsd(unsigned int n);
 
 
 /*
@@ -114,7 +116,6 @@ void			flag_width(t_flag_len *flag);
 */
 
 void			join_str_width_and_precision(t_flag_len *flag);
-int				which_conv(const char *str, va_list ap, t_flag_len *flag);
 void			conv_d_i(va_list ap, t_flag_len *flag);
 void			conv_s(va_list ap, t_flag_len *flag);
 void			conv_c(va_list ap, t_flag_len *flag);
