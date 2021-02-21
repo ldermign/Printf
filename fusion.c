@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 23:48:27 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/20 15:35:06 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/21 22:24:46 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ void    fusion_s(char *str, int max, int len, t_flag_len *flag)
 
     i = 0;
     start = max - len;
+    if (flag->nbr_width <= flag->nbr_precision)
+    {
+        start = 0;
+        len = flag->nbr_precision;
+    }
     if (!(flag->final_str_flag = ft_calloc(max + 1, sizeof(char))))
             return ;
     ft_fill_with_c(flag->final_str_flag, ' ', max + 1);

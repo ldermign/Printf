@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/20 15:37:41 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/21 22:26:05 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,11 @@ void    conv_s(va_list ap, t_flag_len *flag)
     arg_char = va_arg(ap, char *);
 	size_arg = (int)ft_strlen(arg_char);
 	if (arg_char == NULL || arg_char == 0)
+	{
 		arg_char = "(null)";
+		ft_putstr(arg_char, flag);
+		return ;
+	}
 	if (flag->nbr_precision <= 0)
         return ;
 	if (ft_no_flag(flag)

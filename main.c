@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 10:07:46 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/20 15:23:34 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/21 22:07:03 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int main()
 	// size_ft_printf = ft_printf(KCYN"c [-10] ------> [%-*c].\n", 10, test_c);
 	// check_printf(size_ft_printf, size_printf);
 
-	size_printf = printf(KGRN"s [30.11] -------> [%*.*s].\n", 30, 11, test_s);
-	size_ft_printf = ft_printf(KCYN"s [30.11] -------> [%*.*s].\n", 30, 11, test_s);
+	size_printf = printf(KGRN"s [.-1] -------> [%.*s].\n", -1, NULL);
+	size_ft_printf = ft_printf(KCYN"s [.-1] -------> [%.*s].\n", -1, NULL);
 	check_printf(size_ft_printf, size_printf);
 	size_printf = printf(KGRN"s [-30.11] ------> [%-*.*s].\n", 30, 11, test_s);
 	size_ft_printf = ft_printf(KCYN"s [-30.11] ------> [%-*.*s].\n", 30, 11, test_s);
@@ -57,6 +57,9 @@ int main()
 	check_printf(size_ft_printf, size_printf);
 	size_printf = printf(KGRN"s [.11] -------> [%.*s].\n", 11, test_s);
 	size_ft_printf = ft_printf(KCYN"s [.11] -------> [%.*s].\n", 11, test_s);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"s [1.11] -------> [%1.*s].\n", 11, test_s);
+	size_ft_printf = ft_printf(KCYN"s [1.11] -------> [%1.*s].\n", 11, test_s);
 	check_printf(size_ft_printf, size_printf);
 	size_printf = printf(KGRN"s [-.11] ------> [%-.*s].\n", 11, test_s);
 	size_ft_printf = ft_printf(KCYN"s [-.11] ------> [%-.*s].\n", 11, test_s);

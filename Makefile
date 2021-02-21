@@ -6,7 +6,7 @@
 #    By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/04 09:47:47 by ldermign          #+#    #+#              #
-#    Updated: 2021/02/19 08:33:01 by ldermign         ###   ########.fr        #
+#    Updated: 2021/02/21 21:58:03 by ldermign         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ LIBR		=	ranlib
 RM			=	rm -f
 
 .c.o:
-			${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I ${INCS}
+			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 $(NAME):	${OBJS} ./ft_printf.h
 			${LIBC} ${NAME} ${OBJS}
