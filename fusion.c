@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 23:48:27 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/21 22:24:46 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/22 13:47:58 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,37 @@ void    fusion_c(int nbr, t_flag_len *flag)
         flag->final_str_flag[flag->nbr_width - 1] = nbr;
 }
 
+void    fusion_d_i_u(char *str, int nbr, t_flag_len *flag)
+{
+    int     i;
+    int     size_nbr;
+    int     place_zero;
+    int     place_space;
+
+    i = 0;
+    size_nbr = ft_strlen(str);
+    join_str_width_and_precision(flag);
+    place_zero = check_where_zero_or_space(flag, '0');
+    place_space = check_where_zero_or_space(flag, ' ');
+    if (nbr == 0 && flag->nbr_precision != 0)
+        str[0] = ' ';
+    if (nbr < 0)
+        ft_nbr_inf_zero(place_space, place_zero, flag);
+    if (nbr < 0 && flag-> minus == 1 && flag->nbr_precision < flag->nbr_width)
+        place_zero++;
+    if (flag->minus == 1 && size_nbr && flag->precision == -1)
+        place_zero = size_nbr;
+    while (size_nbr >= 0 && place_zero >= 0 && size_nbr-- && place_zero--)
+    {
+        if (str[size_nbr] != '\0' && (ft_is_digit(str[size_nbr])
+        || (str[size_nbr] >= 'a' && str[size_nbr] <= 'z')
+        || (str[size_nbr] >= 'A' && str[size_nbr] <= 'Z')))
+            flag->final_str_flag[place_zero] = str[size_nbr];
+        if (str[size_nbr] == '-' && flag->final_str_flag[place_zero] == ' ')
+            flag->final_str_flag[place_zero] = str[size_nbr];
+    }
+}
+
 void    fusion_s(char *str, int max, int len, t_flag_len *flag)
 {
     int i;
@@ -97,57 +128,145 @@ void    fusion_s(char *str, int max, int len, t_flag_len *flag)
     }
 }
 
-void    fusion_d_i_u(char *str, int nbr, t_flag_len *flag)
+void    ft_final_size(int width, int prec, int len_str, t_flag_len *flag)
 {
-    int     i;
-    int     size_nbr;
-    int     place_zero;
-    int     place_space;
-
-    i = 0;
-    size_nbr = ft_strlen(str);
-    join_str_width_and_precision(flag);
-    place_zero = check_where_zero_or_space(flag, '0');
-    place_space = check_where_zero_or_space(flag, ' ');
-    if (nbr == 0 && flag->nbr_precision != 0)
-        str[0] = ' ';
-    if (nbr < 0)
-        ft_nbr_inf_zero(place_space, place_zero, flag);
-    if (nbr < 0 && flag-> minus == 1 && flag->nbr_precision < flag->nbr_width)
-        place_zero++;
-    if (flag->minus == 1 && size_nbr && flag->precision == -1)
-        place_zero = size_nbr;
-    while (size_nbr >= 0 && place_zero >= 0 && size_nbr-- && place_zero--)
+    if (len_str <= width && flag->precision == -1)
+        flag->size_final_str_flag = width;
+    else if ((len_str >= width && flag->precision == -1)
+    || (len_str <= prec && flag->width == -1))
+        flag->size_final_str_flag = len_str;
+    else if (len_str > prec && flag->width == -1)
+        flag->size_final_str_flag = prec;
+    if (flag->precision == 1 && flag->width == 1)
     {
-        if (str[size_nbr] != '\0' && (ft_is_digit(str[size_nbr])
-        || (str[size_nbr] >= 'a' && str[size_nbr] <= 'z')
-        || (str[size_nbr] >= 'A' && str[size_nbr] <= 'Z')))
-            flag->final_str_flag[place_zero] = str[size_nbr];
-        if (str[size_nbr] == '-' && flag->final_str_flag[place_zero] == ' ')
-            flag->final_str_flag[place_zero] = str[size_nbr];
+        if (width >= prec)
+            flag->size_final_str_flag = width;
+        if (prec > width)
+        {
+            if (prec >= len_str)
+                flag->size_final_str_flag = len_str;
+            if (prec < len_str)
+                flag->size_final_str_flag = prec;
+        }
     }
 }
 
-void    fusion_conv_strflag(char *str, int nbr, t_flag_len *flag)
+void    ft_alloc_size(int width, int prec, int len_str, t_flag_len *flag)
 {
-    int min;
-    int max;
-
-    if (flag->nbr_precision >= flag->nbr_width)
+    if (len_str <= width && flag->precision == -1)
     {
-        max = flag->nbr_precision;
-        min = flag->nbr_width;
+        if (!(flag->final_str_flag = ft_calloc(width + 1, sizeof(char))))
+            return ;
+    }
+    else if ((len_str >= width && flag->precision == -1)
+    || (len_str <= prec && flag->width == -1))
+    {
+        if (!(flag->final_str_flag = ft_calloc(len_str + 1, sizeof(char))))
+            return ;
+    }
+    else if (len_str > prec && flag->width == -1)
+    {
+        if (!(flag->final_str_flag = ft_calloc(prec + 1, sizeof(char))))
+            return ;
+    }
+    if (flag->precision == 1 && flag->width == 1)
+    {
+        if (width >= prec)
+            if (!(flag->final_str_flag = ft_calloc(width + 1, sizeof(char))))
+                return ;
+        if (prec > width)
+        {
+            if (prec >= len_str)
+            {
+                if (!(flag->final_str_flag = ft_calloc(len_str + 1, sizeof(char))))
+                    return ;
+            }
+            else if (prec < len_str)
+            {
+                if (!(flag->final_str_flag = ft_calloc(prec + 1, sizeof(char))))
+                    return ;
+            }
+        }
+    }
+    ft_final_size(width, prec, len_str, flag);
+    ft_fill_with_c(flag->final_str_flag, ' ', flag->size_final_str_flag + 1);
+    // printf("size = {%zu}\n", flag->size_final_str_flag);
+}
+
+int     which_is_smaller(int width, int prec, int len_str)
+{
+    // printf("width = {%d}, prec = {%d}, len_str = {%d}\n", width, prec, len_str);
+    if (width <= prec && width <= len_str && width != 0)
+        return (width);
+    else if (prec <= width && prec <= len_str && prec != 0)
+        return(prec);
+    return (len_str);
+}
+
+int    where_to_begin(int width, int prec, int len_str, t_flag_len *flag)
+{
+    int start;
+    int min;
+    
+    start = 0;
+    min = which_is_smaller(width, prec, len_str);
+    // printf("min = {%d}\n", min);
+    if (flag->width == 1 && flag->precision == -1)
+        start = flag->size_final_str_flag - min;
+    else if (width > len_str && flag->precision == -1)
+        start = flag->size_final_str_flag - min;
+    else if (flag->width == 1 && flag->precision == 1)
+    {
+        if (width > prec)
+            start = flag->size_final_str_flag - min;
+        else
+            start = 0;
+    }
+    return (start);
+}
+
+void    fusion_s1(char *str, int width, int prec, int len_str, t_flag_len *flag)
+{
+    int i;
+    int start;
+    int last;
+    
+    i = 0;
+    ft_alloc_size(width, prec, len_str, flag);
+    start = where_to_begin(width, prec, len_str, flag);
+    last = where_to_begin(width, prec, len_str, flag);
+    if (flag->minus == 1)
+    {
+        start = 0;
+        while (start <= last && str[start] && flag->final_str_flag[start])
+        {
+            flag->final_str_flag[start] = str[start];
+            start++;
+        }
     }
     else
     {
-        max = flag->nbr_width;
-        min = flag->nbr_precision;
+        last = flag->size_final_str_flag;
+        while (str[i] && flag->final_str_flag[start] && start <= last)
+        {
+            flag->final_str_flag[start] = str[i];
+            i++;
+            start++;
+        }
     }
+}
+
+
+void    fusion_conv_strflag(char *str, int nbr, t_flag_len *flag)
+{
+    int len_str;
+
+    len_str = ft_strlen(str);
     if ((flag->conv_c == 1 && flag->padded_zero == 0 && flag->precision == -1)
     || flag->conv_per == 1)
 		fusion_c(nbr, flag);
 	else if (flag->conv_s == 1 && flag->padded_zero == 0)
-		fusion_s(str, max, min, flag);
+		fusion_s1(str, flag->nbr_width, flag->nbr_precision, len_str, flag);
 	else if (flag->conv_p == 1)
 	 	fusion_s(str, flag->nbr_width, ft_strlen(str), flag);
 	else if (flag->conv_d_i == 1 || flag->conv_u == 1 || flag->conv_x == 1)

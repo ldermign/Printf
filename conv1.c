@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/21 22:26:05 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/22 12:41:39 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,19 @@ void    conv_s(va_list ap, t_flag_len *flag)
 
     arg_char = va_arg(ap, char *);
 	size_arg = (int)ft_strlen(arg_char);
-	if (arg_char == NULL || arg_char == 0)
+	if ((arg_char == NULL || arg_char == 0) && flag->nbr_width <= 6)
 	{
-		arg_char = "(null)";
-		ft_putstr(arg_char, flag);
+		ft_putstr("(null)", flag);
 		return ;
 	}
-	if (flag->nbr_precision <= 0)
-        return ;
-	if (ft_no_flag(flag)
-	|| ((flag->nbr_precision > size_arg) && (flag->nbr_width < size_arg)))
+	if (arg_char == NULL || arg_char == 0)
+		arg_char = "(null)";
+	// if (flag->nbr_precision <= 0)
+    //     return ;
+	// printf("precision = {%d}, width = {%d}\n", flag->nbr_precision, flag->nbr_width);
+	if (ft_no_flag(flag))
+	// || ((arg_char == NULL || arg_char == 0) && flag->nbr_width <= 6)
+	// || ((flag->nbr_precision > size_arg) && (flag->nbr_width < size_arg)))
     	ft_putstr(arg_char, flag);
 	else
 	{

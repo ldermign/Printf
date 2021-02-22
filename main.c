@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 10:07:46 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/21 22:07:03 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/22 13:44:33 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main()
 
 	// unsigned int	test_u = 42;
 	// unsigned int	test_x_X = 666666;
-	char 			*test_s = "pouet c'est relou";
+	// char 			*test_s = "pouet c'est relou";
 	// char				test_c = 'q';
 	// int				test_adresse_p = 9999999;
 	// int				*test_p = &test_adresse_p;
@@ -35,6 +35,191 @@ int main()
 	int size_printf;
 	// d
 
+	// size_printf = printf(KGRN"[] -------> hello, [%s].\n", "gavin");
+	// size_ft_printf = ft_printf(KCYN"[] -------> hello, [%s].\n", "gavin");
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[] -------> [%s%s].\n", "hello", "world");
+	// size_ft_printf = ft_printf(KCYN"[] -------> [%s%s].\n", "hello", "world");
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[] -------> this [%s] is [%s].\n", "hello", "");
+	// size_ft_printf = ft_printf(KCYN"[] -------> this [%s] is [%s].\n", "hello", "");
+	// check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[32] -------> [%32s].\n", "abc");
+	size_ft_printf = ft_printf(KCYN"[32] -------> [%32s].\n", "abc");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[16] -------> [%16s].\n", "nark nark");
+	size_ft_printf = ft_printf(KCYN"[16] -------> [%16s].\n", "nark nark");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[-32] ------> [%-32s].\n", "abc");
+	size_ft_printf = ft_printf(KCYN"[-32] ------> [%-32s].\n", "abc");
+	check_printf(size_ft_printf, size_printf);
+	
+	size_printf = printf(KGRN"[-5] -------> [%-5s].\n", "goes over");
+	size_ft_printf = ft_printf(KCYN"[-5] -------> [%-5s].\n", "goes over");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[.7] -------> [%.7s].\n", "hello");
+	size_ft_printf = ft_printf(KCYN"[.7] -------> [%.7s].\n", "hello");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[.3] -------> [%.3s].\n", "hello");
+	size_ft_printf = ft_printf(KCYN"[.3] -------> [%.3s].\n", "hello");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[.3s|.2s] -------> [%.3s%.2s].\n", "holla", "bitch");
+	size_ft_printf = ft_printf(KCYN"[.3s|.2s] -------> [%.3s%.2s].\n", "holla", "bitch");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[.2s|.7s] -------> [%.2s%.7s].\n", "hello", "world");
+	size_ft_printf = ft_printf(KCYN"[.2s|.7s] -------> [%.2s%.7s].\n", "hello", "world");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[.7s|.2s] -------> [%.7s%.2s].\n", "hello", "world");
+	size_ft_printf = ft_printf(KCYN"[.7s|.2s] -------> [%.7s%.2s].\n", "hello", "world");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[.5s|7s] -------> [%.5s%7s].\n", "yo", "boi");
+	size_ft_printf = ft_printf(KCYN"[.5s|7s] -------> [%.5s%7s].\n", "yo", "boi");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[7.5s] -------> [%7.5s].\n", "yolo");
+	size_ft_printf = ft_printf(KCYN"[7.5s] -------> [%7.5s].\n", "yolo");
+	check_printf(size_ft_printf, size_printf);
+	
+	////////////////////////////////////////////////////////
+	
+	size_printf = printf(KGRN"[11.5s] -------> [%11.5s].\n", "bombastic");
+	size_ft_printf = ft_printf(KCYN"[11.5s] -------> [%11.5s].\n", "bombastic");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[5.11s] -------> [%5.11s].\n", "bombastic");
+	size_ft_printf = ft_printf(KCYN"[5.11s] -------> [%5.11s].\n", "bombastic");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[5.4s] -------> [%5.4s].\n", "bombastic");
+	size_ft_printf = ft_printf(KCYN"[5.4s] -------> [%5.4s].\n", "bombastic");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[11.10s] -------> [%11.10s].\n", "bombastic");
+	size_ft_printf = ft_printf(KCYN"[11.10s] -------> [%11.10s].\n", "bombastic");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[3.4s] -------> [%3.4s].\n", "bombastic");
+	size_ft_printf = ft_printf(KCYN"[3.4s] -------> [%3.4s].\n", "bombastic");
+	check_printf(size_ft_printf, size_printf);
+
+
+	
+	size_printf = printf(KGRN"[-7.5s] -------> [%-7.5s].\n", "yolo");
+	size_ft_printf = ft_printf(KCYN"[-7.5s] -------> [%-7.5s].\n", "yolo");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[-7.5s] -------> [%-7.5s].\n", "tubular");
+	size_ft_printf = ft_printf(KCYN"[-7.5s] -------> [%-7.5s].\n", "tubular");
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[5.7s] -------> [%5.7s].\n", "yolo");
+	// size_ft_printf = ft_printf(KCYN"[5.7s] -------> [%5.7s].\n", "yolo");
+	// check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[5.7s] -------> [%5.7s].\n", "bombastic");
+	// size_ft_printf = ft_printf(KCYN"[5.7s] -------> [%5.7s].\n", "bombastic");
+	// check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[-5.7s] -------> [%-5.7s].\n", "yolo");
+	// size_ft_printf = ft_printf(KCYN"[-5.7s] -------> [%-5.7s].\n", "yolo");
+	// check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[-5.7s] -------> [%-5.7s].\n", "tubular");
+	// size_ft_printf = ft_printf(KCYN"[-5.7s] -------> [%-5.7s].\n", "tubular");
+	// check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[7.7s|7.7s] -------> [%7.7s%7.7s].\n", "hello", "world");
+	// size_ft_printf = ft_printf(KCYN"[7.7s|7.7s] -------> [%7.7s%7.7s].\n", "hello", "world");
+	// check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[3.7s|7.7s] -------> [%3.7s%7.7s].\n", "hello", "world");
+	// size_ft_printf = ft_printf(KCYN"[3.7s|7.7s] -------> [%3.7s%7.7s].\n", "hello", "world");
+	// check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[7.7s|3.7s] -------> [%7.7s%3.7s].\n", "hello", "world");
+	// size_ft_printf = ft_printf(KCYN"[7.7s|3.7s] -------> [%7.7s%3.7s].\n", "hello", "world");
+	// check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[3.7s|3.7s] -------> [%3.7s%3.7s].\n", "hello", "world");
+	// size_ft_printf = ft_printf(KCYN"[3.7s|3.7s] -------> [%3.7s%3.7s].\n", "hello", "world");
+	// check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[7.3s|7.7s] -------> [%7.3s%7.7s].\n", "hello", "world");
+	// size_ft_printf = ft_printf(KCYN"[7.3s|7.7s] -------> [%7.3s%7.7s].\n", "hello", "world");
+	// check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[3.3s|7.7s] -------> [%3.3s%7.7s].\n", "hello", "world");
+	// size_ft_printf = ft_printf(KCYN"[3.3s|7.7s] -------> [%3.3s%7.7s].\n", "hello", "world");
+	// check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[7.3s|3.7s] -------> [%7.3s%3.7s].\n", "hello", "world");
+	// size_ft_printf = ft_printf(KCYN"[7.3s|3.7s] -------> [%7.3s%3.7s].\n", "hello", "world");
+	// check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[3.3s|3.7s] -------> [%3.3s%3.7s].\n", "hello", "world");
+	// size_ft_printf = ft_printf(KCYN"[3.3s|3.7s] -------> [%3.3s%3.7s].\n", "hello", "world");
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[7.7s|7.3s] -------> [%7.7s%7.3s].\n", "hello", "world");
+	// size_ft_printf = ft_printf(KCYN"[7.7s|7.3s] -------> [%7.7s%7.3s].\n", "hello", "world");
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[3.7s|7.3s] -------> [%3.7s%7.3s].\n", "hello", "world");
+	// size_ft_printf = ft_printf(KCYN"[3.7s|7.3s] -------> [%3.7s%7.3s].\n", "hello", "world");
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[7.7s|3.3s] -------> [%7.7s%3.3s].\n", "hello", "world");
+	// size_ft_printf = ft_printf(KCYN"[7.7s|3.3s] -------> [%7.7s%3.3s].\n", "hello", "world");
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[3.7s|3.3s] -------> [%3.7s%3.3s].\n", "hello", "world");
+	// size_ft_printf = ft_printf(KCYN"[3.7s|3.3s] -------> [%3.7s%3.3s].\n", "hello", "world");
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[7.3s|7.3s] -------> [%7.3s%7.3s].\n", "hello", "world");
+	// size_ft_printf = ft_printf(KCYN"[7.3s|7.3s] -------> [%7.3s%7.3s].\n", "hello", "world");
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[3.3s|7.3s] -------> [%3.3s%7.3s].\n", "hello", "world");
+	// size_ft_printf = ft_printf(KCYN"[3.3s|7.3s] -------> [%3.3s%7.3s].\n", "hello", "world");
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[7.3s|3.3s] -------> [%7.3s%3.3s].\n", "hello", "world");
+	// size_ft_printf = ft_printf(KCYN"[7.3s|3.3s] -------> [%7.3s%3.3s].\n", "hello", "world");
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[3.3s|3.3s] -------> [%3.3s%3.3s].\n", "hello", "world");
+	// size_ft_printf = ft_printf(KCYN"[3.3s|3.3s] -------> [%3.3s%3.3s].\n", "hello", "world");
+	// check_printf(size_ft_printf, size_printf);
+	
+	// size_printf = printf(KGRN"[3s|3s] -------> [%3s%3s].\n", "hello", "world");
+	// size_ft_printf = ft_printf(KCYN"[3s|3s] -------> [%3s%3s].\n", "hello", "world");
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[] -------> [%s].\n", NULL);
+	// size_ft_printf = ft_printf(KCYN"[] -------> [%s].\n", NULL);
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[32s] -------> [%32s].\n", NULL);
+	// size_ft_printf = ft_printf(KCYN"[32s] -------> [%32s].\n", NULL);
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[2s] -------> [%2s].\n", NULL);
+	// size_ft_printf = ft_printf(KCYN"[2s] -------> [%2s].\n", NULL);
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[-32s] -------> [%-32s].\n", NULL);
+	// size_ft_printf = ft_printf(KCYN"[-32s] -------> [%-32s].\n", NULL);
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[-16s] -------> [%-16s].\n", NULL);
+	// size_ft_printf = ft_printf(KCYN"[-16s] -------> [%-16s].\n", NULL);
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[-3s] -------> [%-3s].\n", NULL);
+	// size_ft_printf = ft_printf(KCYN"[-3s] -------> [%-3s].\n", NULL);
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[.9s] -------> [%.9s].\n", "NULL");
+	// size_ft_printf = ft_printf(KCYN"[.9s] -------> [%.9s].\n", "NULL");
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[.3s] -------> [%.3s].\n", "NULL");
+	// size_ft_printf = ft_printf(KCYN"[.3s] -------> [%.3s].\n", "NULL");
+	// check_printf(size_ft_printf, size_printf);
+	
+	// size_printf = printf(KGRN"[] -------> [%s].\n", "hi low");
+	// size_ft_printf = ft_printf(KCYN"[] -------> [%s].\n", "hi low");
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[3] -------> [%3s].\n", "hi low");
+	// size_ft_printf = ft_printf(KCYN"[3] -------> [%3s].\n", "hi low");
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[9] -------> [%9s].\n", "hi low");
+	// size_ft_printf = ft_printf(KCYN"[9] -------> [%9s].\n", "hi low");
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[.9] -------> [%.9s].\n", "hi low");
+	// size_ft_printf = ft_printf(KCYN"[.9] -------> [%.9s].\n", "hi low");
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[.03] -------> [%.03s].\n", "hi low");
+	// size_ft_printf = ft_printf(KCYN"[.03] -------> [%.03s].\n", "hi low");
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"[.09] -------> [%.09s].\n", "hi low");
+	// size_ft_printf = ft_printf(KCYN"[.09] -------> [%.09s].\n", "hi low");
+	// check_printf(size_ft_printf, size_printf);
+
+
+
+
+
+/////////////////////////////////////////pft
+
+
 
 	// size_printf = printf(KGRN"c [-.00s] -------> [%-.0s].\n", "hi low");
 	// size_ft_printf = ft_printf(KCYN"c [-.00s] -------> [%-.0s].\n", "hi low");
@@ -43,36 +228,36 @@ int main()
 	// size_ft_printf = ft_printf(KCYN"c [-10] ------> [%-*c].\n", 10, test_c);
 	// check_printf(size_ft_printf, size_printf);
 
-	size_printf = printf(KGRN"s [.-1] -------> [%.*s].\n", -1, NULL);
-	size_ft_printf = ft_printf(KCYN"s [.-1] -------> [%.*s].\n", -1, NULL);
-	check_printf(size_ft_printf, size_printf);
-	size_printf = printf(KGRN"s [-30.11] ------> [%-*.*s].\n", 30, 11, test_s);
-	size_ft_printf = ft_printf(KCYN"s [-30.11] ------> [%-*.*s].\n", 30, 11, test_s);
-	check_printf(size_ft_printf, size_printf);
-	size_printf = printf(KGRN"s [11.30] -------> [%*.*s].\n", 11, 30, test_s);
-	size_ft_printf = ft_printf(KCYN"s [11.30] -------> [%*.*s].\n", 11, 30, test_s);
-	check_printf(size_ft_printf, size_printf);
-	size_printf = printf(KGRN"s [-11.30] ------> [%-*.*s].\n", 11, 30, test_s);
-	size_ft_printf = ft_printf(KCYN"s [-11.30] ------> [%-*.*s].\n", 11, 30, test_s);
-	check_printf(size_ft_printf, size_printf);
-	size_printf = printf(KGRN"s [.11] -------> [%.*s].\n", 11, test_s);
-	size_ft_printf = ft_printf(KCYN"s [.11] -------> [%.*s].\n", 11, test_s);
-	check_printf(size_ft_printf, size_printf);
-	size_printf = printf(KGRN"s [1.11] -------> [%1.*s].\n", 11, test_s);
-	size_ft_printf = ft_printf(KCYN"s [1.11] -------> [%1.*s].\n", 11, test_s);
-	check_printf(size_ft_printf, size_printf);
-	size_printf = printf(KGRN"s [-.11] ------> [%-.*s].\n", 11, test_s);
-	size_ft_printf = ft_printf(KCYN"s [-.11] ------> [%-.*s].\n", 11, test_s);
-	check_printf(size_ft_printf, size_printf);
-	size_printf = printf(KGRN"s [.30] -------> [%.*s].\n", 30, test_s);
-	size_ft_printf = ft_printf(KCYN"s [.30] -------> [%.*s].\n", 30, test_s);
-	check_printf(size_ft_printf, size_printf);
-	size_printf = printf(KGRN"s [-.30] ------> [%-.*s].\n", 30, test_s);
-	size_ft_printf = ft_printf(KCYN"s [-.30] ------> [%-.*s].\n", 30, test_s);
-	check_printf(size_ft_printf, size_printf);
-	size_printf = printf(KGRN"s [.0] ------> [%.0s].\n", test_s);
-	size_ft_printf = ft_printf(KCYN"s [.0] ------> [%.0s].\n", test_s);
-	check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"s [.-1] -------> [%.*s].\n", -1, NULL);
+	// size_ft_printf = ft_printf(KCYN"s [.-1] -------> [%.*s].\n", -1, NULL);
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"s [-30.11] ------> [%-*.*s].\n", 30, 11, test_s);
+	// size_ft_printf = ft_printf(KCYN"s [-30.11] ------> [%-*.*s].\n", 30, 11, test_s);
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"s [11.30] -------> [%*.*s].\n", 11, 30, test_s);
+	// size_ft_printf = ft_printf(KCYN"s [11.30] -------> [%*.*s].\n", 11, 30, test_s);
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"s [-11.30] ------> [%-*.*s].\n", 11, 30, test_s);
+	// size_ft_printf = ft_printf(KCYN"s [-11.30] ------> [%-*.*s].\n", 11, 30, test_s);
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"s [.11] -------> [%.*s].\n", 11, test_s);
+	// size_ft_printf = ft_printf(KCYN"s [.11] -------> [%.*s].\n", 11, test_s);
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"s [1.11] -------> [%1.*s].\n", 11, test_s);
+	// size_ft_printf = ft_printf(KCYN"s [1.11] -------> [%1.*s].\n", 11, test_s);
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"s [-.11] ------> [%-.*s].\n", 11, test_s);
+	// size_ft_printf = ft_printf(KCYN"s [-.11] ------> [%-.*s].\n", 11, test_s);
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"s [.30] -------> [%.*s].\n", 30, test_s);
+	// size_ft_printf = ft_printf(KCYN"s [.30] -------> [%.*s].\n", 30, test_s);
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"s [-.30] ------> [%-.*s].\n", 30, test_s);
+	// size_ft_printf = ft_printf(KCYN"s [-.30] ------> [%-.*s].\n", 30, test_s);
+	// check_printf(size_ft_printf, size_printf);
+	// size_printf = printf(KGRN"s [.0] ------> [%.0s].\n", test_s);
+	// size_ft_printf = ft_printf(KCYN"s [.0] ------> [%.0s].\n", test_s);
+	// check_printf(size_ft_printf, size_printf);
 
 
 // 	size_printf = printf(KGRN"p [30] -------> [%*.p].\n", 30, test_p);
