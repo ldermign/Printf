@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 23:48:27 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/22 13:47:58 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/22 21:48:05 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,54 +143,76 @@ void    ft_final_size(int width, int prec, int len_str, t_flag_len *flag)
             flag->size_final_str_flag = width;
         if (prec > width)
         {
-            if (prec >= len_str)
+            if (width >= len_str)
+                flag->size_final_str_flag = width;
+            else if (prec >= len_str)
                 flag->size_final_str_flag = len_str;
-            if (prec < len_str)
+            else if (prec < len_str)
                 flag->size_final_str_flag = prec;
         }
     }
 }
 
-void    ft_alloc_size(int width, int prec, int len_str, t_flag_len *flag)
+int    ft_alloc_size(int width, int prec, int len_str, t_flag_len *flag)
 {
-    if (len_str <= width && flag->precision == -1)
+    if (flag->dot == 1 && prec == 0 && width > 0)
     {
         if (!(flag->final_str_flag = ft_calloc(width + 1, sizeof(char))))
-            return ;
+            return (0);
+        ft_fill_with_c(flag->final_str_flag, ' ', width + 1);
+        return (0);
+    }
+    else if (len_str <= width && flag->precision == -1)
+    {
+        if (!(flag->final_str_flag = ft_calloc(width + 1, sizeof(char))))
+            return (0);
     }
     else if ((len_str >= width && flag->precision == -1)
     || (len_str <= prec && flag->width == -1))
     {
         if (!(flag->final_str_flag = ft_calloc(len_str + 1, sizeof(char))))
-            return ;
+            return (0);
     }
-    else if (len_str > prec && flag->width == -1)
+    else if ((len_str >= prec && flag->width == -1))
     {
         if (!(flag->final_str_flag = ft_calloc(prec + 1, sizeof(char))))
-            return ;
+            return (0);
     }
-    if (flag->precision == 1 && flag->width == 1)
+    else if (flag->precision == 1 && flag->width == 1)
     {
         if (width >= prec)
-            if (!(flag->final_str_flag = ft_calloc(width + 1, sizeof(char))))
-                return ;
-        if (prec > width)
         {
-            if (prec >= len_str)
+            if (!(flag->final_str_flag = ft_calloc(width + 1, sizeof(char))))
+                return (0);
+            // printf("width = {%d}\n", width);
+        }
+        else if (prec > width)
+        {
+            if (width >= len_str)
+            {
+                // printf("width = {%d}\n", width);
+                if (!(flag->final_str_flag = ft_calloc(width + 1, sizeof(char))))
+                    return (0);
+                // printf("width = {%d}\n", width);
+            }
+            else if (prec >= len_str)
             {
                 if (!(flag->final_str_flag = ft_calloc(len_str + 1, sizeof(char))))
-                    return ;
+                    return (0);
             }
             else if (prec < len_str)
             {
                 if (!(flag->final_str_flag = ft_calloc(prec + 1, sizeof(char))))
-                    return ;
+                    return (0);
             }
         }
     }
+    // printf("width = {%d}", width);
     ft_final_size(width, prec, len_str, flag);
+    // printf("width = {%d}", width);
     ft_fill_with_c(flag->final_str_flag, ' ', flag->size_final_str_flag + 1);
     // printf("size = {%zu}\n", flag->size_final_str_flag);
+    return (1);
 }
 
 int     which_is_smaller(int width, int prec, int len_str)
@@ -217,11 +239,12 @@ int    where_to_begin(int width, int prec, int len_str, t_flag_len *flag)
         start = flag->size_final_str_flag - min;
     else if (flag->width == 1 && flag->precision == 1)
     {
-        if (width > prec)
+        if (width >= prec || (prec >= width && width >= len_str))
             start = flag->size_final_str_flag - min;
         else
             start = 0;
     }
+    // printf("start = {%d}\n", start);
     return (start);
 }
 
@@ -232,13 +255,25 @@ void    fusion_s1(char *str, int width, int prec, int len_str, t_flag_len *flag)
     int last;
     
     i = 0;
-    ft_alloc_size(width, prec, len_str, flag);
+    if (ft_alloc_size(width, prec, len_str, flag) == 0)
+        return ;
     start = where_to_begin(width, prec, len_str, flag);
-    last = where_to_begin(width, prec, len_str, flag);
+    // last = which_is_smaller(width, prec, len_str);
+    // printf("start = {%d}\n", start);
+    // printf("size = {%zu}\n", flag->size_final_str_flag);
+    // last = flag->size_final_str_flag;
+    if ((len_str >= prec && prec >= width) || flag->precision == -1
+    || (prec >= len_str && len_str >= width))
+        last = flag->size_final_str_flag;
+    else if (len_str >= prec && width >= prec)
+        last = prec;
+    else
+        last = which_is_smaller(width, prec, len_str);
     if (flag->minus == 1)
     {
+        // printf("last = {%d}\n", last);
         start = 0;
-        while (start <= last && str[start] && flag->final_str_flag[start])
+        while (start < last && str[start] && flag->final_str_flag[start])
         {
             flag->final_str_flag[start] = str[start];
             start++;
@@ -246,6 +281,7 @@ void    fusion_s1(char *str, int width, int prec, int len_str, t_flag_len *flag)
     }
     else
     {
+        // printf("start = {%d}\n", start);
         last = flag->size_final_str_flag;
         while (str[i] && flag->final_str_flag[start] && start <= last)
         {

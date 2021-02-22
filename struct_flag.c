@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:46:59 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/20 11:02:04 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/22 21:33:01 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_init_struct_flag(t_flag_len *flag)
 	flag->conv_u = 0;
 	flag->conv_x = 0;
 	flag->conv_per = 0;
+	flag->dot = 0;
 }
 
 int		ft_nblen(long n)
@@ -98,6 +99,8 @@ int		which_flag(const char *str, va_list ap, t_flag_len *flag)
 		while (str[i] && ft_is_digit(str[i]))
 			i++;
 	}
+	if (str[i] == '.')
+		flag->dot = 1;
 	if (str[i] == '.' && ++i && (ft_is_digit(str[i]) || str[i] == '*'))
 	{
 		flag->precision = 1;

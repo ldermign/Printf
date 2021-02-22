@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/22 12:41:39 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/22 22:11:46 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,24 @@ void    conv_s(va_list ap, t_flag_len *flag)
 
     arg_char = va_arg(ap, char *);
 	size_arg = (int)ft_strlen(arg_char);
-	if ((arg_char == NULL || arg_char == 0) && flag->nbr_width <= 6)
-	{
-		ft_putstr("(null)", flag);
-		return ;
-	}
+	// if ((arg_char == NULL || arg_char == 0) && flag->nbr_width <= 6)
+	// {
+	// 	ft_putstr("(null)", flag);
+	// 	return ;
+	// }
 	if (arg_char == NULL || arg_char == 0)
 		arg_char = "(null)";
-	// if (flag->nbr_precision <= 0)
-    //     return ;
+		// printf("dot = {%d}, preci = {%d}, minus = {%d}, width = {%d}\n", flag->dot, flag->precision, flag->minus, flag->width);
+    if (flag->nbr_width == 0 && flag->nbr_precision == 0 && flag->dot == 1)
+        return ;
 	// printf("precision = {%d}, width = {%d}\n", flag->nbr_precision, flag->nbr_width);
-	if (ft_no_flag(flag))
-	// || ((arg_char == NULL || arg_char == 0) && flag->nbr_width <= 6)
-	// || ((flag->nbr_precision > size_arg) && (flag->nbr_width < size_arg)))
+	// printf("dot = {%d}, preci = {%d}, minus = {%d}, width = {%d}\n", flag->dot, flag->precision, flag->minus, flag->width);
+	else if (ft_no_flag(flag) || flag->nbr_precision < 0)
     	ft_putstr(arg_char, flag);
 	else
 	{
 		fusion_conv_strflag(arg_char, 0, flag);
+		// printf("pouet\n");
 		ft_putstr(flag->final_str_flag, flag);
 	}
 }
