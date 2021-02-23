@@ -6,24 +6,11 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/22 22:11:46 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/23 16:57:44 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void    conv_c(va_list ap, t_flag_len *flag)
-{
-    const int cara = va_arg(ap, int);
-	
-	if (flag->nbr_width < 1)
-		ft_putchar(cara, flag);
-	else
-	{
-		fusion_conv_strflag(NULL, cara, flag);
-    	ft_putstr(flag->final_str_flag, flag);
-	}
-}
 
 void    conv_s(va_list ap, t_flag_len *flag)
 {
@@ -32,24 +19,20 @@ void    conv_s(va_list ap, t_flag_len *flag)
 
     arg_char = va_arg(ap, char *);
 	size_arg = (int)ft_strlen(arg_char);
-	// if ((arg_char == NULL || arg_char == 0) && flag->nbr_width <= 6)
-	// {
-	// 	ft_putstr("(null)", flag);
-	// 	return ;
-	// }
+	// if (flag->nbr_precision < 0 && flag->width == 1)
+	// 	flag->nbr_precision *= -1;
 	if (arg_char == NULL || arg_char == 0)
 		arg_char = "(null)";
-		// printf("dot = {%d}, preci = {%d}, minus = {%d}, width = {%d}\n", flag->dot, flag->precision, flag->minus, flag->width);
     if (flag->nbr_width == 0 && flag->nbr_precision == 0 && flag->dot == 1)
         return ;
-	// printf("precision = {%d}, width = {%d}\n", flag->nbr_precision, flag->nbr_width);
-	// printf("dot = {%d}, preci = {%d}, minus = {%d}, width = {%d}\n", flag->dot, flag->precision, flag->minus, flag->width);
-	else if (ft_no_flag(flag) || flag->nbr_precision < 0)
+	else if (ft_no_flag(flag) || (flag->nbr_precision < 0 && flag->width == -1))
     	ft_putstr(arg_char, flag);
+	// if (flag->nbr_precision < 0 && flag->width == 1
+	// && flag->nbr_precision > size_arg)
+	// 	flag->nbr_precision *= -1;
 	else
 	{
 		fusion_conv_strflag(arg_char, 0, flag);
-		// printf("pouet\n");
 		ft_putstr(flag->final_str_flag, flag);
 	}
 }
@@ -72,6 +55,7 @@ void    conv_p(va_list ap, t_flag_len *flag)
 		fusion_conv_strflag(temp, ft_strlen(temp), flag);
 		ft_putstr(flag->final_str_flag, flag);
 	}
+	free(str_adresse);
 }
 
 void    conv_d_i(va_list ap, t_flag_len *flag)
@@ -83,12 +67,29 @@ void    conv_d_i(va_list ap, t_flag_len *flag)
     arg_int = va_arg(ap, int);
 	temp = ft_itoa(arg_int);
 	size_temp = ft_strlen(temp);
+	// printf("nbr_prec = {%d}, nbr_width = {%d}\n", flag->nbr_precision, flag->nbr_width);
+	if (flag->nbr_width == 0 && flag->nbr_precision == 0 && flag->dot == 1)
+        return ;
 	if ((size_temp >= flag->nbr_precision) && (size_temp >= flag->nbr_width))
 		ft_putstr(temp, flag);
 	else
 	{
 		fusion_conv_strflag(temp, arg_int, flag);
 		ft_putstr(flag->final_str_flag, flag);
+	}
+	free(temp);
+}
+
+void    conv_c(va_list ap, t_flag_len *flag)
+{
+    const int cara = va_arg(ap, int);
+	
+	if (flag->nbr_width < 1)
+		ft_putchar(cara, flag);
+	else
+	{
+		fusion_conv_strflag(NULL, cara, flag);
+    	ft_putstr(flag->final_str_flag, flag);
 	}
 }
 
@@ -101,6 +102,8 @@ void    conv_u(va_list ap, t_flag_len *flag)
     arg_unsdint = va_arg(ap, unsigned int);
 	temp = ft_itoa_unsd(arg_unsdint);
 	size_temp = ft_strlen(temp);
+	if (flag->nbr_precision == 0 && flag->dot == 1 && flag->nbr_width == 0)
+        return ;
 	if ((size_temp >= flag->nbr_precision) && (size_temp >= flag->nbr_width))
 		ft_putstr(temp, flag);
 	else
@@ -108,6 +111,7 @@ void    conv_u(va_list ap, t_flag_len *flag)
 		fusion_conv_strflag(temp, arg_unsdint, flag);
 		ft_putstr(flag->final_str_flag, flag);
 	}
+	free(temp);
 }
 
 void	conv_x_X(char c, va_list ap, t_flag_len *flag)
@@ -116,7 +120,7 @@ void	conv_x_X(char c, va_list ap, t_flag_len *flag)
 	int				size_temp;
 	char			*base;
 	char			*temp;
-	
+
 	arg_unsdint = va_arg(ap, unsigned int);
 	if (c == 'x')
 		base = "0123456789abcdef";
@@ -124,6 +128,8 @@ void	conv_x_X(char c, va_list ap, t_flag_len *flag)
 		base = "0123456789ABCDEF";
 	temp = ft_itoa_base(arg_unsdint, base);
 	size_temp = ft_strlen(temp);
+	if (flag->nbr_precision == 0 && flag->dot == 1 && flag->nbr_width == 0)
+        return ;
 	if ((size_temp >= flag->nbr_precision) && (size_temp >= flag->nbr_width))
 		ft_putstr(temp, flag);
 	else
@@ -131,6 +137,7 @@ void	conv_x_X(char c, va_list ap, t_flag_len *flag)
 		fusion_conv_strflag(temp, arg_unsdint, flag);
 		ft_putstr(flag->final_str_flag, flag);
 	}
+	free (temp);
 }
 
 void    conv_per(t_flag_len *flag)

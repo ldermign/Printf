@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/20 11:05:44 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/23 16:13:16 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,7 @@ size_t		ft_len_nbr(size_t nbr, size_t size_base)
 	
 	size_nbr = 0;
 	if (nbr == 0)
-		size_nbr = 0;
+		size_nbr = 1;
 	if (nbr < 0)
 	{
 		nbr *= -1;
@@ -254,7 +254,7 @@ char	*ft_itoa_base(size_t nbr, char *base)
 	dst[size_nbr--] = '\0';
 	if (nbr == 0)
 		dst[0] = '0';
-	if (nbr < 0)
+	else if (nbr < 0)
 	{
 		dst[0] = '-';
 		nbr *= -1;

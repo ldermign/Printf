@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:46:59 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/22 21:33:01 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/23 11:11:44 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	string_of_flag_to_int(char *str, va_list ap, t_flag_len *flag)
 	}
 	else
 		flag->nbr_precision = ft_atoi_printf(&str[i]);
+		// printf("nbr_prec = {%d}, nbr_width = {%d}\n", flag->nbr_precision, flag->nbr_width);
 }
 
 int		which_flag(const char *str, va_list ap, t_flag_len *flag)
@@ -92,7 +93,8 @@ int		which_flag(const char *str, va_list ap, t_flag_len *flag)
 	if (str[i] == '0')
 		flag->padded_zero = 1;
 	if (str[i] == '0' || str[i] == '-')
-		i++;
+		while (str[i] == '0' || str[i] == '-')
+			i++;
 	if (str[i] && str[i + 1] && (str[i] == '*' || ft_is_digit(str[i])) && ++i)
 	{
 		flag->width = 1;
