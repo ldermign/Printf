@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 10:07:46 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/23 17:01:03 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/23 19:39:31 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,8 @@ int main()
 	size_printf = printf(KGRN"[03d] -------> [%03d].\n", 0);
 	size_ft_printf = ft_printf(KCYN"[03d] -------> [%03d].\n", 0);
 	check_printf(size_ft_printf, size_printf);
-	size_printf = printf(KGRN"[.0u] -------> [%.0u].\n", 0);
-	size_ft_printf = ft_printf(KCYN"[.0u] -------> [%.0u].\n", 0);
+	size_printf = printf(KGRN"[.0u] -------> [%.0u].\n", 3);
+	size_ft_printf = ft_printf(KCYN"[.0u] -------> [%.0u].\n", 3);
 	check_printf(size_ft_printf, size_printf);
 	size_printf = printf(KGRN"[.u] -------> [%.u].\n", 0);
 	size_ft_printf = ft_printf(KCYN"[.u] -------> [%.u].\n", 0);
@@ -828,9 +828,6 @@ int main()
 	check_printf(size_ft_printf, size_printf);
 
 
-//////////// faux
-printf(KRED"\n\t///!\\\\\\FAUX///!\\\\\\\n\n");
-
 
 	size_printf = printf(KGRN"[5c] -------> [%5c].\n", '\0');
 	size_ft_printf = ft_printf(KCYN"[5c] -------> [%5c].\n", '\0');
@@ -838,7 +835,26 @@ printf(KRED"\n\t///!\\\\\\FAUX///!\\\\\\\n\n");
 	size_printf = printf(KGRN"[-5c] -------> [%-5c].\n", '\0');
 	size_ft_printf = ft_printf(KCYN"[-5c] -------> [%-5c].\n", '\0');
 	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[-14c] -------> [%-14c].\n", 'p');
+	size_ft_printf = ft_printf(KCYN"[-14c] -------> [%-14c].\n", 'p');
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[-1c] -------> [%-1c].\n", 't');
+	size_ft_printf = ft_printf(KCYN"[-1c] -------> [%-1c].\n", 't');
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[1c] -------> [%1c].\n", 't');
+	size_ft_printf = ft_printf(KCYN"[1c] -------> [%1c].\n", 't');
+	check_printf(size_ft_printf, size_printf);
 
+
+//////////// faux
+printf(KRED"\n\t///!\\\\\\FAUX///!\\\\\\\n\n");
+
+	size_printf = printf(KGRN"[.0u|0.-3x] -------> [%.0u][%0.*x].\n", -228163136, -3, 2147483647);
+	size_ft_printf = ft_printf(KCYN"[.0u|0.-3x] -------> [%.0u][%0.*x].\n", -228163136, -3, 2147483647);
+	check_printf(size_ft_printf, size_printf);
+	size_printf = printf(KGRN"[14.0 s = {tyL2lTkXLSJwV2yncawCv1YKLTpR9ZhbTJz8qKS8DNtqyG36tmDuPdctln}] -------> [%14.0s].\n", "tyL2lTkXLSJwV2yncawCv1YKLTpR9ZhbTJz8qKS8DNtqyG36tmDuPdctln");
+	size_ft_printf = ft_printf(KCYN"[14.0 s = {tyL2lTkXLSJwV2yncawCv1YKLTpR9ZhbTJz8qKS8DNtqyG36tmDuPdctln}] -------> [%14.0s].\n", "tyL2lTkXLSJwV2yncawCv1YKLTpR9ZhbTJz8qKS8DNtqyG36tmDuPdctln");
+	check_printf(size_ft_printf, size_printf);
 
 
 

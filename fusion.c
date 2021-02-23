@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 23:48:27 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/23 17:00:15 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/23 19:03:13 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,46 @@ void        ft_nbr_inf_zero(int place_space, int place_zero, t_flag_len *flag)
     }
 }
 
+void    ft_cara_non_imp(int nbr, t_flag_len *flag)
+{
+    if (flag->minus == 1)
+    {
+        ft_putchar(nbr, flag);
+        while (flag->nbr_width > 1 && flag->nbr_width--)
+            ft_putchar(' ', flag);
+    }
+    else
+    {
+        while (flag->nbr_width > 1 && flag->nbr_width--)
+            ft_putchar(' ', flag);
+        ft_putchar(nbr, flag);
+    }
+}
+
 void    fusion_c(int nbr, t_flag_len *flag)
 {
-    if (!(flag->final_str_flag = ft_calloc(flag->nbr_width + 1, sizeof(char))))
-        return ;
+    if (flag->nbr_width > 1)
+        if (!(flag->final_str_flag = ft_calloc(flag->nbr_width + 1, sizeof(char))))
+            return ;
+    // printf("pouet\n");
+    // printf("width = {%d}\n", flag->nbr_width);
     if (flag->conv_per == 1 && flag->padded_zero == 1)
         ft_fill_with_c(flag->final_str_flag, '0', flag->nbr_width + 1);
     else
         ft_fill_with_c(flag->final_str_flag, ' ', flag->nbr_width + 1);
+    if (nbr <= 31)
+    {
+        ft_cara_non_imp(nbr, flag);
+        return ;
+    }
     if (flag->minus == 1)
         flag->final_str_flag[0] = nbr;
     else
         flag->final_str_flag[flag->nbr_width - 1] = nbr;
+    
 }
 
-void    fusion_s1(char *str, int max, int len, t_flag_len *flag)
+void    fusion_p(char *str, int max, int len, t_flag_len *flag)
 {
     int i;
     int start;
@@ -169,7 +194,12 @@ int     alloc_if_w_and_p(int width, int prec, int len_str, t_flag_len *flag)
 
 int    alloc_size(int width, int prec, int len_str, t_flag_len *flag)
 {
-    if (flag->dot == 1 && prec == 0 && width > 0)
+    if (flag->precision == 1 && flag->width == 1)
+    {
+        if (alloc_if_w_and_p(width, prec, len_str, flag) == 0)
+            return (0);
+    }
+    else if (flag->dot == 1 && prec == 0 && width > 0)
     {
         if (!(flag->final_str_flag = ft_calloc(width + 1, sizeof(char))))
             return (0);
@@ -189,9 +219,6 @@ int    alloc_size(int width, int prec, int len_str, t_flag_len *flag)
     }
     else if ((len_str >= prec && flag->width == -1))
         if (!(flag->final_str_flag = ft_calloc(prec + 1, sizeof(char))))
-            return (0);
-    if (flag->precision == 1 && flag->width == 1)
-        if (alloc_if_w_and_p(width, prec, len_str, flag) == 0)
             return (0);
     return (1);
 }
@@ -326,7 +353,7 @@ void    fusion_conv_strflag(char *str, int nbr, t_flag_len *flag)
 	else if (flag->conv_s == 1 && flag->padded_zero == 0)
 		prep_fusion_s(str, flag->nbr_width, flag->nbr_precision, len_str, flag);
 	else if (flag->conv_p == 1)
-	 	fusion_s1(str, flag->nbr_width, ft_strlen(str), flag);
+	 	fusion_p(str, flag->nbr_width, len_str, flag);
 	else if (flag->conv_d_i == 1 || flag->conv_u == 1 || flag->conv_x == 1)
 		fusion_d_i_u(str, nbr, flag);
 }

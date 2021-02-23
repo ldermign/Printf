@@ -1,29 +1,206 @@
+Diff for printf("%dPBx4hC5xr%012X%0XdiIjXCd8nb%18.1dOuBwv%5u", 566278057, -2147483647, -2147483647, 2147483647, -2147483647);
+  printf: |566278057PBx4hC5xr00008000000180000001diIjXCd8nb        2147483647OuBwv2147483649-- 81 --|
+ftprintf: |566278057PBx4hC5xr-0008000000180000001diIjXCd8nb        2147483647OuBwv2147483649-- 81 --|
+
+Diff for printf("%0u%0.*d%08X4Hu4UmEcW%14.3d", 2147483647, 0, -1129005084, 2147483647, 2147483647);
+  printf: |2147483647-11290050847FFFFFFF4Hu4UmEcW    2147483647-- 52 --|
+ftprintf: |21474836477FFFFFFF4Hu4UmEcW    2147483647-- 41 --|
+
+Diff for printf("%xLY%.0u", 462680549, 2147483647);
+  printf: |1b93f1e5LY2147483647-- 20 --|
+ftprintf: |1b93f1e5LY-- 10 --|
+
+Diff for printf("%10X%2.3x%0.0x", 2147483647, 0, -2147483647);
+  printf: |  7FFFFFFF00080000001-- 21 --|
+ftprintf: |  7FFFFFFF000-- 13 --|
+
+Diff for printf("%.0il5ioL1Y%%LTOvbczzKXDycmSKx", -262994261);
+  printf: |-262994261l5ioL1Y%LTOvbczzKXDycmSKx-- 35 --|
+ftprintf: |l5ioL1Y%LTOvbczzKXDycmSKx-- 25 --|
+
+Diff for printf("gttXfa7HYyczfiGuFSpai%-.0dnNsSocsc", -1910503830);
+  printf: |gttXfa7HYyczfiGuFSpai-1910503830nNsSocsc-- 40 --|
+ftprintf: |gttXfa7HYyczfiGuFSpainNsSocsc-- 29 --|
+
+Diff for printf("%0.0x", 540443468);
+  printf: |2036834c-- 8 --|
+ftprintf: |-- 0 --|
+
+Diff for printf("%%VOJvb%0.0u%0XO0Hx5%-2X1D4QvQDlDAJpx", -1763102881, -2147483647, -2147483647);
+  printf: |%VOJvb253186441580000001O0Hx5800000011D4QvQDlDAJpx-- 50 --|
+ftprintf: |%VOJvb80000001O0Hx5800000011D4QvQDlDAJpx-- 40 --|
+
+Diff for printf("%-uOXjgfQes%9.0sZFijl%-.3u", 2147483647, NULL, 0);
+  printf: |2147483647OXjgfQes         ZFijl000-- 35 --|
+ftprintf: |2147483647OXjgfQes   (null)ZFijl000-- 35 --|
+
+Diff for printf("j%0.0x%9.1u%.0dX9IAM3jlDyZzd8", 2147483647, 0, -2147483647);
+  printf: |j7fffffff        0-2147483647X9IAM3jlDyZzd8-- 43 --|
+ftprintf: |j        0X9IAM3jlDyZzd8-- 24 --|
+
+Diff for printf("W0m%016u", -2147483647);
+  printf: |W0m0000002147483649-- 19 --|
+ftprintf: |W0m-000002147483649-- 19 --|
+
+Diff for printf("%-.0XkEn0%.2stUgQ2%15Xj5vXUo%d", 1041189663, "", 1443551205, 2147483647);
+  printf: |3E0F4B1FkEn0tUgQ2       560AD7E5j5vXUo2147483647-- 48 --|
+ftprintf: |kEn0tUgQ2       560AD7E5j5vXUo2147483647-- 40 --|
+
+Diff for printf("%016xH6fKI%%%1.*sh UA3gT%-13d%016u", -790613121, 5, "", -1376960887, 0);
+  printf: |00000000d0e0337fH6fKI% h UA3gT-1376960887  0000000000000000-- 59 --|
+ftprintf: |-0000000d0e0337fH6fKI% h UA3gT-1376960887  0000000000000000-- 59 --|
+
+Diff for printf("%-i%.2uMFy%-.0uuz5d4MH", -2147483647, 0, -1006776640);
+  printf: |-214748364700MFy3288190656uz5d4MH-- 33 --|
+ftprintf: |-214748364700MFyuz5d4MH-- 23 --|
+
+Diff for printf("%0iRoSWXq4%-.0d", -2147483647, -2147483647);
+  printf: |-2147483647RoSWXq4-2147483647-- 29 --|
+ftprintf: |-2147483647RoSWXq4-- 18 --|
+
+Diff for printf("T0sA7Tt3%0*iW%-.*XR", -9, 0, 10, -2147483647);
+  printf: |T0sA7Tt30        W0080000001R-- 29 --|
+ftprintf: |T0sA7Tt30        W-0080000001R-- 30 --|
+
+Diff for printf("%-.*s%011.*X%-7i%16.1sfWhyPD%-4c%-.0x%-4.4d%0.*d", 2, "", -10, -2147483647, -299945080, "BFZlFKWtH4tA81mrJh3mVsgTB5tlfxnz4iJoHVQsRllgyImaQUCixYq7Q8rmu8bhfc1ROfSzHwQCO9ZtHt3zqzZwumNm2ISIStXY", 'r', 2147483647, 0, -5, -2147483647);
+  printf: |00080000001-299945080               BfWhyPDr   7fffffff0000-2147483647-- 70 --|
+ftprintf: |   80000001-299945080               BfWhyPDr   0000-2147483647-- 62 --|
+
+Diff for printf("V%0uueY9A0tnYt%-.0u", 2147483647, -2147483647);
+  printf: |V2147483647ueY9A0tnYt2147483649-- 31 --|
+ftprintf: |V2147483647ueY9A0tnYt-- 21 --|
+
+Diff for printf("%%I%uZ%012xRCQj%-.*x%-u%%", -2147483647, -1222525170, 0, 1512992057, -193394292);
+  printf: |%I2147483649Z0000b721bf0eRCQj5a2e6d394101573004%-- 48 --|
+ftprintf: |%I2147483649Z-000b721bf0eRCQj4101573004%-- 40 --|
+
+Diff for printf("%.0dCQl%-13.2u2Or", -166568770, 2147483647);
+  printf: |-166568770CQl2147483647   2Or-- 29 --|
+ftprintf: |CQl2147483647   2Or-- 19 --|
+
+Diff for printf("jcGQk%2.3xynFW  SXu%-.0uTL", 0, 754986239);
+  printf: |jcGQk000ynFW  SXu754986239TL-- 28 --|
+ftprintf: |jcGQk000ynFW  SXuTL-- 19 --|
+
+Diff for printf("%u%15chvLtR%.*s%.0iSyB9u", 0, 'j', -1, "", -478888192);
+  printf: |0              jhvLtR-478888192SyB9u-- 36 --|
+ftprintf: |0              jhvLtRSyB9u-- 26 --|
+
+Diff for printf("%017X", -2147483647);
+  printf: |00000000080000001-- 17 --|
+ftprintf: |-0000000080000001-- 17 --|
+
+Diff for printf("0C7J%0*.4iy3ofRvmx%-14.2d", -5, 0, 1136324144);
+  printf: |0C7J0000 y3ofRvmx1136324144    -- 31 --|
+ftprintf: |0C7J 0000y3ofRvmx1136324144    -- 31 --|
+
+Diff for printf("%10c%.*xC%0.0X%-9c%c9lx9F9STm3eNq%-i", 'T', 1, 2147483647, -2147483647, 'H', '\0', 0);
+  printf: |         T7fffffffC80000001H        9lx9F9STm3eNq0-- 51 --|
+ftprintf: |         T7fffffffCH        9lx9F9STm3eNq0-- 43 --|
+
+Diff for printf("%-.0i", -2147483647);
+  printf: |-2147483647-- 11 --|
+ftprintf: |-- 0 --|
+
+Diff for printf("o41kcNot%-8x%019x%14i", 2147483647, -2147483647, 2147483647);
+  printf: |o41kcNot7fffffff0000000000080000001    2147483647-- 49 --|
+ftprintf: |o41kcNot7fffffff-000000000080000001    2147483647-- 49 --|
+
+Diff for printf("%u%-uxVR8II6ZA%014i56SIMi", 2147483647, -637752227, 0);
+  printf: |21474836473657215069xVR8II6ZA0000000000000056SIMi-- 49 --|
+ftprintf: |21474836473657215069xVR8II6ZA0000000000000000000000000000000000000000000000000000000056SIMi-- 91 --|
+
+Diff for printf("%-19.*s%.0XxNQ4vgqwVU b", 3, "94yPIEUmRPXBBwIjhsH3P5pO1LouWVyC8VGIWQbjiiLm1rfooUXn7AWyrAj qWGGE", -2147483647);
+  printf: |94y                80000001xNQ4vgqwVU b-- 39 --|
+ftprintf: |94y                xNQ4vgqwVU b-- 31 --|
+
+Diff for printf("%0dIWp7CHC6m8%c%20s1%-.4dco", 2147483647, '\0', "51aVyj", 2147483647);
+  printf: |2147483647IWp7CHC6m8              51aVyj12147483647co-- 54 --|
+ftprintf: |2147483647IWp7CHC6m8                   512147483647co-- 54 --|
+
+Diff for printf("DPO26hf32iZzYupHXpCOsG1%-.0x%.1xafX", 2147483647, 2147483647);
+  printf: |DPO26hf32iZzYupHXpCOsG17fffffff7fffffffafX-- 42 --|
+ftprintf: |DPO26hf32iZzYupHXpCOsG17fffffffafX-- 34 --|
+
+Diff for printf("%0XY2fH%-15X%-.0djVP ILu1Q", 0, -2147483647, 2147483647);
+  printf: |0Y2fH80000001       2147483647jVP ILu1Q-- 39 --|
+ftprintf: |0Y2fH80000001       jVP ILu1Q-- 29 --|
+
+Diff for printf("%.*s%.0idu %-.5dexRP%-7d%3i%-3.0d", 9, NULL, 2147483647, -2147483647, 1630475134, 807120242, -2147483647);
+  printf: |(null)2147483647du -2147483647exRP1630475134807120242-2147483647-- 64 --|
+ftprintf: |(null)du -2147483647exRP1630475134807120242-2147483647-- 54 --|
+
+Diff for printf(" Xz%0.0XLpspOGvWc%-.3X%-2c", 2147483647, -198295300, '\0');
+  printf: | Xz7FFFFFFFLpspOGvWcF42E40FC -- 30 --|
+ftprintf: | XzLpspOGvWcF42E40FC -- 22 --|
+
+Diff for printf("%uz%0.*XuKGmOvqj", -2147483647, 0, 226281875);
+  printf: |2147483649zD7CC993uKGmOvqj-- 26 --|
+ftprintf: |2147483649zuKGmOvqj-- 19 --|
+
+Diff for printf("EVI%020.4d%9s%.*X%-18.5uRSprW%s6%.0dLx", 2147483647, "", -1, 0, 0, "", 2147483647);
+  printf: |EVI          2147483647         000000             RSprW62147483647Lx-- 69 --|
+ftprintf: |EVI          2147483647         000000             RSprW6Lx-- 59 --|
+
+Diff for printf("YMom0jeUg0 Lb%c%-.4x%%%0.0X4 nS", 'v', -2147483647, 2147483647);
+  printf: |YMom0jeUg0 Lbv80000001%7FFFFFFF4 nS-- 35 --|
+ftprintf: |YMom0jeUg0 Lbv80000001%4 nS-- 27 --|
+
+Diff for printf("OWxOZJLFZ%-7c%-3.2iTi", 'Y', 0);
+  printf: |OWxOZJLFZY      00 Ti-- 21 --|
+ftprintf: |OWxOZJLFZY       00Ti-- 21 --|
+
+Diff for printf("o%c%11.0s%18c77IEJCNkqu0%-1xcMseLTMt", '\0', NULL, 'I', -2147483647);
+  printf: |o                            I77IEJCNkqu080000001cMseLTMt-- 58 --|
+ftprintf: |o     (null)                 I77IEJCNkqu080000001cMseLTMt-- 58 --|
+
+Diff for printf("3i0yvpC6 jBfv%0.*xrQ0", 9, -567225114);
+  printf: |3i0yvpC6 jBfv0de30d4e6rQ0-- 25 --|
+ftprintf: |3i0yvpC6 jBfv-0de30d4e6rQ0-- 26 --|
+
+Diff for printf("UsSm4J%-2imoUtlKJYkeV9%-.0x%-9stFs5J", 2147483647, -2147483647, NULL);
+  printf: |UsSm4J2147483647moUtlKJYkeV980000001(null)   tFs5J-- 50 --|
+ftprintf: |UsSm4J2147483647moUtlKJYkeV9(null)   tFs5J-- 42 --|
+
+Diff for printf("%-xgI%0.0d%-10uHN%12.3d%.1i%0.2i", 0, 2147483647, 222437221, -2077545535, 1583075866, 0);
+  printf: |0gI2147483647222437221 HN -2077545535158307586600-- 49 --|
+ftprintf: |0gI222437221 HN -2077545535158307586600-- 39 --|
+
+Diff for printf("%%%-12c%-*X%0.0diNU", '\0', 4, 2147483647, 2147483647);
+  printf: |%           7FFFFFFF2147483647iNU-- 34 --|
+ftprintf: |%           7FFFFFFFiNU-- 24 --|
+
+Diff for printf("byn7Y6K%-*u16WSjvuuN%-.0XrI%.3i%-.1u", 2, 2147483647, -2147483647, -2147483647, -2147483647);
+  printf: |byn7Y6K214748364716WSjvuuN80000001rI-21474836472147483649-- 57 --|
+ftprintf: |byn7Y6K214748364716WSjvuuNrI-21474836472147483649-- 49 --|
+
+Diff for printf("HV7QZQ3kqY%*.3i%0*XT%18x%18.5iURLM", 5, 2147483647, 10, -1974186475, 0, 0);
+  printf: |HV7QZQ3kqY2147483647008A544E15T                 0             00000URLM-- 71 --|
+ftprintf: |HV7QZQ3kqY2147483647-08A544E15T                 0             00000URLM-- 71 --|
+
+Diff for printf("rn%16.*s%0.3uIQEY", -8, "b8jK6huay4VnwuX9z9JPw8myzVfam1wzGjygV1TQg0np8hfpvpHd3gue2XMJZ8bowgopc9sAkitA98a34", 2147483647);
+  printf: |rnb8jK6huay4VnwuX9z9JPw8myzVfam1wzGjygV1TQg0np8hfpvpHd3gue2XMJZ8bowgopc9sAkitA98a342147483647IQEY-- 97 --|
+ftprintf: |rn        b8jK6hua2147483647IQEY-- 32 --|
+
+Diff for printf("%0*X%.*u2%9x%d%x%-13.3ud%-.1d", 1, 1611258320, 0, 1308289356, 2147483647, -2147483647, -261529922, -2147483647, 2147483647);
+  printf: |6009D9D013082893562 7fffffff-2147483647f0695ebe2147483649   d2147483647-- 71 --|
+ftprintf: |6009D9D02 7fffffff-2147483647f0695ebe2147483649   d2147483647-- 61 --|
+
+Diff for printf("%.0u%0.*xNqKzK", -228163136, -3, 2147483647);
+  printf: |40668041607fffffffNqKzK-- 23 --|
+ftprintf: |7fffffffNqKzK-- 13 --|
+
+Diff for printf("vwaZ%cBMO9Fw1%-.0XaeDO8", 'E', 1979634434);
+  printf: |vwaZEBMO9Fw175FED302aeDO8-- 25 --|
+ftprintf: |vwaZEBMO9Fw1aeDO8-- 17 --|
+
+Diff for printf("0X5 fcbVFNGQzQ6kS%-16.*s3fHmtCqct", -6, "crOktnmXy71vSvzVLX");
+  printf: |0X5 fcbVFNGQzQ6kScrOktnmXy71vSvzVLX3fHmtCqct-- 44 --|
+ftprintf: |0X5 fcbVFNGQzQ6kScrOktnmXy71vSvzV3fHmtCqct-- 42 --|
+
+Diff for printf("dMGy3%14.0s", "tyL2lTkXLSJwV2yncawCv1YKLTpR9ZhbTJz8qKS8DNtqyG36tmDuPdctln");
+  printf: |dMGy3              -- 19 --|
+ftprintf: |dMGy3             |
 
 
-Test 475 (X_prec0val0_w) : FAILED.
-    First line of code: {return test("%5.0X", 0);}
-      expected output : "     "
-      your output     : ""
-      expected (nonprintable as hex) : "     "
-      actual   (nonprintable as hex) : ""
-
-Test 476 (X_prec0val0_w_impl) : FAILED.
-    First line of code: {return test("%5.X", 0);}
-      expected output : "     "
-      your output     : ""
-      expected (nonprintable as hex) : "     "
-      actual   (nonprintable as hex) : ""
-
-Test 477 (X_prec0val0_wlj) : FAILED.
-    First line of code: {return test("%-5.0X", 0);}
-      expected output : "     "
-      your output     : ""
-      expected (nonprintable as hex) : "     "
-      actual   (nonprintable as hex) : ""
-
-Test 478 (X_prec0val0_wlj_impl) : FAILED.
-    First line of code: {return test("%-5.X", 0);}
-      expected output : "     "
-      your output     : ""
-      expected (nonprintable as hex) : "     "
-      actual   (nonprintable as hex) : ""
+Diff for printf("LnhYV%.5u%-15d%c%17x", 0, 0, '6', 2147483647);
