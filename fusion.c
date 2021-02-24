@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 23:48:27 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/23 19:03:13 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/24 10:18:49 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ void    fusion_c(int nbr, t_flag_len *flag)
     if (flag->nbr_width > 1)
         if (!(flag->final_str_flag = ft_calloc(flag->nbr_width + 1, sizeof(char))))
             return ;
-    // printf("pouet\n");
-    // printf("width = {%d}\n", flag->nbr_width);
     if (flag->conv_per == 1 && flag->padded_zero == 1)
         ft_fill_with_c(flag->final_str_flag, '0', flag->nbr_width + 1);
     else
@@ -106,7 +104,8 @@ void    fusion_p(char *str, int max, int len, t_flag_len *flag)
 
 void    ft_final_size(int width, int prec, int len_str, t_flag_len *flag)
 {
-    if (len_str <= width && flag->precision == -1)
+    if ((len_str <= width && flag->precision == -1)
+    || (flag->dot == 1 && prec == 0 && width > 0))
         flag->size_final_str_flag = width;
     else if ((len_str >= width && flag->precision == -1)
     || (len_str <= prec && flag->width == -1))
@@ -159,14 +158,12 @@ int    where_to_begin(int width, int prec, int len_str, t_flag_len *flag)
         else
             start = 0;
     }
-    // printf("which is smaller = {%d}, start = {%d}\n", min, start);
-    // printf("start = {%d}\n", start);
     return (start);
 }
 
 int     alloc_if_w_and_p(int width, int prec, int len_str, t_flag_len *flag)
 {
-    if (width >= prec)
+    if (width >= prec || prec == 0)
     {
         if (!(flag->final_str_flag = ft_calloc(width + 1, sizeof(char))))
             return (0);
@@ -199,14 +196,8 @@ int    alloc_size(int width, int prec, int len_str, t_flag_len *flag)
         if (alloc_if_w_and_p(width, prec, len_str, flag) == 0)
             return (0);
     }
-    else if (flag->dot == 1 && prec == 0 && width > 0)
-    {
-        if (!(flag->final_str_flag = ft_calloc(width + 1, sizeof(char))))
-            return (0);
-        ft_fill_with_c(flag->final_str_flag, ' ', width + 1);
-        return (0);
-    }
-    else if (len_str <= width && flag->precision == -1)
+    else if ((len_str <= width && flag->precision == -1)
+    || (flag->dot == 1 && prec == 0 && width > 0))
     {
         if (!(flag->final_str_flag = ft_calloc(width + 1, sizeof(char))))
             return (0);
@@ -228,8 +219,6 @@ void    fusion_s(char *str, int start, int last, t_flag_len *flag)
     int i;
 
     i = 0;
-    // printf("precision = {%d}\n", flag->nbr_precision);
-    // printf("last = {%d}\n", last);
     if (flag->minus == 1)
     {
         start = 0;
@@ -260,13 +249,14 @@ void    prep_fusion_s(char *str, int width, int prec, int len_str, t_flag_len *f
     ret = prec;
     if (ret < 0)
 		prec *= -1;
-        // printf("prec = {%d}\n", prec);
     if (alloc_size(width, prec, len_str, flag) == 0)
         return ;
     ft_final_size(width, prec, len_str, flag);
     ft_fill_with_c(flag->final_str_flag, ' ', flag->size_final_str_flag + 1);
+    if ((flag->precision == 1 && flag->nbr_precision == 0)
+    || (flag->dot == 1 && prec == 0 && width > 0))
+        return ;
     start = where_to_begin(width, prec, len_str, flag);
-    // printf("start = {%d}\n", start);
     if ((len_str >= prec && prec >= width) || flag->precision == -1
     || (prec >= len_str && len_str >= width))
         last = flag->size_final_str_flag;
@@ -294,9 +284,6 @@ size_t     check_where_zero_or_space(t_flag_len *flag, char c)
        return (size);
     while (flag->final_str_flag[last_seen] == c)
         last_seen++;
-    // if (nbr < 0 && flag->minus == 1 && flag->nbr_precision < flag->nbr_width)
-    //     last_seen++;
-        // printf("last_seen = {%zu}\n", last_seen);
     return (last_seen);
 }
 

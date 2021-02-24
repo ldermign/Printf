@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/23 16:56:20 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/24 11:15:13 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	make_flags_right(t_flag_len *flag)
 	// 	flag->nbr_precision = 0;
 	if (flag->nbr_width < 0)
 	{
+		// printf("test\n");
 		flag->nbr_width *= -1;
 		flag->minus = 1;
 	}

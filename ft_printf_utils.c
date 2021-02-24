@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/23 16:13:16 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/24 11:35:17 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,74 +268,6 @@ char	*ft_itoa_base(size_t nbr, char *base)
 	}
 	return (dst);
 }
-
-// int		ft_len_int(long n)
-// {
-// 	int len_int;
-
-// 	len_int = 0;
-// 	n = n < 0 ? -n : n;
-// 	while (n >= 10)
-// 	{
-// 		n /= 10;
-// 		len_int++;
-// 	}
-// 	return (len_int + 1);
-// }
-
-// char	*ft_itoa(size_t nbr)
-// {
-// 	char	*dst;
-// 	long	nb;
-// 	int		neg;
-// 	int		len;
-
-// 	nb = nbr;
-// 	len = ft_len_int(nb);
-// 	if (!(dst = (char*)malloc(sizeof(char) * len + 1 + (nbr < 0))))
-// 		return (NULL);
-// 	if (nb < 0)
-// 		dst[0] = '-';
-// 	len = nb < 0 ? len + 1 : len;
-// 	nb = nb < 0 ? -nb : nb;
-// 	dst[len] = '\0';
-// 	len--;
-// 	while (nb >= 10)
-// 	{
-// 		dst[len] = (nb % 10) + '0';
-// 		nb /= 10;
-// 		len--;
-// 	}
-// 	dst[len] = (nb % 10) + '0';
-// 	return (dst);
-// }
-
-// char	*ft_itoa_base(size_t nbr, char *base)
-// {
-// 	size_t	len_nbr;
-// 	size_t	size_base;
-// 	size_t	nbr_positif;
-// 	char	*dst;
-
-// 	size_base = ft_strlen(base);
-// 	len_nbr = ft_len_nb(nbr, size_base);
-// 	nbr_positif = nbr;
-// 	if ((dst = malloc(sizeof(char) * (len_nbr + 1 + (nbr < 0)))) == NULL)
-// 		return (NULL);
-// 	if (nbr_positif < 0)
-// 	{
-// 		nbr_positif = -nbr_positif;
-// 		len_nbr++;
-// 		dst[0] = '-';
-// 	}
-// 	dst[len_nbr--] = '\0';
-// 	while (len_nbr >= size_base)
-// 	{
-// 		dst[len_nbr--] = ft_itoa_base(nbr_positif % size_base, base);
-// 		nbr_positif /= size_base;
-// 	}
-// 	return (dst);
-// }
 
 int		ft_len_int(long n)
 {

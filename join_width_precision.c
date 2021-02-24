@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 09:36:41 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/23 13:45:55 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/24 10:19:31 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	width_sup(t_flag_len *flag)
 	j = 0;
 	max = flag->nbr_width;
 	min = flag->nbr_precision;
-	// printf()
 	while (i < (max - min))
 	{
 		flag->final_str_flag[i] = flag->str_width[i];
