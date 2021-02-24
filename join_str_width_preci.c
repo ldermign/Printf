@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 09:36:41 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/24 10:19:31 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/24 14:34:15 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,24 +102,13 @@ void	join_str_width_and_precision(t_flag_len *flag)
 	}
 	if (flag->width == 1 && flag->precision == 1)
 	{
-		// printf("pouet\n");
 		if (flag->nbr_precision >= flag->nbr_width)
 			precision_sup_or_equal_width(flag);
 		else
 			width_sup(flag);
 	}
-	// if (flag->width == 1 && flag->precision == -1)
-	// if (flag->padded_zero == 1 && flag->precision == -1 && flag->minus == 1)
-		// ft_fill_with_c(flag->final_str_flag, ' ', size + 1);
-	// else if (flag->precision == 1 && flag->width == -1)
-	// if (flag->padded_zero == 1 && flag->precision == -1 && flag->minus == 0)
-		// ft_fill_with_c(flag->final_str_flag, '0', size + 1);
-	// printf("padded_zero = {%d}, precision = {%d}, width = {%d}, minus = {%d}\n", flag->padded_zero, flag->precision, flag->width, flag->minus);
 	if (flag->width == 1 && flag->precision == -1 && flag->padded_zero == 0)
-	{
 		ft_fill_with_c(flag->final_str_flag, ' ', size + 1);
-		// printf("test\n");
-	}
 	else if ((flag->precision == 1 && flag->width == -1)
 	|| (flag->padded_zero == 1 && flag->precision == -1))
 		ft_fill_with_c(flag->final_str_flag, '0', size + 1);

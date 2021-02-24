@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/24 11:15:13 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/24 14:34:00 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,13 @@
 
 static void	make_flags_right(t_flag_len *flag)
 {
-	// printf("padded_zero = {%d}, minus = {%d}\n", flag->padded_zero, flag->minus);
-	// if (flag->conv_d_i == 1 && flag->width == -1 && flag->precision == 1)
-	// 	flag->nbr_precision = 0;
 	if (flag->nbr_width < 0)
 	{
-		// printf("test\n");
 		flag->nbr_width *= -1;
 		flag->minus = 1;
 	}
 	if (flag->padded_zero == 1 && flag->minus == 1)
-	{
-		// printf("test\n");
 		flag->padded_zero = 0;
-	}
-	// if (flag->nbr_precision < 0 && flag->width == 1)
-	// 	flag->nbr_precision *= -1;
 }
 
 static void	ft_struct_conv(char c, t_flag_len *flag)
@@ -57,8 +48,6 @@ static int		which_conv(const char *str, va_list ap, t_flag_len *flag)
 	make_flags_right(flag);
 	flag_width(flag);
 	flag_precision(flag);
-		// printf("padded_zero = {%d}, minus = {%d}\n", flag->padded_zero, flag->minus);
-	// printf("padded_zero = {%d}, minus = {%d}, nbr_width = {%d}, nbr_precision = {%d}\n", flag->padded_zero, flag->minus, flag->nbr_width, flag->nbr_precision);
 	if (flag->conv_c == 1)
 		conv_c(ap, flag);
 	else if (flag->conv_s == 1)

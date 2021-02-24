@@ -6,41 +6,11 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:19:29 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/24 11:35:17 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/24 16:04:09 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	*ft_calloc(size_t nmemb, size_t size)
-{
-	size_t			i;
-	unsigned int	len;
-	unsigned char	*str;
-
-	i = 0;
-	len = nmemb * size;
-	if ((str = malloc(len)) == NULL)
-		return (NULL);
-	while (i < len)
-	{
-		str[i] = '\0';
-		i++;
-	}
-	return (str);
-}
-
-size_t	ft_strlen(const char *str)
-{
-	int i;
-
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
 
 void	ft_putchar(char c, t_flag_len *len)
 {
@@ -57,19 +27,6 @@ void	ft_putstr(char *str, t_flag_len *len)
 	size = ft_strlen(str);
 	write(1, str, size);
 	len->final_len += (int)size;
-}
-
-void	ft_fill_with_c(char *str, char c, int size)
-{
-	int i;
-
-	i = 0;
-	while (i < (size - 1))
-	{
-		str[i] = c;
-		i++;
-	}
-	str[i] = '\0';
 }
 
 void	*ft_memmove(char *dst, char *src, size_t n)
@@ -95,77 +52,6 @@ void	*ft_memmove(char *dst, char *src, size_t n)
 			i++;
 		}
 	}
-	return (dst);
-}
-
-void	*fill_from_end(char *dst, char *src, size_t n)
-{
-	size_t from_last;
-
-	from_last = n;
-	if (!dst && !src)
-		return (NULL);
-	while (from_last > 0)
-	{
-		dst[from_last] = src[from_last];
-		from_last--;
-	}
-	return (dst);
-}
-
-void	ft_putnbr_base_printf(long nbr, char *base, t_flag_len *len)
-{
-	long size_base;
-
-	size_base = ft_strlen(base);
-	if (nbr < 0)
-	{
-		ft_putchar('-', len);
-		nbr *= -1;
-	}
-	if (nbr < size_base)
-		ft_putchar(base[nbr], len);
-	if (nbr >= size_base)
-	{
-		ft_putnbr_base_printf((nbr / size_base), base, len);
-		ft_putnbr_base_printf((nbr % size_base), base, len);
-	}
-}
-
-char	*ft_strcat(char *dst, char *src)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (dst[i])
-		i++;
-	while (src[j])
-	{
-		dst[i + j] = src[j];
-		j++;
-	}
-	dst[i + j] = '\0';
-	return (dst);
-}
-
-char	*ft_strncat(char *dst, char *src, size_t nb)
-{
-	size_t i;
-	size_t j;
-
-	i = 0;
-	j = 0;
-	while (dst[i])
-		i++;
-	while (src[j] && j < nb)
-	{
-		dst[i] = src[j];
-		i++;
-		j++;
-	}
-	dst[i] = '\0';
 	return (dst);
 }
 
@@ -217,111 +103,4 @@ int	ft_atoi_printf(char *str)
 	if (neg % 2 != 0)
 		nbr *= -1;
 	return (nbr);
-}
-
-size_t		ft_len_nbr(size_t nbr, size_t size_base)
-{
-	size_t	size_nbr;
-	
-	size_nbr = 0;
-	if (nbr == 0)
-		size_nbr = 1;
-	if (nbr < 0)
-	{
-		nbr *= -1;
-		size_nbr++;
-	}
-	while (nbr > 0)
-	{
-		nbr /= size_base;
-		size_nbr++;
-	}
-	return (size_nbr);
-}
-
-char	*ft_itoa_base(size_t nbr, char *base)
-{
-	size_t	size_base;
-	size_t	size_nbr;
-	size_t	temp;
-	char	*dst;
-
-	size_base = ft_strlen(base);
-	size_nbr = ft_len_nbr(nbr, size_base);
-	temp = 0;
-	if ((dst = malloc(sizeof(char) * (size_nbr + 1))) == NULL)
-		return (NULL);
-	dst[size_nbr--] = '\0';
-	if (nbr == 0)
-		dst[0] = '0';
-	else if (nbr < 0)
-	{
-		dst[0] = '-';
-		nbr *= -1;
-	}
-	while (nbr > 0)
-	{
-		temp = nbr % size_base;
-		dst[size_nbr] = base[temp];
-		nbr /= size_base;
-		size_nbr--;
-	}
-	return (dst);
-}
-
-int		ft_len_int(long n)
-{
-	int len_int;
-
-	len_int = 0;
-	if (n < 0)
-		n = -n;
-	while (n >= 10)
-	{
-		n /= 10;
-		len_int++;
-	}
-	return (len_int + 1);
-}
-
-char	*ft_itoa(int n)
-{
-	char	*dst;
-	long	nb;
-	int		len;
-
-	nb = n;
-	len = ft_len_int(nb) + (nb < 0);
-	if ((dst = (char*)malloc(sizeof(char) * len + 1 + (n < 0))) == NULL)
-		return (NULL);
-	if (nb < 0 && (nb = -nb))
-		*dst = '-';
-	dst[len--] = '\0';
-	while (len >= (n < 0))
-	{
-		dst[len--] = (nb % 10) + '0';
-		nb /= 10;
-	}
-	return (dst);
-}
-
-char	*ft_itoa_unsd(unsigned int n)
-{
-	char			*dst;
-	int				len;
-	unsigned int	nb;
-
-	nb = n;
-	len = ft_len_int(nb) + (nb < 0);
-	if ((dst = (char*)malloc(sizeof(char) * len + 1 + (n < 0))) == NULL)
-		return (NULL);
-	if (nb < 0 && (nb = -nb))
-		*dst = '-';
-	dst[len--] = '\0';
-	while (len >= (n < 0))
-	{
-		dst[len--] = (nb % 10) + '0';
-		nb /= 10;
-	}
-	return (dst);
 }

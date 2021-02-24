@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/22 21:32:18 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/24 16:07:28 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,8 @@ void			ft_init_flag_len_flag(t_flag_len *flag);
 */
 
 int				ft_check_flag(const char *str);
-int				ft_is_flag(char c);
 int				ft_is_digit(char c);
 int				ft_is_conv(char c);
-int				ft_is_width(char c); //largeur
-int				ft_is_all(char c);
 int				ft_no_flag(t_flag_len *flag);
 
 /*
@@ -86,11 +83,6 @@ void			ft_putchar(char c, t_flag_len *len);
 void			ft_putstr(char *str, t_flag_len *len);
 size_t			ft_strlen(const char *str);
 char			*ft_itoa(int nb);
-void			ft_putnbr_base_printf(long nbr, char *base, t_flag_len *len);
-char			*ft_strcat(char *dst, char *src);
-char			*ft_strncat(char *dst, char *src, size_t nb);
-void			ft_putnbr(unsigned int nbr, t_flag_len *len);
-void			ft_putnbr_adr(unsigned long nbr, t_flag_len *len);
 char			*ft_strjoin(char const *s1, char const *s2);
 int				ft_atoi_printf(char *str);
 void			*ft_memmove(char *dst, char *src, size_t n);
@@ -101,6 +93,7 @@ void			flip_zero_and_space(t_flag_len *flag);
 void			*ft_calloc(size_t nmemb, size_t size);
 char			*ft_itoa_base(size_t nbr, char *base);
 char			*ft_itoa_unsd(unsigned int n);
+int				which_is_smaller(int width, int prec, int len_str)
 
 
 /*
@@ -117,28 +110,13 @@ void			flag_width(t_flag_len *flag);
 */
 
 void			join_str_width_and_precision(t_flag_len *flag);
-void			conv_d_i(va_list ap, t_flag_len *flag);
-void			conv_s(va_list ap, t_flag_len *flag);
-void			conv_c(va_list ap, t_flag_len *flag);
 void			conv_u(va_list ap, t_flag_len *flag);
-void			conv_per(t_flag_len *flag);
 void			conv_x_X(char c, va_list ap, t_flag_len *len);
 void			conv_p(va_list ap, t_flag_len *flag);
+void			conv_d_i(va_list ap, t_flag_len *flag);
+void			conv_per(t_flag_len *flag);
+void			conv_c(va_list ap, t_flag_len *flag);
+void			conv_s(va_list ap, t_flag_len *flag);
 void   			fusion_conv_strflag(char *str, int nbr, t_flag_len *flag);
-
-
-
-
-
-
-
-void    printf_structure(t_flag_len *flag);
-
-
-
-
-
-
-
 
 #endif
