@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 09:36:41 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/25 15:45:02 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/25 19:42:11 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	flip_zero_and_space(t_flag_len *flag)
 	i = 0;
 	here = 0;
 	size = flag->size_final_str_flag;
+	// printf("flag str flag = {%s}\n", flag->final_str_flag);
 	while (flag->final_str_flag[here + 1] && (here < flag->size_final_str_flag))
 	{
 		here++;
@@ -30,11 +31,10 @@ void	flip_zero_and_space(t_flag_len *flag)
 	}
 	if (size > here && here > 0)
 	{
-		if (here == 1)
-			here--;
 		size--;
+		if (here == size)
+			here--;
 			// printf("here = {%d}, size = {%d}\n", here, size);
-
 		if (flag->final_str_flag[0] == '-')
 			i++;
 		if (flag->final_str_flag[size] == '\0')
@@ -48,6 +48,8 @@ void	flip_zero_and_space(t_flag_len *flag)
 			i++;
 		}
 	}
+		// printf("flag str flag = {%s}\n", flag->final_str_flag);
+
 }
 
 void	width_sup(t_flag_len *flag)
