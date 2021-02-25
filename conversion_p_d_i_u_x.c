@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conversion.c                                       :+:      :+:    :+:   */
+/*   conversion_p_d_i_u_x.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/24 14:38:25 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/25 11:48:01 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void    conv_p(va_list ap, t_flag_len *flag)
+void	conv_p(va_list ap, t_flag_len *flag)
 {
-	unsigned long 	arg_unsdint;
+	unsigned long	arg_unsdint;
 	void			*adresse_ptr;
 	char			*temp;
 	char			*str_adresse;
 
-    adresse_ptr = va_arg(ap, void*);
+	adresse_ptr = va_arg(ap, void*);
 	arg_unsdint = (unsigned long)(adresse_ptr);
 	str_adresse = ft_itoa_base(arg_unsdint, "0123456789abcdef");
 	if (adresse_ptr == NULL && flag->precision == -1 && flag->dot == 1)
@@ -27,7 +27,7 @@ void    conv_p(va_list ap, t_flag_len *flag)
 	else
 		temp = ft_strjoin("0x", str_adresse);
 	if (ft_no_flag(flag) || flag->nbr_width < (int)ft_strlen(temp))
-    	ft_putstr(temp, flag);
+		ft_putstr(temp, flag);
 	else
 	{
 		fusion_conv_strflag(temp, ft_strlen(temp), flag);
@@ -36,21 +36,26 @@ void    conv_p(va_list ap, t_flag_len *flag)
 	free(str_adresse);
 }
 
-void    conv_d_i(va_list ap, t_flag_len *flag)
+void	conv_d_i(va_list ap, t_flag_len *flag)
 {
-	int 	arg_int;
+	int		arg_int;
 	int		size_temp;
 	char	*temp;
 
-    arg_int = va_arg(ap, int);
+	arg_int = va_arg(ap, int);
 	temp = ft_itoa(arg_int);
 	size_temp = ft_strlen(temp);
-	if (flag->dot == 1 && flag->nbr_precision == 0 && flag->nbr_width == 0)
+	if (flag->dot == 1 && arg_int == 0 && ((flag->precision == 1 && flag->nbr_width == 0
+	&& flag->nbr_precision == 0)
+	|| ((flag->nbr_width == 0 && flag->precision == -1)
+	|| (flag->width == -1 && flag->nbr_precision == 0)
+	|| (flag->nbr_width == 0 && flag->nbr_precision == 0))))
 	{
 		free(temp);
-        return ;
+		return ;
 	}
-	if ((size_temp >= flag->nbr_precision) && (size_temp >= flag->nbr_width))
+	// printf("flagpadded = {%d}\n", flag->padded_zero);
+	if (size_temp > flag->nbr_precision && size_temp > flag->nbr_width)
 		ft_putstr(temp, flag);
 	else
 	{
@@ -60,20 +65,20 @@ void    conv_d_i(va_list ap, t_flag_len *flag)
 	free(temp);
 }
 
-void    conv_u(va_list ap, t_flag_len *flag)
+void	conv_u(va_list ap, t_flag_len *flag)
 {
-	unsigned int 	arg_unsdint;
+	unsigned	int arg_unsdint;
 	int				size_temp;
 	char			*temp;
 
-    arg_unsdint = va_arg(ap, unsigned int);
+	arg_unsdint = va_arg(ap, unsigned int);
 	temp = ft_itoa_unsd(arg_unsdint);
 	size_temp = ft_strlen(temp);
 	if (arg_unsdint == 0
 	&& (flag->dot == 1 && flag->nbr_precision == 0 && flag->width == -1))
 	{
 		free(temp);
-        return ;
+		return ;
 	}
 	if ((size_temp >= flag->nbr_precision) && (size_temp >= flag->nbr_width))
 		ft_putstr(temp, flag);
@@ -85,7 +90,7 @@ void    conv_u(va_list ap, t_flag_len *flag)
 	free(temp);
 }
 
-void	conv_x_X(char c, va_list ap, t_flag_len *flag)
+void	conv_x(char c, va_list ap, t_flag_len *flag)
 {
 	unsigned int	arg_unsdint;
 	int				size_temp;
@@ -103,7 +108,7 @@ void	conv_x_X(char c, va_list ap, t_flag_len *flag)
 	&& (flag->dot == 1 && flag->nbr_precision == 0 && flag->width == -1))
 	{
 		free(temp);
-        return ;
+		return ;
 	}
 	if ((size_temp >= flag->nbr_precision) && (size_temp >= flag->nbr_width))
 		ft_putstr(temp, flag);
@@ -112,5 +117,5 @@ void	conv_x_X(char c, va_list ap, t_flag_len *flag)
 		fusion_conv_strflag(temp, arg_unsdint, flag);
 		ft_putstr(flag->final_str_flag, flag);
 	}
-	free (temp);
+	free(temp);
 }

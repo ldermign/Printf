@@ -6,10 +6,9 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/24 16:07:28 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/25 10:28:38 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
@@ -18,24 +17,8 @@
 # include <unistd.h>
 # include <stdarg.h>
 
-/*
-**	TEJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
-*/
-
-#define KRED  "\x1B[0;31m" // ROUGE
-#define KGRN  "\x1B[0;32m" // VERT
-#define KYEL  "\x1B[0;33m" // JAUNE
-#define KBLU  "\x1B[0;34m" // BLEU
-#define KMAG  "\x1B[0;35m" // MAGENTA
-#define KCYN  "\x1B[0;36m" // CYAN
-#define KWHT  "\x1B[0;37m" // BLANC
-#define KGRE  "\x1b[1;30m" // VERT
-#define CLR_COLOR "\x1b[0m" // CLEAR COLOR
-
-// printf("666666\n");
 # include <libc.h> /////////////////////////////////////////////////////////////
 
-int				ft_printf(const char *str, ...);
 
 /*
 **	Structures cspdiuxX%
@@ -63,8 +46,6 @@ typedef	struct	s_struct
 	int		conv_per;
 	int		dot;
 }				t_flag_len;
-void			ft_init_flag_len_flag(t_flag_len *flag);
-
 
 /*
 **	Checks
@@ -93,15 +74,15 @@ void			flip_zero_and_space(t_flag_len *flag);
 void			*ft_calloc(size_t nmemb, size_t size);
 char			*ft_itoa_base(size_t nbr, char *base);
 char			*ft_itoa_unsd(unsigned int n);
-int				which_is_smaller(int width, int prec, int len_str)
-
+int				which_is_smaller(int width, int prec, int len_str);
 
 /*
 **	Flags
 */
 
+void			ft_init_flag_len_flag(t_flag_len *flag);
 void			string_of_flag_to_int(char *str, va_list ap, t_flag_len *flag);
-int				which_flag(const char *str, va_list ap, t_flag_len *flag);
+int				check_flags(const char *str, va_list ap, t_flag_len *flag);
 void			flag_precision(t_flag_len *flag);
 void			flag_width(t_flag_len *flag);
 
@@ -109,14 +90,27 @@ void			flag_width(t_flag_len *flag);
 **	Conversion
 */
 
-void			join_str_width_and_precision(t_flag_len *flag);
 void			conv_u(va_list ap, t_flag_len *flag);
-void			conv_x_X(char c, va_list ap, t_flag_len *len);
+void			conv_x(char c, va_list ap, t_flag_len *len);
 void			conv_p(va_list ap, t_flag_len *flag);
 void			conv_d_i(va_list ap, t_flag_len *flag);
-void			conv_per(t_flag_len *flag);
-void			conv_c(va_list ap, t_flag_len *flag);
 void			conv_s(va_list ap, t_flag_len *flag);
+void			conv_c(va_list ap, t_flag_len *flag);
+void			conv_per(t_flag_len *flag);
 void   			fusion_conv_strflag(char *str, int nbr, t_flag_len *flag);
+int				ft_printf(const char *str, ...);
+
+/*
+**	Fusion str flags and str conv
+*/
+
+void			join_str_width_and_precision(t_flag_len *flag);
+void    prep_fus(char *str, int width, int prec, int len_str, t_flag_len *flag);
+void    		fusion_d_i_u(char *str, int nbr, t_flag_len *flag);
+void    		fusion_s(char *str, int start, int last, t_flag_len *flag);
+void    		fusion_p(char *str, int max, int len, t_flag_len *flag);
+void    		fusion_c(int nbr, t_flag_len *flag);
+void    		fusion_c(int nbr, t_flag_len *flag);
+
 
 #endif

@@ -6,18 +6,19 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 15:00:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/24 15:56:11 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/25 10:01:41 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
 
 int     alloc_if_w_and_p(int width, int prec, int len_str, t_flag_len *flag)
 {
     if (width >= prec || prec == 0)
     {
         if (!(flag->final_str_flag = ft_calloc(width + 1, sizeof(char))))
-            return (0);
+        return (0);
     }
     else if (prec > width)
     {
@@ -40,7 +41,7 @@ int     alloc_if_w_and_p(int width, int prec, int len_str, t_flag_len *flag)
     return (1);
 }
 
-int    alloc_size(int width, int prec, int len_str, t_flag_len *flag)
+int  alloc_size(int width, int prec, int len_str, t_flag_len *flag)
 {
     if (flag->precision == 1 && flag->width == 1)
     {
@@ -63,32 +64,6 @@ int    alloc_size(int width, int prec, int len_str, t_flag_len *flag)
         if (!(flag->final_str_flag = ft_calloc(prec + 1, sizeof(char))))
             return (0);
     return (1);
-}
-
-void    fusion_s(char *str, int start, int last, t_flag_len *flag)
-{
-    int i;
-
-    i = 0;
-    if (flag->minus == 1)
-    {
-        start = 0;
-        while (start < last && str[start] && flag->final_str_flag[start])
-        {
-            flag->final_str_flag[start] = str[start];
-            start++;
-        }
-    }
-    else
-    {
-        last = flag->size_final_str_flag;
-        while (str[i] && flag->final_str_flag[start] && start <= last)
-        {
-            flag->final_str_flag[start] = str[i];
-            i++;
-            start++;
-        }
-    }
 }
 
 void    ft_final_size(int width, int prec, int len_str, t_flag_len *flag)
@@ -117,11 +92,11 @@ void    ft_final_size(int width, int prec, int len_str, t_flag_len *flag)
     }
 }
 
-int    where_to_begin(int width, int prec, int len_str, t_flag_len *flag)
+int  where_to_begin(int width, int prec, int len_str, t_flag_len *flag)
 {
     int start;
     int min;
-    
+        
     start = 0;
     min = which_is_smaller(width, prec, len_str);
     if (flag->width == 1 && flag->precision == -1)
@@ -138,8 +113,7 @@ int    where_to_begin(int width, int prec, int len_str, t_flag_len *flag)
     return (start);
 }
 
-
-void    prep_fusion_s(char *str, int width, int prec, int len_str, t_flag_len *flag)
+void    prep_fus(char *str, int width, int prec, int len_str, t_flag_len *flag)
 {
     int start;
     int last;
@@ -166,20 +140,4 @@ void    prep_fusion_s(char *str, int width, int prec, int len_str, t_flag_len *f
     if (ret < 0)
         last = len_str;
     fusion_s(str, start, last, flag);
-}
-
-void    fusion_conv_strflag(char *str, int nbr, t_flag_len *flag)
-{
-    int len_str;
-
-    len_str = ft_strlen(str);
-    if ((flag->conv_c == 1 && flag->padded_zero == 0 && flag->precision == -1)
-    || flag->conv_per == 1)
-		fusion_c(nbr, flag);
-	else if (flag->conv_s == 1 && flag->padded_zero == 0)
-		prep_fusion_s(str, flag->nbr_width, flag->nbr_precision, len_str, flag);
-	else if (flag->conv_p == 1)
-	 	fusion_p(str, flag->nbr_width, len_str, flag);
-	else if (flag->conv_d_i == 1 || flag->conv_u == 1 || flag->conv_x == 1)
-		fusion_d_i_u(str, nbr, flag);
 }

@@ -6,13 +6,13 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/24 14:34:00 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/25 15:27:08 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	make_flags_right(t_flag_len *flag)
+void	make_flags_right(t_flag_len *flag)
 {
 	if (flag->nbr_width < 0)
 	{
@@ -23,7 +23,7 @@ static void	make_flags_right(t_flag_len *flag)
 		flag->padded_zero = 0;
 }
 
-static void	ft_struct_conv(char c, t_flag_len *flag)
+void	ft_struct_conv(char c, t_flag_len *flag)
 {
 	if (c == 'c')
 		flag->conv_c = 1;
@@ -41,9 +41,8 @@ static void	ft_struct_conv(char c, t_flag_len *flag)
 		flag->conv_per = 1;
 }
 
-static int		which_conv(const char *str, va_list ap, t_flag_len *flag)
+int		which_conv(const char *str, va_list ap, t_flag_len *flag)
 {
-
 	ft_struct_conv(*str, flag);
 	make_flags_right(flag);
 	flag_width(flag);
@@ -59,7 +58,7 @@ static int		which_conv(const char *str, va_list ap, t_flag_len *flag)
 	else if (flag->conv_u == 1)
 		conv_u(ap, flag);
 	else if (flag->conv_x == 1)
-		conv_x_X(*str, ap, flag);
+		conv_x(*str, ap, flag);
 	else if (flag->conv_per == 1)
 		conv_per(flag);
 	if (flag->str_width != NULL)
@@ -71,7 +70,7 @@ static int		which_conv(const char *str, va_list ap, t_flag_len *flag)
 	return (1);
 }
 
-static int		ft_printf_inside_job(const char *str, va_list ap)
+int		ft_printf_inside_job(const char *str, va_list ap)
 {
 	t_flag_len	flag;
 	int			i;
@@ -82,7 +81,7 @@ static int		ft_printf_inside_job(const char *str, va_list ap)
 	{
 		if (str[i] == '%' && ++i)
 		{
-			i += which_flag(&str[i], ap, &flag);
+			i += check_flags(&str[i], ap, &flag);
 			if (ft_is_conv(str[i]))
 				i += which_conv(&str[i], ap, &flag);
 		}
@@ -97,9 +96,9 @@ static int		ft_printf_inside_job(const char *str, va_list ap)
 
 int		ft_printf(const char *str, ...)
 {
-	int			final_length;
-
+	int		final_length;
 	va_list ap;
+
 	va_start(ap, str);
 	final_length = ft_printf_inside_job(str, ap);
 	va_end(ap);

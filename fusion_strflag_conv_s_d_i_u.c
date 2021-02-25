@@ -1,103 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fusion_str_flag_str_conv.c                         :+:      :+:    :+:   */
+/*   fusion_strflag_conv_s_d_i_u.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/13 23:48:27 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/24 15:54:09 by ldermign         ###   ########.fr       */
+/*   Created: 2021/02/25 09:53:45 by ldermign          #+#    #+#             */
+/*   Updated: 2021/02/25 16:02:28 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void    ft_cara_non_imp(int nbr, t_flag_len *flag)
-{
-    if (flag->minus == 1)
-    {
-        ft_putchar(nbr, flag);
-        while (flag->nbr_width > 1 && flag->nbr_width--)
-            ft_putchar(' ', flag);
-    }
-    else
-    {
-        while (flag->nbr_width > 1 && flag->nbr_width--)
-            ft_putchar(' ', flag);
-        ft_putchar(nbr, flag);
-    }
-}
 
-void    fusion_c(int nbr, t_flag_len *flag)
+void    ft_nbr_inf_zero(int space, int zero, t_flag_len *flag)
 {
-    if (flag->nbr_width > 1)
-        if (!(flag->final_str_flag = ft_calloc(flag->nbr_width + 1, sizeof(char))))
-            return ;
-    if (flag->conv_per == 1 && flag->padded_zero == 1)
-        ft_fill_with_c(flag->final_str_flag, '0', flag->nbr_width + 1);
-    else
-        ft_fill_with_c(flag->final_str_flag, ' ', flag->nbr_width + 1);
-    if (nbr <= 31)
-    {
-        ft_cara_non_imp(nbr, flag);
-        return ;
-    }
-    if (flag->minus == 1)
-        flag->final_str_flag[0] = nbr;
-    else
-        flag->final_str_flag[flag->nbr_width - 1] = nbr;
-    
-}
-
-void    fusion_p(char *str, int max, int len, t_flag_len *flag)
-{
-    int i;
-    int start;
-
-    i = 0;
-    start = max - len;
-    if (flag->nbr_width <= flag->nbr_precision)
-    {
-        start = 0;
-        len = flag->nbr_precision;
-    }
-    if (!(flag->final_str_flag = ft_calloc(max + 1, sizeof(char))))
-            return ;
-    ft_fill_with_c(flag->final_str_flag, ' ', max + 1);
-    if (flag->minus == 0)
-    {
-        while (str[i] && flag->final_str_flag[start] && start < max)
-        {
-            flag->final_str_flag[start] = str[i];
-            i++;
-            start++;
-        }
-    }
-    else
-    {
-        while (i < len && str[i] && flag->final_str_flag[i])
-        {
-            flag->final_str_flag[i] = str[i];
-            i++;
-        }
-    }
-}
-
-void    ft_nbr_inf_zero(int place_space, int place_zero, t_flag_len *flag)
-{
-    if (flag->padded_zero == 1 && flag->precision == -1)
+    if ((flag->padded_zero == 1 && flag->precision == -1)
+    || ()) /////////////////////////////laaaaaaaaaa
         flag->final_str_flag[0] = '-';
     if (flag->nbr_precision >= flag->nbr_width)
         ft_putchar('-', flag);
     else if (flag->nbr_precision < flag->nbr_width)
     {
         if (flag->minus == 0)
-            flag->final_str_flag[--place_space] = '-';
+            flag->final_str_flag[--space] = '-';
         else if (flag->minus == 1 && flag->width == 1)
         {
             flag->final_str_flag[0] = '-';
-            if (place_zero != (int)flag->size_final_str_flag)
-                flag->final_str_flag[place_zero] = '0';
+            if (zero != (int)flag->size_final_str_flag)
+                flag->final_str_flag[zero] = '0';
         }
     }
 }
@@ -129,9 +60,19 @@ void    fusion_d_i_u(char *str, int nbr, t_flag_len *flag)
 
     i = 0;
     size_nbr = ft_strlen(str);
+    //     if (flag->nbr_precision < 0)
+    // {
+    //     // printf("test\n");
+    //     flag->nbr_precision *= -1;
+    // }
     join_str_width_and_precision(flag);
     place_zero = check_where_zero_or_space(flag, '0');
     place_space = check_where_zero_or_space(flag, ' ');
+    // if (flag->nbr_precision < 0)
+    // {
+    //     // printf("test\n");
+    //     flag->nbr_precision *= -1;
+    // }
     if (nbr == 0 && flag->dot == 1 && flag->nbr_precision == 0)
         str[0] = ' ';
     if (nbr < 0)
@@ -152,5 +93,31 @@ void    fusion_d_i_u(char *str, int nbr, t_flag_len *flag)
             flag->final_str_flag[place_zero] = str[size_nbr];
         if (str[size_nbr] == '-' && flag->final_str_flag[place_zero] == ' ')
             flag->final_str_flag[place_zero] = str[size_nbr];
+    }
+}
+
+void    fusion_s(char *str, int start, int last, t_flag_len *flag)
+{
+    int i;
+
+    i = 0;
+    if (flag->minus == 1)
+    {
+        start = 0;
+        while (start < last && str[start] && flag->final_str_flag[start])
+        {
+            flag->final_str_flag[start] = str[start];
+            start++;
+        }
+    }
+    else
+    {
+        last = flag->size_final_str_flag;
+        while (str[i] && flag->final_str_flag[start] && start <= last)
+        {
+            flag->final_str_flag[start] = str[i];
+            i++;
+            start++;
+        }
     }
 }

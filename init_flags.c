@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct_flag.c                                      :+:      :+:    :+:   */
+/*   init_flags.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:46:59 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/24 14:55:30 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/25 10:35:13 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,20 +78,23 @@ void	string_of_flag_to_int(char *str, va_list ap, t_flag_len *flag)
 		flag->nbr_precision = ft_atoi_printf(&str[i]);
 }
 
-int		which_flag(const char *str, va_list ap, t_flag_len *flag)
+int		check_flags(const char *str, va_list ap, t_flag_len *flag)
 {
 	int i;
 
 	i = 0;
 	ft_init_struct_flag(flag);
 	if (str[i] == '0')
+	{
+		flag->padded_zero = 1;
 		i++;
+	}
 	if (str[i] == '-')
 		flag->minus = 1;
 	if (str[i] == '0' || str[i] == '-')
 		while (str[i] == '0' || str[i] == '-')
 			i++;
-	string_of_flag_to_int(&str[i], ap, flag);
+	string_of_flag_to_int((char*)&str[i], ap, flag);
 	if (str[i] && str[i + 1] && (str[i] == '*' || ft_is_digit(str[i])) && ++i)
 	{
 		flag->width = 1;

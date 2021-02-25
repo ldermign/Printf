@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   join_width_precision.c                             :+:      :+:    :+:   */
+/*   join_str_width_preci.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 09:36:41 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/24 14:34:15 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/25 15:45:02 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ void	flip_zero_and_space(t_flag_len *flag)
 	}
 	if (size > here && here > 0)
 	{
+		if (here == 1)
+			here--;
 		size--;
+			// printf("here = {%d}, size = {%d}\n", here, size);
+
 		if (flag->final_str_flag[0] == '-')
 			i++;
 		if (flag->final_str_flag[size] == '\0')
@@ -78,8 +82,10 @@ void	precision_sup_or_equal_width(t_flag_len *flag)
 
 	i = 0;
 	size = flag->nbr_precision;
+	// printf("strpreci = {%s}\n", flag->str_precision);
 	while (i < size)
 	{
+		// printf("test dedans\n");
 		flag->final_str_flag[i] = flag->str_precision[i];
 		i++;
 	}
@@ -89,7 +95,7 @@ void	precision_sup_or_equal_width(t_flag_len *flag)
 void	join_str_width_and_precision(t_flag_len *flag)
 {
 	int size;
-	
+
 	size = 0;
 	if (flag->width == 1 || flag->precision == 1)
 	{
@@ -103,16 +109,39 @@ void	join_str_width_and_precision(t_flag_len *flag)
 	if (flag->width == 1 && flag->precision == 1)
 	{
 		if (flag->nbr_precision >= flag->nbr_width)
+		{
+			// printf("test00\n");
 			precision_sup_or_equal_width(flag);
+		}
 		else
 			width_sup(flag);
+		// printf("final_str_flag = {%s}\n", flag->final_str_flag);
 	}
-	if (flag->width == 1 && flag->precision == -1 && flag->padded_zero == 0)
+	// printf("nbrprec = {%d}, nbrwid = {%d}, padded = {%d}\n", flag->nbr_precision, flag->nbr_width, flag->padded_zero);
+	if ((flag->width == 1 && flag->precision == -1 && flag->padded_zero == 0))
+	{
+		// printf("test1\n");
 		ft_fill_with_c(flag->final_str_flag, ' ', size + 1);
+	}
 	else if ((flag->precision == 1 && flag->width == -1)
-	|| (flag->padded_zero == 1 && flag->precision == -1))
+	|| (flag->padded_zero == 1 && flag->precision == -1)
+	|| (flag->padded_zero == 1 && flag->nbr_precision < 0))
+
+	{
+		// printf("test2\n");
 		ft_fill_with_c(flag->final_str_flag, '0', size + 1);
+	}
+	// else if (flag->padded_zero == 1 && flag->nbr_precision < 0)
+		// ft_fill_with_c(flag->final_str_flag, '0', size + 1);
+	// printf("strfinal = {%s}\n", flag->final_str_flag);
 	flag->size_final_str_flag = ft_strlen(flag->final_str_flag);
+			// printf("final_str_flag = {%s}\n", flag->final_str_flag);
+
 	if (flag->minus == 1)
+	{
+		// printf("test3\n");
 		flip_zero_and_space(flag);
+	}
+		// printf("strfinal = {%s}\n", flag->final_str_flag);
+
 }
