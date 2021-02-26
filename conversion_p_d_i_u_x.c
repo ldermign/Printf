@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/25 11:48:01 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/26 11:44:50 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	conv_d_i(va_list ap, t_flag_len *flag)
 		free(temp);
 		return ;
 	}
-	// printf("flagpadded = {%d}\n", flag->padded_zero);
 	if (size_temp > flag->nbr_precision && size_temp > flag->nbr_width)
 		ft_putstr(temp, flag);
 	else

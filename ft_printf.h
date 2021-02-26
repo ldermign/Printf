@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/25 19:29:07 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/26 11:43:24 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int				ft_check_flag(const char *str);
 int				ft_is_digit(char c);
 int				ft_is_conv(char c);
 int				ft_no_flag(t_flag_len *flag);
+int				ft_is_alpha(char c);
 
 /*
 **	Utils

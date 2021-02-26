@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 16:01:04 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/25 08:18:44 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/26 11:42:25 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,9 @@ int	which_is_smaller(int width, int prec, int len_str)
 	else if (prec <= width && prec <= len_str && prec != 0)
 		return (prec);
 	return (len_str);
+}
+
+int	ft_is_alpha(char c)
+{
+	return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'));
 }
