@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fusion_str_flag_str_conv_s.c                       :+:      :+:    :+:   */
+/*   fusion_strflag_conv_s_utils.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 15:00:28 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/25 10:01:41 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/26 22:20:31 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,20 +92,27 @@ void    ft_final_size(int width, int prec, int len_str, t_flag_len *flag)
     }
 }
 
-int  where_to_begin(int width, int prec, int len_str, t_flag_len *flag)
+int  where_to_begin(int width, int prec, int ret, int ln_str, t_flag_len *flag)
 {
+    int w_minus_len;
     int start;
     int min;
         
+    w_minus_len = width - ln_str;
     start = 0;
-    min = which_is_smaller(width, prec, len_str);
+    min = which_is_smaller(width, prec, ln_str);
     if (flag->width == 1 && flag->precision == -1)
         start = flag->size_final_str_flag - min;
-    else if (width > len_str && flag->precision == -1)
+    else if (width > ln_str && flag->precision == -1)
         start = flag->size_final_str_flag - min;
     else if (flag->width == 1 && flag->precision == 1)
     {
-        if (width >= prec || (prec >= width && width >= len_str))
+        if (ret < 0 && w_minus_len == 1)
+            start = 1;
+        else if (ret < 0 && w_minus_len == ln_str)
+            start = ln_str;
+        else if ((ret > 0 && (prec >= width && width >= ln_str))
+        || width >= prec)
             start = flag->size_final_str_flag - min;
         else
             start = 0;
@@ -129,7 +136,7 @@ void    prep_fus(char *str, int width, int prec, int len_str, t_flag_len *flag)
     if ((flag->precision == 1 && flag->nbr_precision == 0)
     || (flag->dot == 1 && prec == 0 && width > 0))
         return ;
-    start = where_to_begin(width, prec, len_str, flag);
+    start = where_to_begin(width, prec, ret, len_str, flag);
     if ((len_str >= prec && prec >= width) || flag->precision == -1
     || (prec >= len_str && len_str >= width))
         last = flag->size_final_str_flag;
@@ -139,5 +146,5 @@ void    prep_fus(char *str, int width, int prec, int len_str, t_flag_len *flag)
         last = which_is_smaller(width, prec, len_str);
     if (ret < 0)
         last = len_str;
-    fusion_s(str, start, last, flag);
+    fusion_s(str, start, last, ret, flag);
 }

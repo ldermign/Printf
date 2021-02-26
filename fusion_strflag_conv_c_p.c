@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 23:48:27 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/26 10:16:58 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/26 22:31:54 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void    fusion_conv_strflag(char *str, int nbr, t_flag_len *flag)
     int len_str;
 
     len_str = ft_strlen(str);
-	// printf("nbrwid = {%d}, nbrprei = {%d}\n", flag->nbr_width, flag->nbr_precision);
     if ((flag->conv_c == 1 && flag->padded_zero == 0 && flag->precision == -1)
     || flag->conv_per == 1)
 		fusion_c(nbr, flag);
@@ -97,5 +96,5 @@ void    fusion_conv_strflag(char *str, int nbr, t_flag_len *flag)
 	else if (flag->conv_p == 1)
 	 	fusion_p(str, flag->nbr_width, len_str, flag);
 	else if (flag->conv_d_i == 1 || flag->conv_u == 1 || flag->conv_x == 1)
-		fusion_d_i_u(str, nbr, flag);
+		fusion_d_i_u_x(str, nbr, flag);
 }

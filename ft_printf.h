@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/26 11:43:24 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/26 22:32:17 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ int				ft_printf(const char *str, ...);
 
 void			join_str_width_and_precision(t_flag_len *flag);
 void    prep_fus(char *str, int width, int prec, int len_str, t_flag_len *flag);
-void    		fusion_d_i_u(char *str, int nbr, t_flag_len *flag);
-void    		fusion_s(char *str, int start, int last, t_flag_len *flag);
+void    		fusion_d_i_u_x(char *str, int nbr, t_flag_len *flag);
+void    		fusion_s(char *str, int start, int last, int ret, t_flag_len *flag);
 void    		fusion_p(char *str, int max, int len, t_flag_len *flag);
 void    		fusion_c(int nbr, t_flag_len *flag);
 void    		fusion_c(int nbr, t_flag_len *flag);
