@@ -6,7 +6,7 @@
 #    By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/04 09:47:47 by ldermign          #+#    #+#              #
-#    Updated: 2021/02/25 10:10:47 by ldermign         ###   ########.fr        #
+#    Updated: 2021/02/27 12:48:45 by ldermign         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,14 +15,13 @@ NAME		=	libftprintf.a
 SRCS		=	check.c \
 				conversion_p_d_i_u_x.c \
 				conversion_s_c_per.c \
-				init_flags.c \
-				ft_printf_utils.c \
 				ft_printf.c \
 				fusion_strflag_conv_c_p.c \
 				fusion_strflag_conv_s_d_i_u.c \
 				fusion_strflag_conv_s_utils.c \
-				join_str_width_preci.c \
-				str_flag_width_preci.c \
+				init_flags.c \
+				join_width_preci.c \
+				utils.c \
 				utils_itoa.c \
 				utils_size.c
 

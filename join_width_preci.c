@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 09:36:41 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/26 11:44:04 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/27 10:06:49 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	width_sup(t_flag_len *flag)
 }
 
 
-void	join_str_width_and_precision(t_flag_len *flag)
+void	join_width_and_precision(t_flag_len *flag)
 {
 	int size;
 

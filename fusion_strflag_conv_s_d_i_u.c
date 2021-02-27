@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 09:53:45 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/26 23:50:53 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/27 10:06:40 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void    fusion_d_i_u_x(char *str, int nbr, t_flag_len *flag)
 
     i = 0;
     size_nbr = ft_strlen(str);
-    join_str_width_and_precision(flag);
+    join_width_and_precision(flag);
     place_zero = check_where_zero_or_space(flag, '0');
     place_space = check_where_zero_or_space(flag, ' ');
     if (flag->nbr_precision < 0)

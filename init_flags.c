@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:46:59 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/26 10:21:37 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/27 12:37:06 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	ft_init_struct_flag(t_flag_len *flag)
 	flag->precision = -1;
 	flag->nbr_width = 0;
 	flag->nbr_precision = 0;
-	flag->str_precision = NULL;
-	flag->str_width = NULL;
 	flag->final_str_flag = NULL;
 	flag->size_final_str_flag = 0;
 	flag->conv_c = 0;

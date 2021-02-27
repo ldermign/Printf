@@ -6,11 +6,36 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/26 23:33:41 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/27 12:50:17 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int		particular_case(int arg_unsdint, int size, char *tmp, t_flag_len *flag)
+{
+	if ((arg_unsdint == 0 && flag->dot == 1 && flag->nbr_precision == 0
+	&& flag->width == -1) || (flag->width == 1 && flag->precision == 1
+	&& flag->nbr_width == 0 && flag->nbr_precision == 0 && arg_unsdint == 0))
+	{
+		free(tmp);
+		return (1);
+	}
+	if (flag->width == 1 && flag->precision == 1
+	&& (arg_unsdint == 0 && flag->nbr_width <= 1 && flag->nbr_precision == 0))
+	{
+		ft_putchar(' ', flag);
+		return (1);
+	}
+	else if (size >= flag->nbr_precision && size >= flag->nbr_width)
+	{
+		ft_putstr(tmp, flag);
+		return (1);
+	}
+	return (0);
+}
+
+
 
 void	conv_p(va_list ap, t_flag_len *flag)
 {
@@ -45,7 +70,8 @@ void	conv_d_i(va_list ap, t_flag_len *flag)
 	arg_int = va_arg(ap, int);
 	temp = ft_itoa(arg_int);
 	size_temp = ft_strlen(temp);
-	if (flag->dot == 1 && arg_int == 0 && ((flag->precision == 1 && flag->nbr_width == 0
+	if (flag->dot == 1 && arg_int == 0
+	&& ((flag->precision == 1 && flag->nbr_width == 0
 	&& flag->nbr_precision == 0)
 	|| ((flag->nbr_width == 0 && flag->precision == -1)
 	|| (flag->width == -1 && flag->nbr_precision == 0)
@@ -73,18 +99,20 @@ void	conv_u(va_list ap, t_flag_len *flag)
 	arg_unsdint = va_arg(ap, unsigned int);
 	temp = ft_itoa_unsd(arg_unsdint);
 	size_temp = ft_strlen(temp);
-	if ((arg_unsdint == 0 && flag->dot == 1 && flag->nbr_precision == 0
-	&& flag->width == -1) || (flag->width == 1 && flag->precision == 1
-	&& flag->nbr_width == 0 && flag->nbr_precision == 0 && arg_unsdint == 0))
-	{
-		free(temp);
+	// if ((arg_unsdint == 0 && flag->dot == 1 && flag->nbr_precision == 0
+	// && flag->width == -1) || (flag->width == 1 && flag->precision == 1
+	// && flag->nbr_width == 0 && flag->nbr_precision == 0 && arg_unsdint == 0))
+	// {
+	// 	free(temp);
+	// 	return ;
+	// }
+	// if (flag->width == 1 && flag->precision == 1
+	// && (arg_unsdint == 0 && flag->nbr_width <= 1 && flag->nbr_precision == 0))
+	// 	ft_putchar(' ', flag);
+	// else if (size_temp >= flag->nbr_precision && size_temp >= flag->nbr_width)
+	// 	ft_putstr(temp, flag);
+	if (particular_case(arg_unsdint, size_temp, temp, flag) == 1)
 		return ;
-	}
-	if (flag->width == 1 && flag->precision == 1
-	&& (arg_unsdint == 0 && flag->nbr_width <= 1 && flag->nbr_precision == 0))
-		ft_putchar(' ', flag);
-	else if (size_temp >= flag->nbr_precision && size_temp >= flag->nbr_width)
-		ft_putstr(temp, flag);
 	else
 	{
 		fusion_conv_strflag(temp, arg_unsdint, flag);
@@ -107,18 +135,20 @@ void	conv_x(char c, va_list ap, t_flag_len *flag)
 		base = "0123456789ABCDEF";
 	temp = ft_itoa_base(arg_unsdint, base);
 	size_temp = ft_strlen(temp);
-	if ((arg_unsdint == 0 && flag->dot == 1 && flag->nbr_precision == 0
-	&& flag->width == -1) || (flag->width == 1 && flag->precision == 1
-	&& flag->nbr_width == 0 && flag->nbr_precision == 0 && arg_unsdint == 0))
-	{
-		free(temp);
+	// if ((arg_unsdint == 0 && flag->dot == 1 && flag->nbr_precision == 0
+	// && flag->width == -1) || (flag->width == 1 && flag->precision == 1
+	// && flag->nbr_width == 0 && flag->nbr_precision == 0 && arg_unsdint == 0))
+	// {
+	// 	free(temp);
+	// 	return ;
+	// }
+	// if (flag->width == 1 && flag->precision == 1
+	// && (arg_unsdint == 0 && flag->nbr_width <= 1 && flag->nbr_precision == 0))
+	// 	ft_putchar(' ', flag);
+	// else if (size_temp >= flag->nbr_precision && size_temp >= flag->nbr_width)
+	// 	ft_putstr(temp, flag);
+	if (particular_case(arg_unsdint, size_temp, temp, flag) == 1)
 		return ;
-	}
-	if (flag->width == 1 && flag->precision == 1
-	&& (arg_unsdint == 0 && flag->nbr_width <= 1 && flag->nbr_precision == 0))
-		ft_putchar(' ', flag);
-	else if (size_temp >= flag->nbr_precision && size_temp >= flag->nbr_width)
-		ft_putstr(temp, flag);
 	else
 	{
 		fusion_conv_strflag(temp, arg_unsdint, flag);

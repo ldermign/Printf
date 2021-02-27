@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/26 22:32:17 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/27 10:06:44 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef	struct	s_struct
 	int		precision;
 	int		nbr_width;
 	int		nbr_precision;
-	char	*str_precision;
 	char	*str_width;
 	char	*final_str_flag;
 	size_t	size_final_str_flag;
@@ -105,7 +104,7 @@ int				ft_printf(const char *str, ...);
 **	Fusion str flags and str conv
 */
 
-void			join_str_width_and_precision(t_flag_len *flag);
+void			join_width_and_precision(t_flag_len *flag);
 void    prep_fus(char *str, int width, int prec, int len_str, t_flag_len *flag);
 void    		fusion_d_i_u_x(char *str, int nbr, t_flag_len *flag);
 void    		fusion_s(char *str, int start, int last, int ret, t_flag_len *flag);

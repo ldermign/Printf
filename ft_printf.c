@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:49:07 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/26 10:21:52 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/27 12:44:44 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ int		which_conv(const char *str, va_list ap, t_flag_len *flag)
 {
 	ft_struct_conv(*str, flag);
 	make_flags_right(flag);
-	flag_width(flag);
-	flag_precision(flag);
 	if (flag->conv_c == 1)
 		conv_c(ap, flag);
 	else if (flag->conv_s == 1)
@@ -61,10 +59,6 @@ int		which_conv(const char *str, va_list ap, t_flag_len *flag)
 		conv_x(*str, ap, flag);
 	else if (flag->conv_per == 1)
 		conv_per(flag);
-	if (flag->str_width != NULL)
-		free(flag->str_width);
-	if (flag->str_precision != NULL)
-		free(flag->str_precision);
 	if (flag->final_str_flag != NULL)
 		free(flag->final_str_flag);
 	return (1);
