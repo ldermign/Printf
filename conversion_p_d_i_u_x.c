@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/27 12:52:27 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/27 16:43:35 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ int		particular_case(int arg_unsdint, int size, char *tmp, t_flag_len *flag)
 	&& (arg_unsdint == 0 && flag->nbr_width <= 1 && flag->nbr_precision == 0))
 	{
 		ft_putchar(' ', flag);
+		free(tmp);
 		return (1);
 	}
 	else if (size >= flag->nbr_precision && size >= flag->nbr_width)
 	{
 		ft_putstr(tmp, flag);
+		free(tmp);
 		return (1);
 	}
 	return (0);
@@ -56,6 +58,7 @@ void	conv_p(va_list ap, t_flag_len *flag)
 		fusion_conv_strflag(temp, ft_strlen(temp), flag);
 		ft_putstr(flag->final_str_flag, flag);
 	}
+	free(temp);
 	free(str_adresse);
 }
 
