@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   join_str_width_preci.c                             :+:      :+:    :+:   */
+/*   join_width_preci.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 09:36:41 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/27 10:06:49 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/27 14:56:34 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	flip_zero_and_space(t_flag_len *flag)
+void	flip_zero_and_space(int here, int size, t_flag_len *flag)
 {
 	int		i;
-	size_t	here;
-	size_t	size;
 	char	swap;
 
 	i = 0;
-	here = 0;
-	size = flag->size_final_str_flag;
-	while (flag->final_str_flag[here + 1] && (here < flag->size_final_str_flag))
-	{
-		here++;
-		if (flag->final_str_flag[here] != flag->final_str_flag[here + 1])
-			break ;
-	}
 	if (size > here && here > 0)
 	{
 		size--;
@@ -46,6 +36,22 @@ void	flip_zero_and_space(t_flag_len *flag)
 			i++;
 		}
 	}
+}
+
+void	flip_zero_and_space_init(t_flag_len *flag)
+{
+	size_t	here;
+	size_t	size;
+
+	size = flag->size_final_str_flag;
+	here = 0;
+	while (flag->final_str_flag[here + 1] && (here < flag->size_final_str_flag))
+	{
+		here++;
+		if (flag->final_str_flag[here] != flag->final_str_flag[here + 1])
+			break ;
+	}
+	flip_zero_and_space(here, size, flag);
 }
 
 void	width_sup(t_flag_len *flag)
@@ -71,6 +77,13 @@ void	width_sup(t_flag_len *flag)
 	flag->final_str_flag[ret] = '\0';
 }
 
+int		size_final_str(t_flag_len *flag)
+{
+	if (flag->nbr_precision >= flag->nbr_width)
+		return (flag->nbr_precision);
+	else
+		return (flag->nbr_width);
+}
 
 void	join_width_and_precision(t_flag_len *flag)
 {
@@ -79,10 +92,7 @@ void	join_width_and_precision(t_flag_len *flag)
 	size = 0;
 	if (flag->width == 1 || flag->precision == 1)
 	{
-		if (flag->nbr_precision >= flag->nbr_width)
-			size = flag->nbr_precision;
-		else
-			size = flag->nbr_width;
+		size = size_final_str(flag);
 		if ((flag->final_str_flag = malloc(sizeof(char) * (size + 1))) == NULL)
 			return ;
 	}
@@ -101,5 +111,5 @@ void	join_width_and_precision(t_flag_len *flag)
 		ft_fill_with_c(flag->final_str_flag, '0', size + 1);
 	flag->size_final_str_flag = ft_strlen(flag->final_str_flag);
 	if (flag->minus == 1)
-		flip_zero_and_space(flag);
+		flip_zero_and_space_init(flag);
 }

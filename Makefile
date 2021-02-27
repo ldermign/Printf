@@ -6,7 +6,7 @@
 #    By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/04 09:47:47 by ldermign          #+#    #+#              #
-#    Updated: 2021/02/27 12:48:45 by ldermign         ###   ########.fr        #
+#    Updated: 2021/02/27 16:03:35 by ldermign         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,9 @@ SRCS		=	check.c \
 				conversion_p_d_i_u_x.c \
 				conversion_s_c_per.c \
 				ft_printf.c \
-				fusion_strflag_conv_c_p.c \
-				fusion_strflag_conv_s_d_i_u.c \
+				start_fusion.c \
+				fusion_strflag_conv_cps.c \
+				fusion_strflag_conv_dius.c \
 				fusion_strflag_conv_s_utils.c \
 				init_flags.c \
 				join_width_preci.c \

@@ -6,16 +6,16 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 15:57:56 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/24 15:58:43 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/27 13:02:21 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t		ft_len_nbr(size_t nbr, size_t size_base)
+size_t	ft_len_nbr(size_t nbr, size_t size_base)
 {
 	size_t	size_nbr;
-	
+
 	size_nbr = 0;
 	if (nbr == 0)
 		size_nbr = 1;
@@ -41,7 +41,6 @@ char	*ft_itoa_base(size_t nbr, char *base)
 
 	size_base = ft_strlen(base);
 	size_nbr = ft_len_nbr(nbr, size_base);
-	temp = 0;
 	if ((dst = malloc(sizeof(char) * (size_nbr + 1))) == NULL)
 		return (NULL);
 	dst[size_nbr--] = '\0';

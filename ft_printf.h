@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:05:57 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/27 10:06:44 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/27 16:05:29 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
-
-# include <libc.h> /////////////////////////////////////////////////////////////
-
 
 /*
 **	Structures cspdiuxX%
@@ -70,7 +67,6 @@ void			*ft_memmove(char *dst, char *src, size_t n);
 void			*fill_from_end(char *dst, char *src, size_t n);
 int				ft_atoi(char *str);
 void			ft_fill_with_c(char *str, char c, int size);
-void			flip_zero_and_space(t_flag_len *flag);
 void			*ft_calloc(size_t nmemb, size_t size);
 char			*ft_itoa_base(size_t nbr, char *base);
 char			*ft_itoa_unsd(unsigned int n);
@@ -97,20 +93,31 @@ void			conv_d_i(va_list ap, t_flag_len *flag);
 void			conv_s(va_list ap, t_flag_len *flag);
 void			conv_c(va_list ap, t_flag_len *flag);
 void			conv_per(t_flag_len *flag);
-void   			fusion_conv_strflag(char *str, int nbr, t_flag_len *flag);
+void			fusion_conv_strflag(char *str, int nbr, t_flag_len *flag);
 int				ft_printf(const char *str, ...);
+
+/*
+**	Utils fusion
+*/
+
+int				alloc_size(int width, int prec, int len_str, t_flag_len *flag);
+int				alloc_if_w_and_p(int width, int prec, int len_str,
+															t_flag_len *flag);
+void			ft_final_size(int width, int prec, int len_str,
+															t_flag_len *flag);
+int				where_to_begin(int prec, int ret, int len, t_flag_len *flag);
+int				where_last(char *str, int prec, int ret, t_flag_len *flag);
 
 /*
 **	Fusion str flags and str conv
 */
 
 void			join_width_and_precision(t_flag_len *flag);
-void    prep_fus(char *str, int width, int prec, int len_str, t_flag_len *flag);
-void    		fusion_d_i_u_x(char *str, int nbr, t_flag_len *flag);
-void    		fusion_s(char *str, int start, int last, int ret, t_flag_len *flag);
-void    		fusion_p(char *str, int max, int len, t_flag_len *flag);
-void    		fusion_c(int nbr, t_flag_len *flag);
-void    		fusion_c(int nbr, t_flag_len *flag);
-
+void			fusion_s(char *str, int start, int last, t_flag_len *flag);
+void			prep_fus(char *str, int width, int prec, t_flag_len *flag);
+void			fusion_d_i_u_x(char *str, int nbr, t_flag_len *flag);
+void			fusion_p(char *str, int max, int len, t_flag_len *flag);
+void			fusion_c(int nbr, t_flag_len *flag);
+void			fusion_c(int nbr, t_flag_len *flag);
 
 #endif

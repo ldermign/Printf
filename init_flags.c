@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:46:59 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/27 12:37:06 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/27 13:50:27 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,24 @@ void	string_of_flag_to_int(char *str, va_list ap, t_flag_len *flag)
 		flag->nbr_precision = ft_atoi_printf(&str[i]);
 }
 
+void	check_flag_padded_minus(char *str, t_flag_len *flag)
+{
+	if (*str == '0')
+	{
+		flag->padded_zero = 1;
+		str++;
+	}
+	if (*str == '-')
+		flag->minus = 1;
+}
+
 int		check_flags(const char *str, va_list ap, t_flag_len *flag)
 {
 	int i;
 
 	i = 0;
 	ft_init_struct_flag(flag);
-	if (str[i] == '0')
-	{
-		flag->padded_zero = 1;
-		i++;
-	}
-	if (str[i] == '-')
-		flag->minus = 1;
+	check_flag_padded_minus((char*)str, flag);
 	if (str[i] == '0' || str[i] == '-')
 		while (str[i] == '0' || str[i] == '-')
 			i++;

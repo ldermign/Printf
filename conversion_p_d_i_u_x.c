@@ -6,7 +6,7 @@
 /*   By: ldermign <ldermign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 08:31:53 by ldermign          #+#    #+#             */
-/*   Updated: 2021/02/27 12:50:17 by ldermign         ###   ########.fr       */
+/*   Updated: 2021/02/27 12:52:27 by ldermign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ int		particular_case(int arg_unsdint, int size, char *tmp, t_flag_len *flag)
 	}
 	return (0);
 }
-
-
 
 void	conv_p(va_list ap, t_flag_len *flag)
 {
@@ -99,18 +97,6 @@ void	conv_u(va_list ap, t_flag_len *flag)
 	arg_unsdint = va_arg(ap, unsigned int);
 	temp = ft_itoa_unsd(arg_unsdint);
 	size_temp = ft_strlen(temp);
-	// if ((arg_unsdint == 0 && flag->dot == 1 && flag->nbr_precision == 0
-	// && flag->width == -1) || (flag->width == 1 && flag->precision == 1
-	// && flag->nbr_width == 0 && flag->nbr_precision == 0 && arg_unsdint == 0))
-	// {
-	// 	free(temp);
-	// 	return ;
-	// }
-	// if (flag->width == 1 && flag->precision == 1
-	// && (arg_unsdint == 0 && flag->nbr_width <= 1 && flag->nbr_precision == 0))
-	// 	ft_putchar(' ', flag);
-	// else if (size_temp >= flag->nbr_precision && size_temp >= flag->nbr_width)
-	// 	ft_putstr(temp, flag);
 	if (particular_case(arg_unsdint, size_temp, temp, flag) == 1)
 		return ;
 	else
@@ -135,18 +121,6 @@ void	conv_x(char c, va_list ap, t_flag_len *flag)
 		base = "0123456789ABCDEF";
 	temp = ft_itoa_base(arg_unsdint, base);
 	size_temp = ft_strlen(temp);
-	// if ((arg_unsdint == 0 && flag->dot == 1 && flag->nbr_precision == 0
-	// && flag->width == -1) || (flag->width == 1 && flag->precision == 1
-	// && flag->nbr_width == 0 && flag->nbr_precision == 0 && arg_unsdint == 0))
-	// {
-	// 	free(temp);
-	// 	return ;
-	// }
-	// if (flag->width == 1 && flag->precision == 1
-	// && (arg_unsdint == 0 && flag->nbr_width <= 1 && flag->nbr_precision == 0))
-	// 	ft_putchar(' ', flag);
-	// else if (size_temp >= flag->nbr_precision && size_temp >= flag->nbr_width)
-	// 	ft_putstr(temp, flag);
 	if (particular_case(arg_unsdint, size_temp, temp, flag) == 1)
 		return ;
 	else
